@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ReparApp</string>
     <string name="ubicacion_icono">Icono de Ubicación\n</string>
-    <string name=""
     <string name="local_icono_detail">Icono en la parte superior de ubication_detail_dialog\n</string>
 </resources>
