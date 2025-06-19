@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".LoginFragment">
+    tools:context=".views.fragments.LoginFragment">
 
     <LinearLayout
         android:id="@+id/contenedorLogin"
@@ -95,6 +95,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
+                android:textColor="#3c3c3c"
+                android:fontFamily="@font/roboto"
                 android:text="¿No tienes cuenta?"/>
             <TextView
                 android:id="@+id/btn_registrate"
@@ -103,6 +105,7 @@
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:textStyle="bold"
+                android:fontFamily="@font/roboto"
                 android:text="@string/registrate"/>
         </LinearLayout>
 
@@ -209,8 +212,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
+            android:fontFamily="@font/roboto"
             android:text="@string/derechos_reservados"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/contenedorLogin"/>
 
     </LinearLayout>

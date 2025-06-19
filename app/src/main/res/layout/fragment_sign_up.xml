@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".LoginFragment">
+    tools:context=".views.fragments.LoginFragment">
 
     <LinearLayout
         android:id="@+id/contenedorLogin"
@@ -34,12 +34,14 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:fontFamily="@font/roboto"
             android:text="Crea una cuenta"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="17sp"
+            android:textColor="#3c3c3c"
             android:fontFamily="@font/roboto"
             android:layout_marginBottom="20dp"
             android:text="Ingresa tu correo electrónico para registrarte"/>
@@ -93,6 +95,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto"
             android:text="@string/derechos_reservados"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contenedorLogin"/>
