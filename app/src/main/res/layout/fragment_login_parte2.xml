@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".LoginFragment">
+
+    <LinearLayout
+        android:id="@+id/contenedorLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgVlogo"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_logo"
+            android:contentDescription="Logo de la app"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:text="Llene los datos"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto"
+            android:layout_marginBottom="20dp"
+            android:text="Ingrese sus datos para continuar"/>
+
+<!--        Username-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/your_cursor_color"
+            android:hint="Usuario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/teUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Nombre-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/your_cursor_color"
+            android:hint="Nombre">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/teNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Apellidos-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/your_cursor_color"
+            android:hint="Apellidos">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/teApellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Telefono-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/your_cursor_color"
+            android:hint="Teléfono">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/teTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        boton para continuar-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonLoginContinuar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continuar"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            app:backgroundTint="@android:color/black"
+            app:cornerRadius="6dp"
+            app:rippleColor="#333333"
+            android:paddingVertical="15dp"
+            android:layout_marginBottom="10dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"/>
+
+
+        <TextView
+            android:id="@+id/derechos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:text="@string/derechos_reservados"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedorLogin"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

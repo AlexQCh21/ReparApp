@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cursokotlin.reparapp.LoginFragment"
+        android:label="LoginParte2Fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginParte2Fragment"
+            app:destination="@id/loginParte2Fragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginParte2Fragment"
+        android:name="com.cursokotlin.reparapp.LoginParte2Fragment"
+        android:label="LoginParte2Fragment" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.cursokotlin.reparapp.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpParte2Fragment"
+            app:destination="@id/signUpParte2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpParte2Fragment"
+        android:name="com.cursokotlin.reparapp.SignUpParte2Fragment"
+        android:label="SignUpParte2Fragment" />
+</navigation>
