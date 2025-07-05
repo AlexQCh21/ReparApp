@@ -28,6 +28,8 @@
     <string name="apellidos">Apellidos</string>
     <string name="detalle">Detalle</string>
     <string name="solucion">Solución</string>
+    <string name="prompt_tipo_dispositivo">Tipo de dispositivo</string>
+
 
     <string-array name="dispositivos_tipos">
         <item>Tipod de dispositivo</item>

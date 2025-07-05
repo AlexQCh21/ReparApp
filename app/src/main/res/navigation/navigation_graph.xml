@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/loginFragment">
 
@@ -44,4 +45,16 @@
         android:id="@+id/signUpParte2Fragment"
         android:name="com.cursokotlin.reparapp.views.fragments.SignUpParte2Fragment"
         android:label="SignUpParte2Fragment" />
+    <fragment
+        android:id="@+id/inventarioFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
+        android:label="fragment_inventario"
+        tools:layout="@layout/fragment_inventario" />
+
+    <fragment
+        android:id="@+id/homeTechnicalFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.HomeTechnicalFragment"
+        android:label="HomeTechnicalFragment" />
+
+
 </navigation>
