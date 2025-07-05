@@ -28,4 +28,12 @@
     <string name="apellidos">Apellidos</string>
     <string name="detalle">Detalle</string>
     <string name="solucion">Solución</string>
+
+    <string-array name="dispositivos_tipos">
+        <item>Tipod de dispositivo</item>
+        <item>Celular</item>
+        <item>All in one</item>
+        <item>Laptop</item>
+        <item>Computadora</item>
+    </string-array>
 </resources>

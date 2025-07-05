@@ -5,4 +5,7 @@
     <color name="grey">#828282</color>
 
     <color name="your_cursor_color">#A9A9A9</color>
+    <color name="your_primary_color">#FF6200EE</color>
+    <color name="your_secondary_color">#FF03DAC5</color>
+    <color name="my_custom_red">#FFFF0000</color>
 </resources>
