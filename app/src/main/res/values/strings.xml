@@ -7,4 +7,25 @@
     <string name="derechos_reservados">By clicking continue, you agree to our <b>Terms of Service</b> and <b>Privacy Policy</b></string>
     <string name="ubicacion_icono">Icono de Ubicación\n</string>
     <string name="local_icono_detail">Icono en la parte superior de ubication_detail_dialog\n</string>
+    <string name="user_group">User Group</string>
+    <string name="tickets">Tickets</string>
+    <string name="pendientes">pendientes\n</string>
+    <string name="home">Home</string>
+    <string name="asignados">asignados hoy</string>
+    <string name="semana">Esta semana</string>
+    <string name="ticketsF">Tickets terminados</string>
+    <string name="see_all">See all</string>
+    <string name="mis_tickets">Mis Tickets</string>
+    <string name="ticket_icon">Ticket Icon</string>
+    <string name="base_de_conocimiento">Base de conocimiento</string>
+    <string name="filter_notifications">Filter Notifications</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="notification_bell">Notification Bell</string>
+    <string name="gmail">abc@gmail.com</string>
+    <string name="edit">edit</string>
+    <string name="name">Cesar Alexander</string>
+    <string name="lastname">Quezada Chorres</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="detalle">Detalle</string>
+    <string name="solucion">Solución</string>
 </resources>
