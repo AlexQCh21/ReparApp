@@ -4,6 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="start|center">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:src="@drawable/ic_arrow_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="Centros de atención"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
     <!-- tools:context=".ui.fragments.UbicationFragment"-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerUbicaciones"
@@ -11,8 +35,12 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingBottom="8dp"
+        android:layout_marginTop="80dp"
+        tools:listitem="@layout/item_ubication"
         android:scrollbars="vertical">
     </androidx.recyclerview.widget.RecyclerView>
+
+
     <RelativeLayout
         android:id="@+id/ubication_base"
         android:layout_width="match_parent"

@@ -28,7 +28,11 @@
     <fragment
         android:id="@+id/loginParte2Fragment"
         android:name="com.cursokotlin.reparapp.views.fragments.LoginParte2Fragment"
-        android:label="LoginParte2Fragment" />
+        android:label="LoginParte2Fragment" >
+        <action
+            android:id="@+id/action_loginParte2Fragment_to_homeTechnicalFragment"
+            app:destination="@id/homeTechnicalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.cursokotlin.reparapp.views.fragments.SignUpFragment"
@@ -44,7 +48,12 @@
     <fragment
         android:id="@+id/signUpParte2Fragment"
         android:name="com.cursokotlin.reparapp.views.fragments.SignUpParte2Fragment"
-        android:label="SignUpParte2Fragment" />
+        android:label="SignUpParte2Fragment" >
+        <action
+            android:id="@+id/action_signUpParte2Fragment_to_homeTechnicalFragment"
+            app:destination="@id/homeTechnicalFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/inventarioFragment"
         android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
@@ -54,7 +63,80 @@
     <fragment
         android:id="@+id/homeTechnicalFragment"
         android:name="com.cursokotlin.reparapp.views.fragments.HomeTechnicalFragment"
-        android:label="HomeTechnicalFragment" />
+        android:label="HomeTechnicalFragment" >
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_myTicketsFragment"
+            app:destination="@id/myTicketsFragment" />
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_baseConocimientoFragment"
+            app:destination="@id/baseConocimientoFragment" />
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_inventarioFragment"
+            app:destination="@id/inventarioFragment" />
+        <action
+            android:id="@+id/action_homeTechnicalFragment_to_reportarProblemaFragment"
+            app:destination="@id/reportarProblemaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myTicketsFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.MyTicketsFragment"
+        android:label="fragment_my_tickets"
+        tools:layout="@layout/fragment_my_tickets" >
+        <action
+            android:id="@+id/action_myTicketsFragment_to_ticketDetailFragment"
+            app:destination="@id/ticketDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketDetailFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.TicketDetailFragment"
+        android:label="fragment_ticket_detail"
+        tools:layout="@layout/fragment_ticket_detail" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_disponibilidadFragment"
+            app:destination="@id/disponibilidadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/baseConocimientoFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.BaseConocimientoFragment"
+        android:label="BaseConocimientoFragment" />
+
+    <fragment
+        android:id="@+id/disponibilidadFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.DisponibilidadFragment"
+        android:label="DisponibilidadFragment" />
+    <fragment
+        android:id="@+id/reportarProblemaFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.ReportarProblemaFragment"
+        android:label="ReportarProblemaFragment" />
+    <fragment
+        android:id="@+id/ubicationFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.UbicationFragment"
+        android:label="UbicationFragment" >
+        <action
+            android:id="@+id/action_ubicationFragment_to_ubicationDetailDialogFragment"
+            app:destination="@id/ubicationDetailDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ubicationDetailDialogFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.UbicationDetailDialogFragment"
+        android:label="UbicationDetailDialogFragment" />
 
 
 </navigation>
