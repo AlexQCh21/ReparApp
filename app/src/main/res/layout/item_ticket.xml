@@ -44,27 +44,29 @@
                 android:id="@+id/ticketDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hoy 9:14 Am"
+                android:text="12 Mayo 2025 - 9:14 Am"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/detailButton"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTicketDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/detalle"
             android:textColor="@android:color/white"
-            android:background="@drawable/bg_detalle"
+            android:backgroundTint = "@android:color/holo_red_dark"
             android:textSize="12sp"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
             android:textAllCaps="false"
             android:minWidth="0dp"
-            android:minHeight="0dp" />
-
+            android:minHeight="0dp"
+            app:icon="@drawable/ic_arrow_right"
+            app:iconGravity="end"
+            app:cornerRadius="5dp"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

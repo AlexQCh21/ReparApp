@@ -10,7 +10,7 @@
     <string name="user_group">User Group</string>
     <string name="tickets">Tickets</string>
     <string name="pendientes">pendientes\n</string>
-    <string name="home">Home</string>
+    <string name="home">Bienvenido</string>
     <string name="asignados">asignados hoy</string>
     <string name="semana">Esta semana</string>
     <string name="ticketsF">Tickets terminados</string>
