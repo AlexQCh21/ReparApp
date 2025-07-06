@@ -256,7 +256,7 @@
         android:layout_height="24dp"
         android:src="@drawable/ic_arrow_right_png"
         android:contentDescription="@string/see_all"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintTop_toTopOf="@id/misTicketsTitle"
         app:layout_constraintBottom_toBottomOf="@id/misTicketsTitle"
         app:layout_constraintEnd_toEndOf="parent"/>
