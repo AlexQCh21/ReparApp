@@ -38,7 +38,7 @@
                 app:popUpTo="@id/auth_flow"
                 app:popUpToInclusive="true" />
         </fragment>
-=======
+
     <fragment
         android:id="@+id/inventarioFragment"
         android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
@@ -129,6 +129,9 @@
             <action
                 android:id="@+id/action_homeClientFragment_to_myTicketsFragment"
                 app:destination="@id/myTicketsFragment" />
+            <action
+                android:id="@+id/action_homeClientFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
         </fragment>
 
         <fragment

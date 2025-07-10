@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentProfileBinding
 import com.cursokotlin.reparapp.views.activities.AuthActivity
 import com.cursokotlin.reparapp.views.utils.AuthManager
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileFragment : Fragment() {
 
@@ -19,6 +21,8 @@ class ProfileFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         authManager = AuthManager()
+
+
     }
 
     override fun onCreateView(
@@ -26,6 +30,14 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+
+        consultarRolUsuario { rol ->
+            if (rol == "cliente") {
+                binding.cardDisponibilidad.visibility = View.INVISIBLE
+            }
+        }
+
         eventListeners()
         return binding.root
     }
@@ -44,4 +56,31 @@ class ProfileFragment : Fragment() {
             requireActivity().finish()
         }
     }
+
+    private fun consultarRolUsuario(onResult: (String?) -> Unit) {
+        val user = authManager.getCurrentUser()
+        if (user != null) {
+            val uid = user.uid
+            val firestore = FirebaseFirestore.getInstance()
+
+            firestore.collection("usuarios")
+                .document(uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        val rol = document.getString("rol")
+                        onResult(rol)
+                    } else {
+                        onResult(null)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    onResult(null)
+                }
+        } else {
+            onResult(null)
+        }
+    }
+
+
 }
