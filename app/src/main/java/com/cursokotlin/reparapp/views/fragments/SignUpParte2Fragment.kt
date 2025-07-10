@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentRegisterParte2Binding
 import com.cursokotlin.reparapp.views.activities.PrincipalActivity
 import com.cursokotlin.reparapp.views.model.Usuario
@@ -148,13 +146,13 @@ class SignUpParte2Fragment : Fragment() {
                         // ÉXITO: Usuario creado y datos guardados
                         Toast.makeText(context, "Registro completado con éxito", Toast.LENGTH_LONG).show()
 
-                        // 🚀 Lanzamos PrincipalActivity con el rol
+                        // Lanzamos PrincipalActivity con el rol
                         val intent = Intent(requireContext(), PrincipalActivity::class.java).apply {
                             putExtra("userRole", nuevoUsuario.rol)
                         }
                         startActivity(intent)
 
-                        // 🗑️ Cerramos AuthActivity para que no quede en el backstack
+                        // 🗑Cerramos AuthActivity para que no quede en el backstack
                         requireActivity().finish()
 
                     } else {
