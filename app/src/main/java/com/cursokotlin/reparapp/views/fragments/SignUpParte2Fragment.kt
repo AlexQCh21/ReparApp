@@ -11,8 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cursokotlin.reparapp.R
-import com.cursokotlin.reparapp.databinding.FragmentSignUpBinding
-import com.cursokotlin.reparapp.databinding.FragmentSignUpParte2Binding
+import com.cursokotlin.reparapp.databinding.FragmentRegisterParte2Binding
 import com.cursokotlin.reparapp.views.activities.PrincipalActivity
 import com.cursokotlin.reparapp.views.model.Usuario
 import com.cursokotlin.reparapp.views.utils.AuthManager
@@ -20,7 +19,7 @@ import com.cursokotlin.reparapp.views.utils.FirestoreManager
 
 
 class SignUpParte2Fragment : Fragment() {
-    private lateinit var binding: FragmentSignUpParte2Binding
+    private lateinit var binding: FragmentRegisterParte2Binding
     private lateinit var authManager: AuthManager
     private lateinit var firestoreManager: FirestoreManager
     private val args: SignUpParte2FragmentArgs by navArgs()
@@ -38,7 +37,7 @@ class SignUpParte2Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Corrección: Inicializa el binding aquí y retorna binding.root
-        binding = FragmentSignUpParte2Binding.inflate(inflater, container, false)
+        binding = FragmentRegisterParte2Binding.inflate(inflater, container, false)
 
         // Inicializar managers
         authManager = AuthManager()

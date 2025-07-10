@@ -8,20 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.cursokotlin.reparapp.R
-import com.cursokotlin.reparapp.databinding.FragmentSignUpBinding
+import com.cursokotlin.reparapp.databinding.FragmentRegisterBinding
 
 
 
 
 class SignUpFragment : Fragment() {
-    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inicializa el binding
-        binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        binding = FragmentRegisterBinding.inflate(inflater, container, false)
         eventListenersButton()
         return binding.root
     }
