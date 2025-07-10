@@ -38,12 +38,19 @@
                 app:popUpTo="@id/auth_flow"
                 app:popUpToInclusive="true" />
         </fragment>
+=======
+    <fragment
+        android:id="@+id/inventarioFragment"
+        android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
+        android:label="fragment_inventario"
+        tools:layout="@layout/fragment_inventory" />
+
 
         <fragment
             android:id="@+id/signUpFragment"
             android:name="com.cursokotlin.reparapp.views.fragments.SignUpFragment"
             android:label="SignUpFragment"
-            tools:layout="@layout/fragment_sign_up">
+            tools:layout="@layout/fragment_register">
             <action
                 android:id="@+id/action_signUpFragment_to_signUpParte2Fragment"
                 app:destination="@id/signUpParte2Fragment" />
@@ -53,7 +60,7 @@
             android:id="@+id/signUpParte2Fragment"
             android:name="com.cursokotlin.reparapp.views.fragments.SignUpParte2Fragment"
             android:label="SignUpParte2Fragment"
-            tools:layout="@layout/fragment_sign_up_parte2">
+            tools:layout="@layout/fragment_register_parte2">
             <argument
                 android:name="email"
                 app:argType="string" />
@@ -128,7 +135,7 @@
             android:id="@+id/inventarioFragment"
             android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
             android:label="fragment_inventario"
-            tools:layout="@layout/fragment_inventario" />
+            tools:layout="@layout/fragment_inventory" />
 
         <fragment
             android:id="@+id/myTicketsFragment"
@@ -166,13 +173,13 @@
             android:id="@+id/baseConocimientoFragment"
             android:name="com.cursokotlin.reparapp.views.fragments.BaseConocimientoFragment"
             android:label="BaseConocimientoFragment"
-            tools:layout="@layout/fragment_base_conocimiento" />
+            tools:layout="@layout/fragment_knowledge_base" />
 
         <fragment
             android:id="@+id/disponibilidadFragment"
             android:name="com.cursokotlin.reparapp.views.fragments.DisponibilidadFragment"
             android:label="DisponibilidadFragment"
-            tools:layout="@layout/fragment_disponibilidad" />
+            tools:layout="@layout/fragment_profile_tech_detail_dialog" />
 
         <fragment
             android:id="@+id/reportarProblemaFragment"
