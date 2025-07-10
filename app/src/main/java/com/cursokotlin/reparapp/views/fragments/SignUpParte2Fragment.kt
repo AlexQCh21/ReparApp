@@ -1,60 +1,192 @@
 package com.cursokotlin.reparapp.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.cursokotlin.reparapp.R
+import com.cursokotlin.reparapp.databinding.FragmentSignUpBinding
+import com.cursokotlin.reparapp.databinding.FragmentSignUpParte2Binding
+import com.cursokotlin.reparapp.views.activities.PrincipalActivity
+import com.cursokotlin.reparapp.views.model.Usuario
+import com.cursokotlin.reparapp.views.utils.AuthManager
+import com.cursokotlin.reparapp.views.utils.FirestoreManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SignUpParte2Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SignUpParte2Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentSignUpParte2Binding
+    private lateinit var authManager: AuthManager
+    private lateinit var firestoreManager: FirestoreManager
+    private val args: SignUpParte2FragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        val args = SignUpParte2FragmentArgs.fromBundle(requireArguments())
+        val email = args.email
+        // Inicializar AuthManager
+        authManager = AuthManager()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up_parte2, container, false)
+    ): View {
+        // Corrección: Inicializa el binding aquí y retorna binding.root
+        binding = FragmentSignUpParte2Binding.inflate(inflater, container, false)
+
+        // Inicializar managers
+        authManager = AuthManager()
+        firestoreManager = FirestoreManager()
+
+        // Configurar listeners
+        eventListenersButton()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignUpParte2Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignUpParte2Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun eventListenersButton(){
+        binding.botonRegistroContinuar.setOnClickListener {
+            // Si la validación es exitosa, procedemos con el registro
+            registerUser()
+        }
     }
+
+    private fun validateFields(): Boolean {
+        // Limpiar errores previos
+        binding.tilUsuario.error = null
+        binding.tilNombre.error = null
+        binding.tilApellidos.error = null
+        binding.tilTelefono.error = null
+        binding.tilPassword.error = null
+        binding.tilConfirmarPassword.error = null
+
+        // Obtener valores de los campos
+        val usuario = binding.teUsuario.text.toString().trim()
+        val nombre = binding.teNombre.text.toString().trim()
+        val apellidos = binding.teApellidos.text.toString().trim()
+        val telefono = binding.teTelefono.text.toString().trim()
+        val password = binding.tePassword.text.toString()
+        val confirmarPassword = binding.teConfirmarPassword.text.toString()
+
+        var isValid = true
+
+        // Validar usuario
+        if (usuario.isEmpty()) {
+            binding.tilUsuario.error = "El usuario es obligatorio"
+            isValid = false
+        }
+
+        // Validar nombre
+        if (nombre.isEmpty()) {
+            binding.tilNombre.error = "El nombre es obligatorio"
+            isValid = false
+        }
+
+        // Validar apellidos
+        if (apellidos.isEmpty()) {
+            binding.tilApellidos.error = "Los apellidos son obligatorios"
+            isValid = false
+        }
+
+        // Validar teléfono
+        if (telefono.isEmpty()) {
+            binding.tilTelefono.error = "El teléfono es obligatorio"
+            isValid = false
+        } else if (!telefono.matches(Regex("^[0-9]{7,15}\$"))) {
+            binding.tilTelefono.error = "Teléfono inválido (solo números, mínimo 7 dígitos)"
+            isValid = false
+        }
+
+        // Validar contraseña
+        if (password.isEmpty()) {
+            binding.tilPassword.error = "La contraseña es obligatoria"
+            isValid = false
+        } else if (password.length < 6) {
+            binding.tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
+            isValid = false
+        }
+
+        // Validar confirmación de contraseña
+        if (confirmarPassword.isEmpty()) {
+            binding.tilConfirmarPassword.error = "Debe confirmar la contraseña"
+            isValid = false
+        } else if (password != confirmarPassword) {
+            binding.tilConfirmarPassword.error = "Las contraseñas no coinciden"
+            isValid = false
+        }
+
+        return isValid
+    }
+
+    private fun registerUser() {
+        showLoading(true)
+
+        val email = args.email
+        val password = binding.tePassword.text.toString()
+
+        authManager.signUpUser(email, password) { isSuccess, firebaseUser, authError ->
+            if (isSuccess && firebaseUser != null) {
+                // Paso 1: Éxito en Auth. Ahora intentamos guardar en Firestore.
+                val nuevoUsuario = Usuario(
+                    id = firebaseUser.uid,
+                    nombreApellido = "${binding.teNombre.text.toString().trim()} ${binding.teApellidos.text.toString().trim()}",
+                    email = email,
+                    telefono = binding.teTelefono.text.toString().trim(),
+                    rol = "cliente", // O "tecnico" según corresponda
+                    isActive = true
+                )
+
+                firestoreManager.saveUser(nuevoUsuario) { isSaved, firestoreError ->
+                    showLoading(false)
+
+                    if (isSaved) {
+                        // ÉXITO: Usuario creado y datos guardados
+                        Toast.makeText(context, "Registro completado con éxito", Toast.LENGTH_LONG).show()
+
+                        // 🚀 Lanzamos PrincipalActivity con el rol
+                        val intent = Intent(requireContext(), PrincipalActivity::class.java).apply {
+                            putExtra("userRole", nuevoUsuario.rol)
+                        }
+                        startActivity(intent)
+
+                        // 🗑️ Cerramos AuthActivity para que no quede en el backstack
+                        requireActivity().finish()
+
+                    } else {
+                        // Falló guardar en Firestore
+                        Log.e("RegisterUser", "Falló el guardado en Firestore. Iniciando rollback de Auth.")
+                        Toast.makeText(context, "Error al guardar datos. Deshaciendo registro...", Toast.LENGTH_LONG).show()
+
+                        authManager.deleteCurrentUser { isDeleted, deleteError ->
+                            if (isDeleted) {
+                                Toast.makeText(context, "No se pudo completar el registro. Por favor, inténtelo de nuevo.", Toast.LENGTH_LONG).show()
+                            } else {
+                                Toast.makeText(context, "Error crítico: no se pudo deshacer el registro. Contacte a soporte.", Toast.LENGTH_LONG).show()
+                                Log.e("RegisterUser", "CRÍTICO: Falló el rollback de Auth. Error: $deleteError")
+                            }
+                        }
+                    }
+                }
+            } else {
+                // Falló crear usuario en Auth
+                showLoading(false)
+                Toast.makeText(context, "Error de registro: $authError", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+
+    private fun showLoading(isLoading: Boolean) {
+        // Aquí puedes controlar la visibilidad de una ProgressBar
+        // binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.botonRegistroContinuar.isEnabled = !isLoading
+    }
+
+
 }

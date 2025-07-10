@@ -29,6 +29,8 @@
     <string name="detalle">Detalle</string>
     <string name="solucion">Solución</string>
     <string name="prompt_tipo_dispositivo">Tipo de dispositivo</string>
+    <string name="error_empty_email">Por favor ingresa tu correo electrónico</string>
+    <string name="error_invalid_email">Correo electrónico no válido</string>
 
 
     <string-array name="dispositivos_tipos">

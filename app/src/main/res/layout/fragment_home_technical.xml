@@ -30,6 +30,24 @@
             android:textStyle="bold"
             android:layout_marginStart="8dp" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_perfil_tecnico"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:cardCornerRadius="40dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/person_perfil"
+                android:contentDescription="@string/user_group" />
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
     <LinearLayout

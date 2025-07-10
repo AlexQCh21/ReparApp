@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "140750798895",
+    "project_id": "reparapp-18d32",
+    "storage_bucket": "reparapp-18d32.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:140750798895:android:49db324d3034e6c1bc46da",
+        "android_client_info": {
+          "package_name": "com.cursokotlin.reparapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq4Kwr_H0q4poeJdq-Ng7dUYk29atW9IA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
