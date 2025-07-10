@@ -7,12 +7,14 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
     app:cardBackgroundColor="@color/white">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="8dp">
+
         <TextView
             android:id="@+id/ModeloMarcaDevice"
             android:layout_width="wrap_content"
@@ -20,32 +22,34 @@
             android:text="HP Pavilion 15"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/tipo_dispositivo"
-            android:contentDescription="@string/ticket_icon" />
+            android:contentDescription="@string/ticket_icon"
+            android:src="@drawable/tipo_dispositivo" />
         <!-- Tengo dos estados: "Disponible" y "Reportado", esto lo usaré en un recycler view, quiero que me des los drawables y si es posible un ícono dinámico de acuerdo al estado -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:background="@drawable/bg_estado_reportado"
-            android:text= "Reportado"
+            android:text="Reportado"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="12sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="1"
-            android:singleLine="true"
-            android:scrollHorizontally="true"
-            android:layout_marginTop="4dp"
-            android:text="i7, 16GB RAM, SSD 512GB"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="11sp"/>
+            android:textSize="12sp" />
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:ellipsize="marquee"-->
+<!--            android:marqueeRepeatLimit="1"-->
+<!--            android:scrollHorizontally="true"-->
+<!--            android:singleLine="true"-->
+<!--            android:text="i7, 16GB RAM, SSD 512GB"-->
+<!--            android:textColor="@android:color/darker_gray"-->
+<!--            android:textSize="11sp" />-->
     </LinearLayout>
 </androidx.cardview.widget.CardView>

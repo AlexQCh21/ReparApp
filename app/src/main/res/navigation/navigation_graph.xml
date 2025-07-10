@@ -58,7 +58,7 @@
         android:id="@+id/inventarioFragment"
         android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
         android:label="fragment_inventario"
-        tools:layout="@layout/fragment_inventario" />
+        tools:layout="@layout/fragment_inventory" />
 
     <fragment
         android:id="@+id/homeTechnicalFragment"

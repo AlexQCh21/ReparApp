@@ -28,19 +28,16 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/statusBadge"
+            android:id="@+id/txtEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EN PROCESO"
+            android:text="En Progreso"
             android:textColor="@color/white"
-            android:background="@drawable/bg_estado"
-            android:paddingVertical="5dp"
-            android:paddingHorizontal="10dp"
-            android:textSize="12sp"
+            android:background="@android:color/holo_green_dark"
+            android:padding="4dp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -57,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="18dp">
 
             <TextView
                 android:id="@+id/ticketMainTitle"
@@ -67,7 +64,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal" />
 
             <LinearLayout
@@ -101,12 +98,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="32dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Reparado:"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
@@ -161,7 +157,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha límite"
+                    android:text="Fecha límite:"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -184,7 +180,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="32dp" />
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/problemaDescription"
@@ -192,35 +188,32 @@
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:justificationMode="inter_word"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="4dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Documentar"
-                android:textColor="@android:color/black"
+                android:drawableStart="@drawable/ic_share"
+                android:text="Documentar: "
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="32dp" />
+                android:layout_marginTop="12dp"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/solutionEditText"
+            <!-- Crear un shape en drawable -->
+            <EditText
+                android:id="@+id/edtReportDetailDocumentation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/solucion"
-                android:minHeight="100dp"
                 android:gravity="top"
-                android:padding="12dp"
-                android:background="@drawable/bg_solucion"
-                android:textColor="@color/grey"
-                android:textColorHint="@android:color/darker_gray"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                android:imeOptions="actionDone"
-                android:inputType="textMultiLine" />
-
+                android:minHeight="100dp"
+                android:textSize="14sp"
+                android:background="@drawable/edittext_reportsolution"
+                android:inputType="textMultiLine"
+                android:layout_marginTop="4dp"
+                android:imeOptions="actionDone"/>
         </LinearLayout>
     </ScrollView>
 

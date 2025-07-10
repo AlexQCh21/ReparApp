@@ -52,7 +52,7 @@
                 <EditText
                     android:id="@+id/buscar"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/item_text_field"
@@ -94,7 +94,7 @@
             <EditText
                 android:id="@+id/nombres"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/item_text_field"
@@ -102,31 +102,16 @@
                 android:drawablePadding="16dp"
                 android:drawableTint="#49454F"
                 android:ems="10"
-                android:hint="Nombres"
+                android:hint="Apellido y Nombre"
                 android:inputType="text"
                 android:padding="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/head" />
 
-            <EditText
-                android:id="@+id/apellidos"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/item_text_field"
-                android:drawableStart="@drawable/client"
-                android:drawablePadding="16dp"
-                android:drawableTint="#49454F"
-                android:ems="10"
-                android:hint="Apellidos"
-                android:inputType="text"
-                android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/head" />
 
             <EditText
                 android:id="@+id/teTelefono"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/item_text_field"
@@ -142,7 +127,7 @@
             <EditText
                 android:id="@+id/etDireccion"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/item_text_field"
@@ -157,7 +142,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/item_text_field"
                 android:gravity="start|center"
@@ -184,7 +169,7 @@
             <EditText
                 android:id="@+id/modelo"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/item_text_field"
@@ -226,8 +211,8 @@
 
                 <FrameLayout
                     android:id="@+id/frameAdjuntarFoto"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:background="@drawable/dashed_border"
                     android:clickable="true"
                     android:focusable="true">
