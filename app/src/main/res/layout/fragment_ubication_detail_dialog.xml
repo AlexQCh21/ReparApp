@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
     <ScrollView
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_tech_support"
+                    android:src="@drawable/ic_explore"
+                    app:tint="@color/black"
                     android:contentDescription="@string/local_icono_detail"/>
                 <TextView
                     android:id="@+id/ub_detail_NombreLocal"
@@ -93,18 +94,18 @@
                 <ImageView
                     android:id="@+id/ub_detail_local_frontal"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="200dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_tech_support"
-                    android:scaleType="centerInside"
+                    android:src="@drawable/foto_referencia_1"
+                    android:scaleType="fitXY"
                     android:layout_marginEnd="8dp"/>
                 <ImageView
                     android:id="@+id/ub_detail_local_lateral"
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="200dp"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_tech_support"
-                    android:scaleType="centerInside"
+                    android:src="@drawable/foto_referencia_2"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="8dp"/>
             </LinearLayout>
         </LinearLayout>
