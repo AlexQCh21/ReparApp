@@ -46,6 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/profileHeader"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="250dp"
             android:layout_height="250dp"

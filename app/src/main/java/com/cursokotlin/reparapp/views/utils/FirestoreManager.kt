@@ -14,12 +14,7 @@ class FirestoreManager {
         const val COLLECTION_USERS = "usuarios"
     }
 
-    /**
-     * Crea o actualiza un documento de usuario en Firestore.
-     * Usamos el UID de Firebase Auth como ID del documento.
-     * @param user El objeto Usuario con los datos a guardar.
-     * @param onResult Callback que se invoca cuando la operación termina.
-     */
+
     fun saveUser(user: Usuario, onResult: (Boolean, String?) -> Unit) {
         // El usuario debe tener un ID (debería ser el UID de Auth)
         if (user.id.isNullOrEmpty()) {

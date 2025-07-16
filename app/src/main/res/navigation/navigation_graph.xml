@@ -39,12 +39,6 @@
                 app:popUpToInclusive="true" />
         </fragment>
 
-    <fragment
-        android:id="@+id/inventarioFragment"
-        android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
-        android:label="fragment_inventario"
-        tools:layout="@layout/fragment_inventory" />
-
 
         <fragment
             android:id="@+id/signUpFragment"
