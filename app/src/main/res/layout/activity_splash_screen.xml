@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgVlogo"
+            android:id="@+id/img_logo"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_marginBottom="10dp"
@@ -28,7 +28,7 @@
             app:shapeAppearanceOverlay="@style/RoundedImageView"/>
 
         <TextView
-            android:id="@+id/tvLeyenda"
+            android:id="@+id/tv_leyenda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -39,7 +39,7 @@
             android:textSize="23sp" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress"
+            android:id="@+id/pb_carga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:indicatorColor="#a6acaf"

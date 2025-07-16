@@ -9,13 +9,14 @@
     tools:context=".views.fragments.LoginFragment">
 
     <LinearLayout
-        android:id="@+id/contenedorLogin"
+        android:id="@+id/contenedorRegistro2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:paddingVertical="20dp"
-        android:paddingHorizontal="30dp">
+        android:paddingHorizontal="30dp"
+        >
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgVlogo"
@@ -44,9 +45,7 @@
             android:layout_marginBottom="20dp"
             android:text="Ingrese sus datos para continuar" />
 
-        <!-- Usuario -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -57,16 +56,14 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/teUsuario"
+                android:id="@+id/ed_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Nombre -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -77,16 +74,14 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/teNombre"
+                android:id="@+id/ed_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Apellidos -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilApellidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -97,16 +92,14 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/teApellidos"
+                android:id="@+id/ed_apellidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Teléfono -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilTelefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -117,16 +110,15 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/teTelefono"
+                android:id="@+id/ed_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Contraseña -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPassword"
+            android:id="@+id/tilContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -138,16 +130,15 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tePassword"
+                android:id="@+id/et_contraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Confirmar contraseña -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilConfirmarPassword"
+            android:id="@+id/tilConfirmarContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -159,16 +150,15 @@
             app:cursorColor="@color/your_cursor_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/teConfirmarPassword"
+                android:id="@+id/et_confirmar_contraseña"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Botón -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/botonRegistroContinuar"
+            android:id="@+id/btn_continuar_registro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Continuar"
@@ -180,9 +170,7 @@
             android:paddingVertical="15dp"
             android:layout_marginBottom="10dp" />
 
-        <!-- Derechos -->
         <TextView
-            android:id="@+id/derechos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

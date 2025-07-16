@@ -44,7 +44,6 @@
         android:drawableTint="#49454F"
         android:background="@drawable/item_search"
         android:drawableEnd="@drawable/search"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationsRecyclerView"
         android:layout_width="0dp"
@@ -57,7 +56,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_component" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

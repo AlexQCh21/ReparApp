@@ -16,10 +16,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"/>
+        app:layout_constraintBottom_toTopOf="@+id/bnv_navegacion_principal"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bnv_navegacion_principal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/menu"
