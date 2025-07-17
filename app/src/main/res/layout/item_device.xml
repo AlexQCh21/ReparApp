@@ -16,7 +16,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/ModeloMarcaDevice"
+            android:id="@+id/tv_modelo_dispositivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HP Pavilion 15"
@@ -25,13 +25,16 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/img_dispositivo"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/ticket_icon"
             android:src="@drawable/tipo_dispositivo" />
+
         <!-- Tengo dos estados: "Disponible" y "Reportado", esto lo usaré en un recycler view, quiero que me des los drawables y si es posible un ícono dinámico de acuerdo al estado -->
         <TextView
+            android:id="@+id/tv_estado_dispositivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

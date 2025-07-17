@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/notificationTime"
+                android:id="@+id/tv_hora_ticket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hoy 9:14 Am"

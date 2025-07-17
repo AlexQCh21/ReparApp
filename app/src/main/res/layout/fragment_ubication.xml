@@ -13,6 +13,7 @@
         android:gravity="start|center">
 
         <ImageView
+            android:id="@+id/img_volver_atras"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:padding="15dp"
@@ -28,9 +29,8 @@
 
     </LinearLayout>
 
-    <!-- tools:context=".ui.fragments.UbicationFragment"-->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUbicaciones"
+        android:id="@+id/rv_locales_disponibles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -51,7 +51,7 @@
             android:background="@color/material_dynamic_tertiary95"
             android:alpha="0.2"/>
         <ProgressBar
-            android:id="@+id/ubication_progressBar"
+            android:id="@+id/pb_carga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>

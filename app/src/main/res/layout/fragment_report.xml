@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.MyTicketsFragment">
+    tools:context=".views.ui.fragments.MyTicketsFragment">
+
     <LinearLayout
         android:id="@+id/myTicketsHeader"
         android:layout_width="0dp"
@@ -21,7 +22,9 @@
             android:layout_height="24dp"
             android:src="@drawable/ic_user_group"
             android:contentDescription="User Group"
-            app:tint="@android:color/black" /> <TextView
+            app:tint="@android:color/black" />
+
+        <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -32,6 +35,7 @@
         android:layout_marginStart="8dp" />
 
         <ImageView
+            android:id="@+id/img_filtrar_tickets"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_filter"
@@ -41,7 +45,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/myTicketsRecyclerView"
+        android:id="@+id/rv_lista_tickets"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="8dp"
@@ -52,4 +56,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_ticket" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

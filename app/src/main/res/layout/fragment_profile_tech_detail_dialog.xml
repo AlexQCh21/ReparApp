@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.ProfileFragment">
+    tools:context=".views.ui.fragments.ProfileFragment">
 
     <LinearLayout
         android:id="@+id/profileHeader"
@@ -121,7 +121,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_titulo_dias"
                     />
                 <TextView
-                    android:id="@+id/tv_hora_laborable"
+                    android:id="@+id/tv_horario_laborable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="9:00 - 18:00"
@@ -135,14 +135,13 @@
                     />
 
                 <ImageView
-                    android:id="@+id/img_calendario"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_calendar"
                     android:contentDescription="Edit Name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_titulo_dias"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_hora_laborable"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_horario_laborable"
                     />
 
                 <TextView
@@ -183,7 +182,6 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_titulo_break"
                     />
                 <ImageView
-                    android:id="@+id/img_editar_nombres"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/resource_break"
@@ -193,7 +191,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/tv_tiempo_break"
                     />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/menu"
+                    android:id="@+id/til_especialidad"
                     style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -205,7 +203,7 @@
                     >
 
                     <AutoCompleteTextView
-                        android:id="@+id/autoCompleteOpciones"
+                        android:id="@+id/atv_especialidad"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"

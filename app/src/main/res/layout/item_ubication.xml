@@ -30,7 +30,7 @@
                 android:orientation="vertical"
                 android:layout_weight="1">
                 <TextView
-                    android:id="@+id/ub_NombreLocal"
+                    android:id="@+id/tv_local_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Local"
@@ -38,7 +38,7 @@
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/ub_DireccionLocal"
+                    android:id="@+id/tv_local_direccion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Av.xxxx"
