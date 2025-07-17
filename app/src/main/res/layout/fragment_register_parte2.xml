@@ -23,8 +23,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:paddingVertical="20dp"
-            android:paddingHorizontal="30dp"
-            >
+            android:paddingHorizontal="30dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgVlogo"
