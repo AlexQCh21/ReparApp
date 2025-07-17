@@ -15,7 +15,7 @@
 
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.LoginFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.LoginFragment"
             android:label="LoginFragment"
             tools:layout="@layout/fragment_login">
             <action
@@ -28,7 +28,7 @@
 
         <fragment
             android:id="@+id/loginParte2Fragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.LoginParte2Fragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.LoginParte2Fragment"
             android:label="LoginParte2Fragment"
             tools:layout="@layout/fragment_login_parte2">
             <!-- Acción para saltar al flujo principal y limpiar el historial de login -->
@@ -42,7 +42,7 @@
 
         <fragment
             android:id="@+id/signUpFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.SignUpFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.SignUpFragment"
             android:label="SignUpFragment"
             tools:layout="@layout/fragment_register">
             <action
@@ -52,7 +52,7 @@
 
         <fragment
             android:id="@+id/signUpParte2Fragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.SignUpParte2Fragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.SignUpParte2Fragment"
             android:label="SignUpParte2Fragment"
             tools:layout="@layout/fragment_register_parte2">
             <argument
@@ -83,7 +83,7 @@
 
         <fragment
             android:id="@+id/homeTechnicalFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.HomeTechnicalFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.HomeTechnicalFragment"
             android:label="HomeTechnicalFragment"
             tools:layout="@layout/fragment_home_technical" >
             <action
@@ -108,7 +108,7 @@
 
         <fragment
             android:id="@+id/homeClientFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.HomeClientFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.HomeClientFragment"
             android:label="HomeClientFragment"
             tools:layout="@layout/fragment_home_user" >
             <action
@@ -130,13 +130,13 @@
 
         <fragment
             android:id="@+id/inventarioFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.InventarioFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.InventarioFragment"
             android:label="fragment_inventario"
             tools:layout="@layout/fragment_inventory" />
 
         <fragment
             android:id="@+id/myTicketsFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.MyTicketsFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.MyTicketsFragment"
             android:label="fragment_my_tickets"
             tools:layout="@layout/fragment_report" >
             <action
@@ -146,13 +146,13 @@
 
         <fragment
             android:id="@+id/ticketDetailFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.TicketDetailFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.TicketDetailFragment"
             android:label="fragment_ticket_detail"
             tools:layout="@layout/fragment_report_detail_dialog" />
 
         <fragment
             android:id="@+id/profileFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.ProfileFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.ProfileFragment"
             android:label="fragment_profile"
             tools:layout="@layout/fragment_profile" >
             <action
@@ -162,31 +162,31 @@
 
         <fragment
             android:id="@+id/notificationFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.NotificationFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.NotificationFragment"
             android:label="fragment_notification"
             tools:layout="@layout/fragment_notification" />
 
         <fragment
             android:id="@+id/baseConocimientoFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.BaseConocimientoFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.BaseConocimientoFragment"
             android:label="BaseConocimientoFragment"
             tools:layout="@layout/fragment_knowledge_base" />
 
         <fragment
             android:id="@+id/disponibilidadFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.DisponibilidadFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.DisponibilidadFragment"
             android:label="DisponibilidadFragment"
             tools:layout="@layout/fragment_profile_tech_detail_dialog" />
 
         <fragment
             android:id="@+id/reportarProblemaFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.ReportarProblemaFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportarProblemaFragment"
             android:label="ReportarProblemaFragment"
             tools:layout="@layout/fragment_ticket" />
 
         <fragment
             android:id="@+id/ubicationFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.UbicationFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.UbicationFragment"
             android:label="UbicationFragment"
             tools:layout="@layout/fragment_ubication" >
             <action
@@ -196,7 +196,7 @@
 
         <fragment
             android:id="@+id/ubicationDetailDialogFragment"
-            android:name="com.cursokotlin.reparapp.views.fragments.UbicationDetailDialogFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.UbicationDetailDialogFragment"
             android:label="UbicationDetailDialogFragment"
             tools:layout="@layout/fragment_ubication_detail_dialog" />
 
