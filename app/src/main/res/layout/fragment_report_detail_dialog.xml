@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.TicketDetailFragment">
+    tools:context=".views.ui.fragments.TicketDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailHeader"
@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/txtEstado"
+            android:id="@+id/tv_estado_ticket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="En Progreso"
@@ -37,7 +37,10 @@
             android:padding="4dp"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,6 +86,7 @@
                     app:tint="@android:color/black" />
 
                 <TextView
+                    android:id="@+id/tv_codigo_ticket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ID: CODK00102"
@@ -139,7 +143,7 @@
                     android:layout_marginEnd="16dp" />
 
                 <TextView
-                    android:id="@+id/fechaAsignacionValue"
+                    android:id="@+id/tv_fecha_asignacion"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,7 +168,7 @@
                     android:layout_marginEnd="16dp" />
 
                 <TextView
-                    android:id="@+id/fechaLimiteValue"
+                    android:id="@+id/tv_fecha_limite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -183,7 +187,7 @@
                 android:layout_marginTop="10dp" />
 
             <TextView
-                android:id="@+id/problemaDescription"
+                android:id="@+id/tv_descripcion_problema"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!"
@@ -203,7 +207,7 @@
 
             <!-- Crear un shape en drawable -->
             <EditText
-                android:id="@+id/edtReportDetailDocumentation"
+                android:id="@+id/et_documentacion_tecnica"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/solucion"

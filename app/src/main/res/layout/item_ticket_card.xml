@@ -21,15 +21,17 @@
                 android:contentDescription="@string/ticket_icon" />
 
             <TextView
+                android:id="@+id/tv_nombre_ticket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Laptop"
+                android:text="Ticket"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp" />
 
             <TextView
+                android:id="@+id/tv_codigo_ticket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="COD7eddasd"

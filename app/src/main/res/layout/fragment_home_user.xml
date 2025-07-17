@@ -41,10 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1"/>
-        <!-- más grande el ícono -->
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/btn_perfil_user"
+            android:id="@+id/card_btn_perfil_user"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:cardCornerRadius="40dp">
@@ -80,7 +79,6 @@
                 android:layout_marginHorizontal="16dp"
                 >
                 <TextView
-                    android:id="@+id/misDevicesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mis Dispositivos"
@@ -91,6 +89,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
                 <ImageView
+                    android:id="@+id/img_ir_a_dispositivos"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_right_png"
@@ -102,7 +101,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerHomeUserDevices"
+                android:id="@+id/rv_lista_dispositivos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -145,7 +144,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerHomeUserTickets"
+                android:id="@+id/rv_historial_tickets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -171,7 +170,7 @@
                 />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerHomeUserKnowledge"
+                android:id="@+id/rv_base_conocimientos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -192,7 +191,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fabAdd"
+        android:id="@+id/fab_agregar"
         android:src="@drawable/ic_add_white"
         app:backgroundTint="@android:color/black"
         app:tint="@android:color/white"

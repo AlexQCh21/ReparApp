@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
 
         consultarRolUsuario { rol ->
             if (rol == "cliente") {
-                binding.cardDisponibilidad.visibility = View.INVISIBLE
+                binding.cardBtnDisponibilidad.visibility = View.INVISIBLE
             }
         }
 
@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun eventListeners() {
-        binding.cardCerrarSesion.setOnClickListener {
+        binding.cardBtnCerrarSesion.setOnClickListener {
             // Cierra sesión
             authManager.logout()
 

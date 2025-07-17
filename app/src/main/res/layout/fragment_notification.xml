@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.NotificationFragment">
+    tools:context=".views.ui.fragments.NotificationFragment">
 
     <LinearLayout
         android:id="@+id/notificationsHeader"
@@ -27,6 +27,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/img_filtrar_notificaciones"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_filter"
@@ -35,7 +36,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notificationsRecyclerView"
+        android:id="@+id/rv_lista_notificaciones"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="8dp"

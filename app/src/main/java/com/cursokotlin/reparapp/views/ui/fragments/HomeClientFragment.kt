@@ -31,7 +31,7 @@ class HomeClientFragment : Fragment() {
     }
 
     private fun showPerfilUser(){
-        binding.btnPerfilUser.setOnClickListener {
+        binding.cardBtnPerfilUser.setOnClickListener {
             findNavController().navigate(R.id.action_homeClientFragment_to_profileFragment)
         }
     }
