@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/img_flecha_atras"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:padding="15dp"
@@ -31,7 +32,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/buscar"
+        android:id="@+id/et_buscar_base_conocimientos"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:layout_constraintTop_toBottomOf="@+id/head"
@@ -46,18 +47,16 @@
         android:drawableEnd="@drawable/search"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notificationsRecyclerView"
+        android:id="@+id/rv_lista_base_conocimientos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/buscar"
+        app:layout_constraintTop_toBottomOf="@id/et_buscar_base_conocimientos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_knowledge_card" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

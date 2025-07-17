@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.fragments.ProfileFragment">
+
     <LinearLayout
         android:id="@+id/profileHeader"
         android:layout_width="0dp"
@@ -18,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/backButton"
+            android:id="@+id/img_volver_atras"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_arrow_back"
@@ -48,116 +49,160 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingHorizontal="40dp"
             >
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/profileImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="120dp"
-                app:cardElevation="5dp"
                 android:layout_gravity="center_horizontal"
-                >
+                app:cardCornerRadius="120dp"
+                android:layout_marginTop="20dp"
+                app:cardElevation="5dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="200dp"
                     android:layout_height="200dp"
+                    android:background="@color/grey"
                     android:scaleType="centerCrop"
                     app:strokeColor="@android:color/darker_gray"
-                    android:background="@color/grey"
-                    tools:src="@drawable/person_perfil"
                     app:strokeWidth="1dp"
-                    />
+                    tools:src="@drawable/person_perfil" />
+
             </com.google.android.material.card.MaterialCardView>
-            <LinearLayout
-                android:id="@+id/emailSection"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
                 android:layout_marginTop="16dp"
+                android:text="Email"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:id="@+id/tv_valor_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/gmail"
+                android:textColor="@color/grey"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 >
-
                 <TextView
+                    android:id="@+id/tv_titulo_dias"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email"
+                    android:text="Dias laborables"
                     android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/emailValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/gmail"
-                    android:textColor="@color/grey"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/profileInfoContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="32dp"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                >
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputFilledStyle"
-                    android:id="@+id/filledTextField"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_dias_laborables"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Dias laborables"
-                    app:endIconMode="custom"
-                    app:endIconDrawable="@drawable/ic_calendar" >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:longClickable="false"
-                        android:text="Lunes - Viernes\n9:00 - 18:00" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="?attr/textInputFilledStyle"
-                    android:id="@+id/textInputTiempoBreak" android:layout_width="match_parent"
+                    android:text="Lunes - Viernes"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_dias"
+                    />
+                <TextView
+                    android:id="@+id/tv_hora_laborable"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    android:hint="Tiempo de break"
-                    app:endIconMode="custom"
-                    app:endIconDrawable="@drawable/resource_break">
+                    android:text="9:00 - 18:00"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_dias_laborables"
+                    app:layout_constraintTop_toTopOf="@id/tv_dias_laborables"
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextTiempoBreak" android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="30 minutos"
-                        android:focusable="false"
-                        android:longClickable="false" />
+                    />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                <ImageView
+                    android:id="@+id/img_calendario"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_calendar"
+                    android:contentDescription="Edit Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_titulo_dias"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_hora_laborable"
+                    />
 
+                <TextView
+                    android:id="@+id/tv_titulo_break"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiempo de break"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dias_laborables"
+                    />
 
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/actionButtonsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="32dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                >
-
+                <TextView
+                    android:id="@+id/tv_tiempo_break"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_break"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="minutos"
+                    android:textColor="@color/grey"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@id/tv_tiempo_break"
+                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_break"
+                    />
+                <ImageView
+                    android:id="@+id/img_editar_nombres"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/resource_break"
+                    android:contentDescription="Edit Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_titulo_break"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_tiempo_break"
+                    />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/menu"
                     style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Especialidad">
+                    android:layout_marginTop="20dp"
+                    android:hint="Especialidad"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_tiempo_break"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/autoCompleteOpciones"
@@ -167,18 +212,10 @@
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
     </ScrollView>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
