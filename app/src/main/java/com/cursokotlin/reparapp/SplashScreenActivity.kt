@@ -11,10 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.cursokotlin.reparapp.databinding.ActivitySplashScreenBinding
-import com.cursokotlin.reparapp.views.activities.AuthActivity
-import com.cursokotlin.reparapp.views.activities.PrincipalActivity
-import com.cursokotlin.reparapp.views.model.Usuario
-import com.cursokotlin.reparapp.views.utils.AuthManager
+import com.cursokotlin.reparapp.views.ui.activities.AuthActivity
+import com.cursokotlin.reparapp.views.ui.activities.PrincipalActivity
+import com.cursokotlin.reparapp.model.Usuario
+import com.cursokotlin.reparapp.network.AuthManager
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -32,8 +32,8 @@ class SplashScreenActivity : AppCompatActivity() {
         }
         authManager = AuthManager()
 
-        binding.progress.isIndeterminate = true
-        binding.progress.visibility = View.VISIBLE
+        binding.pbCarga.isIndeterminate = true
+        binding.pbCarga.visibility = View.VISIBLE
 
         // Espera 2 segundos (2000 ms) antes de lanzar la app principal
         Handler(Looper.getMainLooper()).postDelayed({
