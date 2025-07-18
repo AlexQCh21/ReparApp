@@ -14,10 +14,8 @@ import com.cursokotlin.reparapp.network.AuthManager
 class HomeClientFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeUserBinding
-    private lateinit var authManager: AuthManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authManager = AuthManager()
     }
 
     override fun onCreateView(

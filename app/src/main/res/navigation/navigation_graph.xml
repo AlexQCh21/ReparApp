@@ -15,7 +15,7 @@
 
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.LoginFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.login.LoginFragment"
             android:label="LoginFragment"
             tools:layout="@layout/fragment_login">
             <action
@@ -24,11 +24,14 @@
             <action
                 android:id="@+id/action_loginFragment_to_signUpFragment"
                 app:destination="@id/signUpFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_verificacionEmailFragment"
+                app:destination="@id/verificacionEmailFragment" />
         </fragment>
 
         <fragment
             android:id="@+id/loginParte2Fragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.LoginParte2Fragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.login.LoginParte2Fragment"
             android:label="LoginParte2Fragment"
             tools:layout="@layout/fragment_login_parte2">
             <!-- Acción para saltar al flujo principal y limpiar el historial de login -->
@@ -42,7 +45,7 @@
 
         <fragment
             android:id="@+id/signUpFragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.SignUpFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.register.SignUpFragment"
             android:label="SignUpFragment"
             tools:layout="@layout/fragment_register">
             <action
@@ -52,18 +55,30 @@
 
         <fragment
             android:id="@+id/signUpParte2Fragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.SignUpParte2Fragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.register.SignUpParte2Fragment"
             android:label="SignUpParte2Fragment"
             tools:layout="@layout/fragment_register_parte2">
             <argument
                 android:name="email"
                 app:argType="string" />
+
+            <action
+                android:id="@+id/action_signUpParte2Fragment_to_verificacionEmailFragment"
+                app:destination="@id/verificacionEmailFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/verificacionEmailFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.register.VerificationEmailFragment"
+            android:label="fragment_verification_email"
+            tools:layout="@layout/fragment_verification_email">
             <!-- Acción para saltar al flujo principal y limpiar el historial de registro -->
             <action
                 android:id="@+id/action_auth_flow_to_main_flow"
                 app:destination="@id/main_flow"
                 app:popUpTo="@id/auth_flow"
                 app:popUpToInclusive="true" />
+
         </fragment>
 
     </navigation>

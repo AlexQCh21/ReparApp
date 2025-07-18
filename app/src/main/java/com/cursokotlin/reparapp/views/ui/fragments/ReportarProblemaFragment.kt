@@ -36,7 +36,7 @@ class ReportarProblemaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner: Spinner = view.findViewById(R.id.spinnerEspecialidad)
+        val spinner: Spinner = view.findViewById(R.id.spinner_tipo_dispositivo)
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.dispositivos_tipos,

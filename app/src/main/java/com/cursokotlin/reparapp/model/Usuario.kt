@@ -6,7 +6,7 @@ import java.util.Date
 
 // Usamos @JvmField para que Firestore pueda acceder directamente a las propiedades
 data class Usuario(
-    var id: String? = null, // Corresponderá al UID de Firebase Auth
+    var id: String, // Corresponderá al UID de Firebase Auth
 
     @JvmField @PropertyName("nombre_apellido")
     var nombreApellido: String = "",
@@ -45,5 +45,5 @@ data class Usuario(
     var breakTime: String? = null
 ) {
     // Constructor sin argumentos requerido por Firestore para la deserialización
-    constructor() : this(null, "", "", "", "cliente", true, null, null, null, null, null, null)
+    constructor() : this("", "", "", "", "cliente", true, null, null, null, null, null, null)
 }

@@ -1,4 +1,4 @@
-package com.cursokotlin.reparapp.views.ui.fragments
+package com.cursokotlin.reparapp.views.ui.fragments.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

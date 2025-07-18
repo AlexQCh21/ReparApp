@@ -14,11 +14,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var authManager: AuthManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        authManager = AuthManager()
 
 
     }
@@ -30,55 +28,55 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
 
-        consultarRolUsuario { rol ->
-            if (rol == "cliente") {
-                binding.cardBtnDisponibilidad.visibility = View.INVISIBLE
-            }
-        }
-
-        eventListeners()
+//        consultarRolUsuario { rol ->
+//            if (rol == "cliente") {
+//                binding.cardBtnDisponibilidad.visibility = View.INVISIBLE
+//            }
+//        }
+//
+//        eventListeners()
         return binding.root
     }
 
-    private fun eventListeners() {
-        binding.cardBtnCerrarSesion.setOnClickListener {
-            // Cierra sesión
-            authManager.logout()
+//    private fun eventListeners() {
+//        binding.cardBtnCerrarSesion.setOnClickListener {
+//            // Cierra sesión
+//            authManager.logout()
+//
+//            // Redirige a AuthActivity
+//            val intent = Intent(requireContext(), AuthActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            startActivity(intent)
+//
+//            // Finaliza la actividad actual
+//            requireActivity().finish()
+//        }
+//    }
 
-            // Redirige a AuthActivity
-            val intent = Intent(requireContext(), AuthActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-
-            // Finaliza la actividad actual
-            requireActivity().finish()
-        }
-    }
-
-    private fun consultarRolUsuario(onResult: (String?) -> Unit) {
-        val user = authManager.getCurrentUser()
-        if (user != null) {
-            val uid = user.uid
-            val firestore = FirebaseFirestore.getInstance()
-
-            firestore.collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener { document ->
-                    if (document.exists()) {
-                        val rol = document.getString("rol")
-                        onResult(rol)
-                    } else {
-                        onResult(null)
-                    }
-                }
-                .addOnFailureListener { e ->
-                    onResult(null)
-                }
-        } else {
-            onResult(null)
-        }
-    }
+//    private fun consultarRolUsuario(onResult: (String?) -> Unit) {
+//        val user = authManager.getCurrentUser()
+//        if (user != null) {
+//            val uid = user.uid
+//            val firestore = FirebaseFirestore.getInstance()
+//
+//            firestore.collection("usuarios")
+//                .document(uid)
+//                .get()
+//                .addOnSuccessListener { document ->
+//                    if (document.exists()) {
+//                        val rol = document.getString("rol")
+//                        onResult(rol)
+//                    } else {
+//                        onResult(null)
+//                    }
+//                }
+//                .addOnFailureListener { e ->
+//                    onResult(null)
+//                }
+//        } else {
+//            onResult(null)
+//        }
+//    }
 
 
 }
