@@ -75,6 +75,27 @@ class RegisterViewModel @Inject constructor(
         )
     }
 
+    fun onNombreChanged(nombre: String) {
+        val error = if (nombre.isBlank()) "Nombre obligatorio" else null
+
+        _formState.value = _formState.value.copy(
+            nombre = nombre,
+            nombreError = error,
+            isValid = validateForm()
+        )
+    }
+
+    fun onApellidosChanged(apellidos: String) {
+        val error = if (apellidos.isBlank()) "Apellidos obligatorios" else null
+
+        _formState.value = _formState.value.copy(
+            apellidos = apellidos,
+            apellidosError = error,
+            isValid = validateForm()
+        )
+    }
+
+
     fun onTelefonoChanged(newTelefono: String) {
         val error = validateTelefono(newTelefono)
 
@@ -107,6 +128,8 @@ class RegisterViewModel @Inject constructor(
         )
     }
 
+
+
     private fun validateTelefono(telefono: String): String? {
         //if (telefono.isBlank()) return "Teléfono obligatorio"
         if (!telefono.matches(Regex("^[0-9]{7,15}\$"))) return "Teléfono inválido"
@@ -126,11 +149,15 @@ class RegisterViewModel @Inject constructor(
         val state = _formState.value
         return listOf(
             state.usernameError,
+            state.nombreError,
+            state.apellidosError,
             state.telefonoError,
             state.passwordError,
             state.confirmPasswordError
         ).all { it == null } && listOf(
             state.username,
+            state.nombre,
+            state.apellidos,
             state.telefono,
             state.password,
             state.confirmPassword

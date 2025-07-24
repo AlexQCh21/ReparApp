@@ -48,6 +48,24 @@ class VerificationEmailFragment : Fragment() {
             viewModel.resendVerificationEmail()
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.validation.collect { state ->
+                    when (state) {
+                        is ValidationState.Message -> {
+                            //Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                        }
+                        is ValidationState.Error -> {
+                            //Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                        }
+                        else -> { /* No hacer nada si está en estado Idle u otro */ }
+                    }
+                }
+            }
+        }
+
+
+
         return binding.root
     }
 

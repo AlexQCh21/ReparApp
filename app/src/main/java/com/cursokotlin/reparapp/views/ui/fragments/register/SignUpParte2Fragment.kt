@@ -46,8 +46,9 @@ class SignUpParte2Fragment : Fragment() {
 
     private fun setupTextWatchers() {
         // Validación en tiempo real
-        binding.etNombre.addTextChangedListener { viewModel.onUsernameChanged(it.toString()) }
-        binding.etApellidos.addTextChangedListener { viewModel.onUsernameChanged(it.toString()) }
+        binding.etUsuario.addTextChangedListener { viewModel.onUsernameChanged(it.toString()) }
+        binding.etNombre.addTextChangedListener { viewModel.onNombreChanged(it.toString()) }
+        binding.etApellidos.addTextChangedListener { viewModel.onApellidosChanged(it.toString()) }
         binding.etTelefono.addTextChangedListener { viewModel.onTelefonoChanged(it.toString()) }
         binding.etClave.addTextChangedListener { viewModel.onPasswordChanged(it.toString()) }
         binding.etConfirmarClave.addTextChangedListener { viewModel.onConfirmPasswordChanged(it.toString()) }
@@ -60,6 +61,7 @@ class SignUpParte2Fragment : Fragment() {
                 viewModel.formState.collect { formState ->
                     updateFormErrors(formState)
                     binding.btnContinuarRegistro.isEnabled = formState.isValid
+                    Toast.makeText(requireContext(), formState.isValid.toString(), Toast.LENGTH_LONG).show()
                     print(formState.isValid)
                 }
             }
@@ -91,7 +93,7 @@ class SignUpParte2Fragment : Fragment() {
                             findNavController().navigate(R.id.action_signUpParte2Fragment_to_verificacionEmailFragment)
                         }
                         is RegisterEvent.ShowError -> {
-                            Toast.makeText(requireContext(), event.message + " - Manda error por alguna razón", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), event.message, Toast.LENGTH_LONG).show()
                         }
                         null -> {} // Sin evento
                     }
@@ -101,7 +103,9 @@ class SignUpParte2Fragment : Fragment() {
     }
 
     private fun updateFormErrors(formState: RegisterFormState) {
-        binding.etCampoNombre.error = formState.usernameError
+        binding.etCampoUsuario.error = formState.usernameError
+        binding.etCampoNombre.error = formState.nombreError
+        binding.etCampoApellidos.error = formState.apellidosError
         binding.etCampoTelefono.error = formState.telefonoError
         binding.etCampoClave.error = formState.passwordError
         binding.etCampoConfirmarClave.error = formState.confirmPasswordError
@@ -109,7 +113,12 @@ class SignUpParte2Fragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnContinuarRegistro.setOnClickListener {
-            registerUser()
+            if (binding.cbxTerminos.isChecked){
+                registerUser()
+            } else{
+                binding.cbxTerminos.error = "Debes aceptar los términos de uso"
+            }
+
         }
     }
 

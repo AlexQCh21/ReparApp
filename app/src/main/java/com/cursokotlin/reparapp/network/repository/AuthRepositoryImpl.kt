@@ -23,15 +23,15 @@ class AuthRepositoryImpl @Inject constructor(
         return authManager.sendEmailVerification(user)
     }
 
-    override suspend fun userValidate(user: FirebaseUser): Boolean {
+    override fun userValidate(user: FirebaseUser): Boolean {
         return authManager.userValidated()
     }
 
-    override suspend fun getCurrentUser(): FirebaseUser? {
+    override fun getCurrentUser(): FirebaseUser? {
         return authManager.getCurrentUser()
     }
 
-    override suspend fun observeCurrentUser(): Flow<FirebaseUser?> {
+    override fun observeCurrentUser(): Flow<FirebaseUser?> {
         return authManager.observeCurrentUser()
     }
 }

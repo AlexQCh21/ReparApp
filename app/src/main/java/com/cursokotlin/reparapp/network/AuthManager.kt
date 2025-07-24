@@ -12,18 +12,18 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.cursokotlin.reparapp.domain.model.Result
+import com.google.firebase.auth.FirebaseAuthException
 
 
 @Singleton
 class AuthManager @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    //private val firebaseAuth: FirebaseAuth
 ) {
     companion object {
         const val TAG = "AuthManager"
     }
 
-    // Obtener instancia de FirebaseAuth (si es necesario para algún caso específico)
-    fun getFirebaseAuthInstance(): FirebaseAuth = firebaseAuth
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     // Verifica si hay un usuario logueado (Flow para observación reactiva)
     fun observeCurrentUser(): Flow<FirebaseUser?> = flow {
@@ -57,22 +57,56 @@ class AuthManager @Inject constructor(
     }
 
     // Inicia sesión (suspend + Result)
+//    suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
+//        return try {
+//            val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+//            val user = authResult.user ?: throw AuthError.UnknownError(Exception("Usuario nulo").message)
+//            Result.Success(user)
+//        } catch (e: FirebaseAuthInvalidCredentialsException) {
+//            val error = when (e.errorCode) {
+//                "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
+//                "ERROR_WRONG_PASSWORD" -> AuthError.WeakPassword
+//                else -> AuthError.UnknownError(e.message)
+//            }
+//            Result.Failure(error)
+//        } catch (e: Exception) {
+//            Result.Failure(AuthError.UnknownError(e.message))
+//        }
+//    }
+
     suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
         return try {
             val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            val user = authResult.user ?: throw AuthError.UnknownError(Exception("Usuario nulo").message)
-            Result.Success(user)
+            val user = authResult.user
+            if (user != null) {
+                Result.Success(user)
+            } else {
+                // Este caso es poco probable si signInWithEmailAndPassword tiene éxito, pero es bueno por seguridad
+                Result.Failure(AuthError.UnknownError("Autenticación exitosa pero el usuario es nulo."))
+            }
         } catch (e: FirebaseAuthInvalidCredentialsException) {
             val error = when (e.errorCode) {
                 "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
-                "ERROR_WRONG_PASSWORD" -> AuthError.WeakPassword
+                "ERROR_WRONG_PASSWORD" -> AuthError.WrongPassword // Mapeo corregido
+                "ERROR_USER_NOT_FOUND" -> AuthError.UserNotFound // Añadido
                 else -> AuthError.UnknownError(e.message)
             }
             Result.Failure(error)
+        } catch (e: FirebaseAuthException) {
+            // Captura otros tipos de FirebaseAuthException si es necesario (ej. problemas de red)
+            Result.Failure(AuthError.UnknownError(e.message))
         } catch (e: Exception) {
+            // Captura cualquier otra excepción inesperada
             Result.Failure(AuthError.UnknownError(e.message))
         }
     }
+
+    fun addAuthStateListener(onAuthStateChanged: (FirebaseUser?) -> Unit) {
+        firebaseAuth.addAuthStateListener { auth ->
+            onAuthStateChanged(auth.currentUser)
+        }
+    }
+
 
     // Restablecer contraseña (suspend)
     suspend fun sendPasswordReset(email: String): Result<Unit> {

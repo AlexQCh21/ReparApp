@@ -1,5 +1,6 @@
 package com.cursokotlin.reparapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cursokotlin.reparapp.domain.model.AuthError
@@ -12,11 +13,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.domain.repository.AuthRepository
 import kotlinx.coroutines.delay
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val authManager: AuthManager,
+    private val authManager: AuthRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
 
@@ -31,20 +33,20 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             delay(1000)
             val currentUser = authManager.getCurrentUser()
+            Log.i("SPLASH", "Usuario actual: ${currentUser?.email}")
             if (currentUser != null) {
                 when (val userResult = userRepository.getUser(currentUser.uid)) {
                     is Result.Success -> {
                         val usuario = userResult.data
-                        if (usuario.isActive) {
-                            // Usuario activo -> navega a PrincipalActivity con su rol
+                        val isVerified = authManager.getCurrentUser()?.isEmailVerified == true
+                        if (usuario.isActive && isVerified) {
+                            // Usuario activo y verificado -> navega a PrincipalActivity con su rol
                             _uiState.value = SplashUiState.NavigateToMain(usuario.rol)
                         } else {
-                            authManager.logout()
                             _uiState.value = SplashUiState.ShowError("Tu cuenta está desactivada. Contacta al administrador.")
                         }
                     }
                     is Result.Failure -> {
-                        authManager.logout()
                         val errorMsg = when (userResult.error) {
                             AuthError.UserNotFound -> "No se encontraron datos del usuario."
                             is AuthError.DatabaseError -> "Error de base de datos."
@@ -55,12 +57,16 @@ class SplashViewModel @Inject constructor(
 
                     else -> { /* no debería pasar, pero necesario para ser exhaustivo */ }
                 }
+
             } else {
                 // Usuario no autenticado -> navega al login
                 _uiState.value = SplashUiState.NavigateToLogin
             }
         }
     }
+
+
+
 }
 
 sealed class SplashUiState {

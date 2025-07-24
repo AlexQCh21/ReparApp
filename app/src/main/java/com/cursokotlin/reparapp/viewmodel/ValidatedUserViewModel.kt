@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Usuario
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
@@ -56,7 +57,7 @@ class ValidatedUserViewModel @Inject constructor(
 
     fun resendVerificationEmail() {
         viewModelScope.launch {
-            when (val result = authRepository.sendEmailVerification()) {
+            when (val result = authRepository.sendEmailVerification(authRepository.getCurrentUser())) {
                 is Result.Success -> {
                     _validation.value = ValidationState.Message("Correo de verificación enviado correctamente")
                 }

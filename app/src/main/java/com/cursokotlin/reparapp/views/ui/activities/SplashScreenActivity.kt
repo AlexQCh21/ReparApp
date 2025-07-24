@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -18,8 +19,10 @@ import com.cursokotlin.reparapp.model.Usuario
 import com.cursokotlin.reparapp.network.AuthManager
 import com.cursokotlin.reparapp.viewmodel.SplashUiState
 import com.cursokotlin.reparapp.viewmodel.SplashViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
@@ -35,6 +38,8 @@ class SplashScreenActivity : AppCompatActivity() {
         observeUiState()
     }
 
+
+
     private fun observeUiState() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { state ->
@@ -43,17 +48,23 @@ class SplashScreenActivity : AppCompatActivity() {
                         binding.pbCarga.visibility = View.VISIBLE
                     }
                     is SplashUiState.NavigateToMain -> {
+                        //Cuando esta autenticado te redirige a la vista home
                         val intent = Intent(this@SplashScreenActivity, PrincipalActivity::class.java).apply {
                             putExtra("userRole", state.userRole)
                         }
+                        Toast.makeText(this@SplashScreenActivity, "autenticado", Toast.LENGTH_LONG).show()
                         startActivity(intent)
                         finish()
                     }
                     is SplashUiState.NavigateToLogin -> {
+                        //Te redirige al login
+                        Toast.makeText(this@SplashScreenActivity, "No autenticado", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
                         finish()
                     }
                     is SplashUiState.ShowError -> {
+                        //Te redirige al login
+                        Toast.makeText(this@SplashScreenActivity, "Error", Toast.LENGTH_LONG).show()
                         Toast.makeText(this@SplashScreenActivity, state.message, Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
                         finish()

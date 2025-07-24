@@ -170,6 +170,12 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <CheckBox
+                android:id="@+id/cbxTerminos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aceptar térmnos y condiciones"/>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_continuar_registro"
                 android:layout_width="match_parent"
