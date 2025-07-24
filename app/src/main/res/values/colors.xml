@@ -8,4 +8,8 @@
     <color name="your_primary_color">#FF6200EE</color>
     <color name="your_secondary_color">#FF03DAC5</color>
     <color name="my_custom_red">#FFFF0000</color>
+    <color name="light_Grey">#E9E9E9</color>
+
+    <color name="variante_blue">#254BDC</color>
+    
 </resources>

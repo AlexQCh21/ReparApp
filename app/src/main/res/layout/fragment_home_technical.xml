@@ -313,7 +313,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 tools:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/item_card"
+                tools:listitem="@layout/item_ticket_card"
                 tools:orientation="horizontal" />
             <TextView
                 android:layout_width="wrap_content"

@@ -10,11 +10,11 @@
         <item name="cornerSize">50%</item> <!-- O usa 16dp, 8dp, etc. -->
     </style>
 
-
-
-
-
     <style name="Theme.ReparApp" parent="Base.Theme.ReparApp" />
+    <style name="Theme.TextMain" parent="Base.Theme.ReparApp">
+        <item name="android:fontFamily">@font/montserrat</item>
+    </style>
+
 
 </resources>
 

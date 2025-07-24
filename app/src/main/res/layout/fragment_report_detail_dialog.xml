@@ -1,225 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.ui.fragments.TicketDetailFragment">
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/detailHeader"
-        android:layout_width="0dp"
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/bg_fondo"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-        <TextView
-            android:id="@+id/headerTitle"
+        <ImageView
+            android:id="@+id/img_flecha_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detalle del Ticket"
-            android:textColor="@android:color/black"
-            android:textSize="28sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/icon_arrow_back"
+            />
 
         <TextView
-            android:id="@+id/tv_estado_ticket"
+            android:id="@+id/tv_titulo_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="En Progreso"
-            android:textColor="@color/white"
-            android:background="@android:color/holo_green_dark"
-            android:padding="4dp"
-            android:textSize="15sp"
+            android:layout_marginStart="16dp"
+            android:text="Detalle del Ticket"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintStart_toEndOf="@id/img_flecha_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/detailHeader"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="18dp">
-
-            <TextView
-                android:id="@+id/ticketMainTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Titulo del Ticket"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerLayout"
+            android:padding="18dp"
+            >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:layout_gravity="center_horizontal">
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Datos de la Transaccion"
+                    android:textSize="20sp"
+                    android:textColor="#2C2C2C"
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_ticket_black"
-                    android:contentDescription="Ticket Icon"
-                    app:tint="@android:color/black" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_edit"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Codigo de Ticket:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    />
 
                 <TextView
                     android:id="@+id/tv_codigo_ticket"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ID: CODK00102"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
+                    android:text="CODK00102"
                     android:textStyle="bold"
+                    android:textColor="#3D3D3D"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
                     />
+
+                <TextView
+                    android:id="@+id/tv_fecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="17/09/25"
+                    android:textStyle="bold"
+                    android:textColor="#3D3D3D"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="8dp"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reparado:"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Hora:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_hora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23:04"
                     android:textStyle="bold"
-                    android:layout_marginEnd="16dp" />
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_check_circle_green"
-                    android:contentDescription="Reparado Yes"
-                    android:layout_marginEnd="8dp" />
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/ic_cancel_red"
-                    android:contentDescription="Reparado No" />
+                    android:textColor="#3D3D3D"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="8dp"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha de asignación:"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="16dp" />
+                    android:layout_marginEnd="16dp"
+                    android:text="Estado:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    />
 
                 <TextView
                     android:id="@+id/tv_fecha_asignacion"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hoy 9:14 Am"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha límite:"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:text="Iniciado"
                     android:textStyle="bold"
-                    android:layout_marginEnd="16dp" />
-
-                <TextView
-                    android:id="@+id/tv_fecha_limite"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="25/05/2025"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp" />
+                    android:textColor="#55B85A"
+                    android:textAllCaps="true"
+                    android:textSize="18sp" />
             </LinearLayout>
+
+            <View
+                android:id="@+id/v_linea"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="4dp"
+                android:background="#E4E4E4"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PROBLEMA:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="12dp"
+                android:text="Datos del Dipositivo"
+                android:textSize="20sp"
+                android:textColor="#2C2C2C"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_tipo_dispositivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monitor"
+                    android:textStyle="bold"
+                    android:textColor="#3D3D3D"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modelo:"
+                    android:textColor="#3D3D3D"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_modelo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LG UltraGear 27GN950-B 27"
+                    android:textStyle="bold"
+                    android:textColor="#3D3D3D"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/v_linea2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="4dp"
+                android:background="#E4E4E4"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Problema reportado"
+                android:layout_marginTop="10dp"
+                android:textColor="#2C2C2C"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_descripcion_problema"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!"
-                android:textColor="@color/black"
-                android:textSize="14sp"
+                android:layout_marginTop="4dp"
                 android:justificationMode="inter_word"
-                android:layout_marginTop="4dp" />
+                android:text="@string/lorem"
+                android:textColor="#3D3D3D"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/v_linea3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="4dp"
+                android:background="#E4E4E4"
+                />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_share"
-                android:text="Documentar: "
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginTop="12dp"/>
+                android:text="Fotos del Cliente"
+                android:layout_marginTop="10dp"
+                android:textColor="#2C2C2C"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <!-- Crear un shape en drawable -->
-            <EditText
-                android:id="@+id/et_documentacion_tecnica"
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_lista_dispositivos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/solucion"
-                android:gravity="top"
-                android:minHeight="100dp"
-                android:textSize="14sp"
-                android:background="@drawable/edittext_reportsolution"
-                android:inputType="textMultiLine"
-                android:layout_marginTop="4dp"
-                android:imeOptions="actionDone"/>
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/misDevicesTitle"
+                tools:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/item_device_problema"
+                tools:orientation="horizontal" />
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_agregar_ticket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_edit"
+        app:backgroundTint="#2E47A4"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
+        app:fabSize="normal"
+        android:contentDescription="@string/agregar_ticket"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@android:color/white" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

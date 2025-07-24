@@ -1,219 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="F9F9F9F"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".views.ui.fragments.ProfileFragment">
 
-    <LinearLayout
-        android:id="@+id/profileHeader"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="horizontal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="18dp"
+        >
 
         <ImageView
-            android:id="@+id/img_volver_atras"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            android:contentDescription="Back"
-            app:tint="@android:color/black" />
+            android:id="@+id/img_flecha_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/icon_arrow_back2"
+            />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_titulo_home"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Disponibilidad"
-            android:textColor="@android:color/black"
-            android:gravity="center"
-            android:textSize="28sp"
+            android:layout_marginStart="16dp"
+            android:text="Mi perfil"
+            android:textColor="#2C2C2C"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginStart="16dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileHeader"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="40dp"
+            android:paddingHorizontal="20dp"
             >
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/profileImage"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                app:cardCornerRadius="120dp"
-                android:layout_marginTop="20dp"
-                app:cardElevation="5dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:background="@color/grey"
-                    android:scaleType="centerCrop"
-                    app:strokeColor="@android:color/darker_gray"
-                    app:strokeWidth="1dp"
-                    tools:src="@drawable/person_perfil" />
-
-            </com.google.android.material.card.MaterialCardView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Email"
-                android:textColor="@android:color/black"
+                android:text="Información Personal"
+                android:layout_marginVertical="15dp"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                />
-            <TextView
-                android:id="@+id/tv_valor_email"
+                android:textColor="#2C2C2C"
+                android:textStyle="bold" />
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="4dp"
-                android:text="@string/gmail"
-                android:textColor="@color/grey"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                />
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
                 >
-                <TextView
-                    android:id="@+id/tv_titulo_dias"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dias laborables"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_dias_laborables"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lunes - Viernes"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_dias"
-                    />
-                <TextView
-                    android:id="@+id/tv_horario_laborable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9:00 - 18:00"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="10dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_dias_laborables"
-                    app:layout_constraintTop_toTopOf="@id/tv_dias_laborables"
-
-                    />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/ic_calendar"
-                    android:contentDescription="Edit Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_titulo_dias"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_horario_laborable"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_titulo_break"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tiempo de break"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="20dp"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_dias_laborables"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_tiempo_break"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="30"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_break"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="minutos"
-                    android:textColor="@color/grey"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="4dp"
-                    app:layout_constraintStart_toEndOf="@id/tv_tiempo_break"
-                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_break"
-                    />
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/resource_break"
-                    android:contentDescription="Edit Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tv_titulo_break"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_tiempo_break"
-                    />
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_especialidad"
-                    style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="Especialidad"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_tiempo_break"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
                     >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nombres Completos"
+                        android:textColor="#BDBDBD"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/atv_especialidad"
+                    <TextView
+                        android:id="@+id/tv_nombre_completos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="David Emanuel"
+                        android:textColor="#5D5D5D"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apellidos Completos"
+                        android:textColor="#BDBDBD"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_apellidos_completos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rojas Jimenez"
+                        android:textColor="#5D5D5D"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Celular"
+                        android:textColor="#BDBDBD"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
+                        />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/tv_numero_telefono"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="968****05"
+                            android:textColor="#5D5D5D"
+                            android:textSize="20sp" />
 
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_arrow_right2"
+                            android:layout_gravity="center"
+                            />
+
+                    </LinearLayout>
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="1"
+                        android:text="Correo Electronico"
+                        android:textColor="#BDBDBD"
+                        android:textSize="16sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/tv_correo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="davidemanuelrojas...@gmail.com"
+                            android:textColor="#5D5D5D"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_edit2"
+                            android:layout_gravity="center"
+                            />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dirección"
+                        android:textColor="#BDBDBD"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"
                         />
-                </com.google.android.material.textfield.TextInputLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/tv_direccion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Urb. Villa Agraria..."
+                            android:textColor="#5D5D5D"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_edit2"
+                            android:layout_gravity="center"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

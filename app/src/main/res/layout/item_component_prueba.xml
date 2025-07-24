@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    >
+
+    <ImageView
+        android:id="@+id/img_refaccion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img_component"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/grey_bg_prueba"
+        />
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Batería de iphone 12 pro max"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:textColor="#2C2C2C"
+        app:layout_constraintStart_toEndOf="@id/img_refaccion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_refaccion"
+        android:layout_marginStart="8dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo"
+        app:layout_constraintStart_toStartOf="@id/tv_titulo"
+        >
+
+        <TextView
+            android:id="@+id/tv_cantidad_componente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:text="12"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_unidad_medida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:paddingVertical="8dp"
+            android:text="unidades"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+    <View
+        android:id="@+id/v_linea"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

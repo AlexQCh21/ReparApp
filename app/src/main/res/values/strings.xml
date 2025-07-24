@@ -9,9 +9,9 @@
     <string name="local_icono_detail">Icono en la parte superior de ubication_detail_dialog\n</string>
     <string name="user_group">User Group</string>
     <string name="tickets">Tickets</string>
-    <string name="pendientes">pendientes\n</string>
+    <string name="pendientes">pendientes</string>
     <string name="home">ReparApp</string>
-    <string name="asignados">asignados hoy</string>
+    <string name="asignados">asignados</string>
     <string name="semana">Esta semana</string>
     <string name="ticketsF">Tickets terminados</string>
     <string name="see_all">See all</string>
@@ -32,6 +32,11 @@
     <string name="error_empty_email">Por favor ingresa tu correo electrónico</string>
     <string name="error_invalid_email">Correo electrónico no válido</string>
     <string name="agregar_ticket">Agregar Ticket</string>
+    <string name="paso2">¿Necesitas contactar a un proveedor?</string>
+    <string name="paso1">Sigue estos pasos para corregirlo:</string>
+    <string name="todo">TODO</string>
+    <string name="codigo">TIC-003943</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!</string>
 
 
     <string-array name="dispositivos_tipos">

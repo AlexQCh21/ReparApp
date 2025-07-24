@@ -5,15 +5,11 @@
         android:icon="@drawable/ic_home"
         android:title="Inicio" />
     <item
-        android:id="@+id/nav_notifications"
-        android:icon="@drawable/ic_bell"
-        android:title="Notificaciones" />
-    <item
         android:id="@+id/nav_inventario"
         android:icon="@drawable/ic_ticket_nav"
-        android:title="Inventario" />
+        android:title="Tickets" />
     <item
         android:id="@+id/nav_history"
-        android:icon="@drawable/ic_history"
-        android:title="Tickets" />
+        android:icon="@drawable/icon_configuration"
+        android:title="Configuración" />
 </menu>
