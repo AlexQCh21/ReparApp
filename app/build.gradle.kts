@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
+
+    //Hilt
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -60,7 +64,14 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-
     //Firebase
     implementation("com.google.firebase:firebase-auth")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.56.2")
+    ksp("com.google.dagger:hilt-compiler:2.56.2")
+
+    //Lottie
+    implementation("com.airbnb.android:lottie:6.4.0")
+
 }

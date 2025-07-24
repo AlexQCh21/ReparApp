@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".views.ui.fragments.LoginFragment">
+    tools:context=".views.ui.fragments.login.LoginFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
             app:shapeAppearanceOverlay="@style/RoundedImageView"/>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_contenedor_correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -54,6 +55,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_contenedor_clave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"

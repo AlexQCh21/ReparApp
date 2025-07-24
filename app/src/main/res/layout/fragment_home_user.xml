@@ -54,6 +54,8 @@
                 android:src="@drawable/person_perfil"
                 android:contentDescription="@string/user_group" />
         </com.google.android.material.card.MaterialCardView>
+
+
     </LinearLayout>
 
     <ScrollView

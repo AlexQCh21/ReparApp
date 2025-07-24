@@ -1,36 +1,90 @@
 package com.cursokotlin.reparapp.network
 
 import android.util.Log
+import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.model.Usuario
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
+import com.cursokotlin.reparapp.domain.model.Result
 
-class FirestoreManager {
-
-    private val db = FirebaseFirestore.getInstance()
-
+@Singleton
+class FirestoreManager @Inject constructor(
+    private val firestore: FirebaseFirestore
+) {
     companion object {
-        const val TAG = "FirestoreManager"
+        private const val TAG = "FirestoreManager"
         const val COLLECTION_USERS = "usuarios"
     }
 
+    suspend fun saveUser(user: Usuario): Result<Unit> {
+        return try {
+            require(user.id.isNotEmpty()) { throw AuthError.InvalidUserData }
 
-    fun saveUser(user: Usuario, onResult: (Boolean, String?) -> Unit) {
-        // El usuario debe tener un ID (debería ser el UID de Auth)
-        if (user.id.isNullOrEmpty()) {
-            onResult(false, "El ID de usuario no puede ser nulo o vacío.")
-            return
+            firestore.collection(COLLECTION_USERS)
+                .document(user.id)
+                .set(user, SetOptions.merge())
+                .await()
+
+            Log.d(TAG, "Usuario guardado con éxito: ${user.id}")
+            Result.Success(Unit)
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "Datos de usuario inválidos", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al guardar usuario", e)
+            Result.Failure(AuthError.DatabaseError(e))
         }
+    }
 
-        db.collection(COLLECTION_USERS).document(user.id!!)
-            .set(user, SetOptions.merge())
-            .addOnSuccessListener {
-                Log.d(TAG, "Usuario guardado con éxito en Firestore con ID: ${user.id}")
-                onResult(true, null)
+    suspend fun getUser(userId: String): Result<Usuario> {
+        return try {
+            require(userId.isNotEmpty()) { throw AuthError.InvalidUserData }
+
+            val snapshot = firestore.collection(COLLECTION_USERS)
+                .document(userId)
+                .get()
+                .await()
+
+            if (snapshot.exists()) {
+                snapshot.toObject(Usuario::class.java)?.let { user ->
+                    Result.Success(user)
+                } ?: Result.Failure(AuthError.InvalidUserData)
+            } else {
+                Result.Failure(AuthError.UserNotFound)
             }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Error al guardar usuario en Firestore", e)
-                onResult(false, e.message)
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "ID de usuario inválido", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener usuario", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    suspend fun getUserRole(userId: String): Result<String> {
+        return try {
+            require(userId.isNotEmpty()) { throw AuthError.InvalidUserData }
+
+            val snapshot = firestore.collection(COLLECTION_USERS)
+                .document(userId)
+                .get()
+                .await()
+
+            if (snapshot.exists()) {
+                val role = snapshot.getString("rol") ?: "cliente"
+                Result.Success(role)
+            } else {
+                Result.Failure(AuthError.UserNotFound)
             }
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "ID de usuario inválido", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener rol del usuario", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
     }
 }

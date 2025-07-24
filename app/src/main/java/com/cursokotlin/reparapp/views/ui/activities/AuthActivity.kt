@@ -9,11 +9,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.ActivityMainBinding
-import com.cursokotlin.reparapp.network.AuthManager
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
 
-    private lateinit var authManager: AuthManager
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
@@ -25,16 +25,12 @@ class AuthActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        authManager = AuthManager()
 
-        // Comprueba si ya hay un usuario autenticado
-//        userAuthenticate()
     }
-
 
 
     private fun setupNavigation() {

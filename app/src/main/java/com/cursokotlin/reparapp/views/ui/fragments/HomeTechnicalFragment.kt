@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentHomeTechnicalBinding
-import com.cursokotlin.reparapp.databinding.FragmentLoginBinding
 
 
 class HomeTechnicalFragment : Fragment() {

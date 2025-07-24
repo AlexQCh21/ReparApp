@@ -1,137 +1,167 @@
 package com.cursokotlin.reparapp.network
 
 import android.util.Log
+import com.cursokotlin.reparapp.domain.model.AuthError
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
+import com.cursokotlin.reparapp.domain.model.Result
+import com.google.firebase.auth.FirebaseAuthException
 
-class AuthManager {
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
+@Singleton
+class AuthManager @Inject constructor(
+    //private val firebaseAuth: FirebaseAuth
+) {
     companion object {
         const val TAG = "AuthManager"
     }
 
-    fun obtenerInstance(): FirebaseAuth {
-        return auth
-    }
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    // Verifica si hay un usuario logueado
-    fun checkCurrentUser(): String? {
-        val currentUser = auth.currentUser
-        return currentUser?.let {
-            "Usuario ya autenticado: ${it.email}"
+    // Verifica si hay un usuario logueado (Flow para observación reactiva)
+    fun observeCurrentUser(): Flow<FirebaseUser?> = flow {
+        while (true) {
+            emit(firebaseAuth.currentUser)
+            kotlinx.coroutines.delay(1000) // Emite cada segundo (ajustable)
         }
     }
 
-    // Devuelve el usuario actual
-    fun getCurrentUser(): FirebaseUser? {
-        return auth.currentUser
-    }
+    // Devuelve el usuario actual (sincrónico)
+    fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
-    // Registra un usuario con email y password
-    fun signUpUser(
-        email: String,
-        password: String,
-        onResult: (Boolean, FirebaseUser?, String?) -> Unit
-    ) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    user?.sendEmailVerification()  // Opcional
-                    onResult(true, user, null)
-                } else {
-                    val errorMessage = task.exception?.message ?: "Error desconocido"
-                    Log.e(TAG, "Error al registrar: $errorMessage")
-                    onResult(false, null, errorMessage)
-                }
+    // Registra un usuario con email y password (usando suspend)
+    suspend fun signUpUser(email: String, password: String): Result<FirebaseUser> {
+        return try {
+            val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            val user = authResult.user ?: throw AuthError.UnknownError(Exception("Usuario nulo").message)
+            Result.Success(user)
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            val error = when (e.errorCode) {
+                "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
+                "ERROR_WEAK_PASSWORD" -> AuthError.WeakPassword
+                else -> AuthError.UnknownError(e.message)
             }
+            Result.Failure(error)
+        } catch (e: FirebaseAuthUserCollisionException) {
+            Result.Failure(AuthError.UserCollision)
+        } catch (e: Exception) {
+            Result.Failure(AuthError.UnknownError(e.message))
+        }
     }
 
-    //Inicia sesión del usuario
-    fun signInUser(
-        email: String,
-        password: String,
-        onResult: (Boolean, FirebaseUser?, String?) -> Unit
-    ) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    onResult(true, user, null)
-                } else {
-                    val error = task.exception?.message ?: "Error desconocido"
-                    Log.e(TAG, "Error al iniciar sesión: $error")
-                    onResult(false, null, error)
-                }
+    // Inicia sesión (suspend + Result)
+//    suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
+//        return try {
+//            val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+//            val user = authResult.user ?: throw AuthError.UnknownError(Exception("Usuario nulo").message)
+//            Result.Success(user)
+//        } catch (e: FirebaseAuthInvalidCredentialsException) {
+//            val error = when (e.errorCode) {
+//                "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
+//                "ERROR_WRONG_PASSWORD" -> AuthError.WeakPassword
+//                else -> AuthError.UnknownError(e.message)
+//            }
+//            Result.Failure(error)
+//        } catch (e: Exception) {
+//            Result.Failure(AuthError.UnknownError(e.message))
+//        }
+//    }
+
+    suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
+        return try {
+            val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            val user = authResult.user
+            if (user != null) {
+                Result.Success(user)
+            } else {
+                // Este caso es poco probable si signInWithEmailAndPassword tiene éxito, pero es bueno por seguridad
+                Result.Failure(AuthError.UnknownError("Autenticación exitosa pero el usuario es nulo."))
             }
-    }
-
-    //Restablecer contraseña
-    fun sendPasswordReset(email: String, onResult: (Boolean, String?) -> Unit) {
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onResult(true, null)
-                } else {
-                    val error = task.exception?.message ?: "Error al enviar el correo"
-                    onResult(false, error)
-                }
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            val error = when (e.errorCode) {
+                "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
+                "ERROR_WRONG_PASSWORD" -> AuthError.WrongPassword // Mapeo corregido
+                "ERROR_USER_NOT_FOUND" -> AuthError.UserNotFound // Añadido
+                else -> AuthError.UnknownError(e.message)
             }
+            Result.Failure(error)
+        } catch (e: FirebaseAuthException) {
+            // Captura otros tipos de FirebaseAuthException si es necesario (ej. problemas de red)
+            Result.Failure(AuthError.UnknownError(e.message))
+        } catch (e: Exception) {
+            // Captura cualquier otra excepción inesperada
+            Result.Failure(AuthError.UnknownError(e.message))
+        }
     }
 
-    //Verificación del email
-    fun sendEmailVerification(user: FirebaseUser?, onResult: (Boolean, String?) -> Unit) {
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    onResult(true, null)
-                } else {
-                    val error = task.exception?.message ?: "Error al enviar verificación"
-                    onResult(false, error)
-                }
-            }
+    fun addAuthStateListener(onAuthStateChanged: (FirebaseUser?) -> Unit) {
+        firebaseAuth.addAuthStateListener { auth ->
+            onAuthStateChanged(auth.currentUser)
+        }
     }
 
-    //Iniciar como anónimo
-    fun signInAnonymously(onResult: (Boolean, FirebaseUser?, String?) -> Unit) {
-        auth.signInAnonymously()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    onResult(true, user, null)
-                } else {
-                    val error = task.exception?.message ?: "Error al iniciar sesión como invitado"
-                    onResult(false, null, error)
-                }
-            }
+
+    // Restablecer contraseña (suspend)
+    suspend fun sendPasswordReset(email: String): Result<Unit> {
+        return try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Failure(AuthError.DatabaseError(e))
+        }
     }
 
-    // Cerrar sesión
+    fun userValidated(user: FirebaseUser?=firebaseAuth.currentUser):Boolean{
+        return user?.isEmailVerified?:false
+    }
+
+    // Verificación del email (suspend)
+    suspend fun sendEmailVerification(user: FirebaseUser? = firebaseAuth.currentUser): Result<Unit> {
+        return try {
+            val targetUser = user ?: throw AuthError.UserNotLoggedIn
+            targetUser.sendEmailVerification().await()
+            Log.d(TAG, "Email de verificación enviado a ${targetUser.email}")
+            Result.Success(Unit)
+        } catch (e: AuthError) {
+            Log.e(TAG, "Error de autenticación al enviar verificación", e)
+            Result.Failure(e)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al enviar email de verificación", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    // Iniciar como anónimo (suspend)
+    suspend fun signInAnonymously(): Result<FirebaseUser> {
+        return try {
+            val authResult = firebaseAuth.signInAnonymously().await()
+            val user = authResult.user ?: throw Exception("Usuario anónimo nulo")
+            Result.Success(user)
+        } catch (e: Exception) {
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    // Cerrar sesión (sincrónico)
     fun logout() {
-        auth.signOut()
+        firebaseAuth.signOut()
     }
 
-    fun deleteCurrentUser(onResult: (Boolean, String?) -> Unit) {
-        val user = auth.currentUser
-        if (user == null) {
-            // No debería pasar en el flujo de registro, pero es una buena práctica manejarlo
-            onResult(false, "No hay un usuario para borrar.")
-            return
+    // Eliminar usuario actual (suspend)
+    suspend fun deleteCurrentUser(): Result<Unit> {
+        return try {
+            val user = firebaseAuth.currentUser ?: throw Exception("No hay usuario para borrar")
+            user.delete().await()
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Failure(AuthError.DatabaseError(e))
         }
-
-        user.delete()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "Usuario borrado de Auth exitosamente (rollback).")
-                    onResult(true, null)
-                } else {
-                    val error = task.exception?.message ?: "Error desconocido al borrar el usuario."
-                    Log.e(TAG, "Error en el rollback de Auth: $error")
-                    // Este es un error crítico. El usuario podría quedar en un estado inconsistente.
-                    onResult(false, error)
-                }
-            }
     }
 }
