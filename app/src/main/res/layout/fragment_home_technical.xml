@@ -335,7 +335,7 @@
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/baseConocimientoTitle"
+                app:layout_constraintTop_toBottomOf="@id/rv_base_conocimientos"
                 tools:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/item_knowledge_card"
                 tools:orientation="horizontal" />
