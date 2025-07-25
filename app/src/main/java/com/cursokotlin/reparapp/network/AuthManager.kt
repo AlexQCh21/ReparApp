@@ -13,6 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import com.cursokotlin.reparapp.domain.model.Result
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.GoogleAuthProvider
 
 
 @Singleton
@@ -164,4 +165,22 @@ class AuthManager @Inject constructor(
             Result.Failure(AuthError.DatabaseError(e))
         }
     }
+
+    //Iniciar sesión con google
+    suspend fun signInWithGoogle(idToken: String): Result<FirebaseUser> {
+        return try {
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            val authResult = firebaseAuth.signInWithCredential(credential).await()
+            val user = authResult.user
+            if (user != null) {
+                Result.Success(user)
+            } else {
+                Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Google."))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al iniciar sesión con Google", e)
+            Result.Failure(AuthError.UnknownError(e.message))
+        }
+    }
+
 }

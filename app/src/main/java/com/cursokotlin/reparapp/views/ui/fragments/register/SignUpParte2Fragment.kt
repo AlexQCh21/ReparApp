@@ -60,8 +60,8 @@ class SignUpParte2Fragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.formState.collect { formState ->
                     updateFormErrors(formState)
-                    binding.btnContinuarRegistro.isEnabled = formState.isValid
-                    Toast.makeText(requireContext(), formState.isValid.toString(), Toast.LENGTH_LONG).show()
+                    //binding.btnContinuarRegistro.isEnabled = formState.isValid
+                    //Toast.makeText(requireContext(), formState.isValid.toString(), Toast.LENGTH_LONG).show()
                     print(formState.isValid)
                 }
             }

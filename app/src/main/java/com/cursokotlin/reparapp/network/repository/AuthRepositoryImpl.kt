@@ -19,6 +19,10 @@ class AuthRepositoryImpl @Inject constructor(
         return authManager.signInUser(email, password)
     }
 
+    override suspend fun signInWithGoogle(token: String): Result<FirebaseUser> {
+        return authManager.signInWithGoogle(token)
+    }
+
     override suspend fun sendEmailVerification(user: FirebaseUser?): Result<Unit> {
         return authManager.sendEmailVerification(user)
     }

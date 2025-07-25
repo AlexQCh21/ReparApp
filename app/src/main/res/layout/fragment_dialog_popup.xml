@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    app:cardElevation="20dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardPreventCornerOverlap="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--Título-->
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/roboto"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="Términos y Condiciones" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#aaaaaa"
+            android:layout_marginHorizontal="10dp"/>
+
+        <TextView
+            android:id="@+id/contenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="@string/terminos_y_condiciones" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#aaaaaa"
+            android:layout_marginHorizontal="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancelar"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="#dd4444"
+                android:layout_marginEnd="10dp"
+                android:textSize="16sp"
+                app:cornerRadius="4dp"
+                android:text="Declinar"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_continuar"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="#33aa33"
+                android:textSize="16sp"
+                app:cornerRadius="4dp"
+                android:text="Aceptar"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

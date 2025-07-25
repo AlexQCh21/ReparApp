@@ -12,7 +12,20 @@
           "package_name": "com.cursokotlin.reparapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "140750798895-pjcjkf1i4ksvt5skakcjn2p9545rphuc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cursokotlin.reparapp",
+            "certificate_hash": "22ff81ff03fb8c87d51a580638abafe4bb56eafd"
+          }
+        },
+        {
+          "client_id": "140750798895-l2jag71ha8m69konall9kapiecou858u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBq4Kwr_H0q4poeJdq-Ng7dUYk29atW9IA"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "140750798895-l2jag71ha8m69konall9kapiecou858u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -1,5 +1,6 @@
 package com.cursokotlin.reparapp.views.ui.fragments.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -18,6 +21,11 @@ import com.cursokotlin.reparapp.databinding.FragmentLoginBinding
 import com.cursokotlin.reparapp.views.ui.activities.PrincipalActivity
 import com.cursokotlin.reparapp.viewmodel.LoginViewModel
 import com.cursokotlin.reparapp.viewmodel.ValidationStateLogin
+import com.cursokotlin.reparapp.views.ui.fragments.CustomDialogFragment
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -26,6 +34,35 @@ class LoginFragment : Fragment() {
 
     private val viewModel:LoginViewModel by viewModels()
     private lateinit var binding: FragmentLoginBinding
+    lateinit var dialog : CustomDialogFragment
+    var loginProvider:String = ""
+
+
+    companion object{
+        val PROVIDER_GOOGLE = "GOOGLE"
+        val PROVIDER_FACEBOOK = "FACEBOOK"
+    }
+
+    // 🔹 One Tap Client y Launcher
+    private lateinit var oneTapClient: SignInClient
+    private lateinit var signInRequest: BeginSignInRequest
+
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
+            val idToken = credential.googleIdToken
+            if (idToken != null) {
+                val account = GoogleSignIn.getLastSignedInAccount(requireContext())
+                viewModel.signInWithGoogle(idToken,account)
+            } else {
+                Toast.makeText(requireContext(), "No se pudo obtener el token", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(requireContext(), "Inicio cancelado", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +73,25 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        setupGoogleSignIn()
         setupEventListeners()
-
+        initDialog()
         return binding.root
+    }
+
+    private fun setupGoogleSignIn() {
+        oneTapClient = Identity.getSignInClient(requireContext())
+
+        signInRequest = BeginSignInRequest.builder()
+            .setGoogleIdTokenRequestOptions(
+                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+                    .setSupported(true)
+                    .setServerClientId(getString(R.string.web_client_id))
+                    .setFilterByAuthorizedAccounts(false)
+                    .build()
+            )
+            .setAutoSelectEnabled(true)
+            .build()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,6 +109,44 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun initDialog(){
+        dialog = CustomDialogFragment.newInstance(
+            titulo = "Términos y Condiciones",
+            contenido = getString(R.string.terminos_y_condiciones)
+        )
+    }
+
+    private fun showDialog(){
+        dialog.setDialogListener(object : CustomDialogFragment.DialogListener {
+            override fun onConfirm() {
+                // Acción al hacer clic en "Aceptar"
+                if(loginProvider == PROVIDER_GOOGLE){
+                    initSesionWithGoogle()
+                }else if (loginProvider == PROVIDER_FACEBOOK){
+
+                }
+            }
+
+            override fun onCancel() {
+                // Acción al hacer clic en "Declinar"
+                Toast.makeText(context, "Cancelado", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        dialog.show(parentFragmentManager, "CustomDialog")
+    }
+
+    private fun initSesionWithGoogle(){
+        oneTapClient.beginSignIn(signInRequest)
+            .addOnSuccessListener { result ->
+                val intentSenderRequest = IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
+                googleSignInLauncher.launch(intentSenderRequest)
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), "No se pudo iniciar sesión con Google", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun observeLoginState() {
@@ -105,11 +196,13 @@ class LoginFragment : Fragment() {
         }
 
         binding.cardBtnGoogle.setOnClickListener {
-            Toast.makeText(requireContext(), "Login con Google (en desarrollo)", Toast.LENGTH_SHORT).show()
+            loginProvider = PROVIDER_GOOGLE
+            showDialog()
         }
 
         binding.cardBtnFacebook.setOnClickListener {
             Toast.makeText(requireContext(), "Login con Facebook (en desarrollo)", Toast.LENGTH_SHORT).show()
+            showDialog()
         }
 
         binding.etCorreo.doOnTextChanged { text, _, _, _ ->
