@@ -98,7 +98,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun signInWithGoogle(idToken: String, cuenta: GoogleSignInAccount?) {
+    fun signInWithGoogle(idToken: String, nombre: String, apellido: String, email: String) {
         viewModelScope.launch {
             _validation.value = ValidationStateLogin.Loading
 
@@ -109,21 +109,16 @@ class LoginViewModel @Inject constructor(
                     val user = authRepository.getCurrentUser()
                     val userId = user?.uid ?: ""
 
-                    // Verifica si ya existe en Firestore
                     val userDataResult = userRepository.getUser(userId)
 
                     if (userDataResult is Result.Failure) {
-                        // Si no existe, crear usuario
-                        val account = cuenta
-                        val nombre = account?.givenName ?: ""
-                        val apellido = account?.familyName ?: ""
-                        val email = account?.email ?: ""
-
-                        val nombreApellido = "${account?.givenName ?: ""} ${account?.familyName ?: ""}".trim()
+                        val username = "$nombre ${apellido.firstOrNull() ?: ""}".trim()
 
                         val nuevoUsuario = Usuario(
                             id = userId,
-                            nombreApellido = nombreApellido,
+                            nombreUsuario = username,
+                            nombre = nombre,
+                            apellido = apellido,
                             email = email,
                             telefono = "",
                             rol = "cliente"
@@ -136,7 +131,6 @@ class LoginViewModel @Inject constructor(
                         }
                     }
 
-                    // Obtener el rol del usuario
                     val userRoleResult = userRepository.getUserRole(userId)
 
                     if (userRoleResult is Result.Success) {
@@ -162,6 +156,75 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+
+//    fun signInWithGoogle(idToken: String, cuenta: GoogleSignInAccount?) {
+//        viewModelScope.launch {
+//            _validation.value = ValidationStateLogin.Loading
+//
+//            val result = authRepository.signInWithGoogle(idToken)
+//
+//            when (result) {
+//                is Result.Success -> {
+//                    val user = authRepository.getCurrentUser()
+//                    val userId = user?.uid ?: ""
+//
+//                    // Verifica si ya existe en Firestore
+//                    val userDataResult = userRepository.getUser(userId)
+//
+//                    if (userDataResult is Result.Failure) {
+//                        // Si no existe, crear usuario
+//                        val account = cuenta
+//                        val nombre = account?.givenName ?: ""
+//                        val apellido = account?.familyName ?: ""
+//                        val email = account?.email ?: ""
+//
+//
+//                        val username = "${account?.givenName ?: ""} ${account?.familyName?.substring(0,1) ?: ""}".trim()
+//
+//                        val nuevoUsuario = Usuario(
+//                            id = userId,
+//                            nombreUsuario = username,
+//                            nombre = nombre,
+//                            apellido = apellido,
+//                            email = email,
+//                            telefono = "",
+//                            rol = "cliente"
+//                        )
+//
+//                        val saveResult = userRepository.saveUser(nuevoUsuario)
+//                        if (saveResult is Result.Failure) {
+//                            _validation.value = ValidationStateLogin.Error("No se pudo guardar el usuario")
+//                            return@launch
+//                        }
+//                    }
+//
+//                    // Obtener el rol del usuario
+//                    val userRoleResult = userRepository.getUserRole(userId)
+//
+//                    if (userRoleResult is Result.Success) {
+//                        if (user?.isEmailVerified == true) {
+//                            _validation.value = ValidationStateLogin.Verified(userRoleResult.data)
+//                        } else {
+//                            _validation.value = ValidationStateLogin.NotVerified(userRoleResult.data)
+//                        }
+//                    } else {
+//                        _validation.value = ValidationStateLogin.Error("No se pudo obtener el rol")
+//                    }
+//                }
+//
+//                is Result.Failure -> {
+//                    _validation.value = ValidationStateLogin.Error(
+//                        result.error.message ?: "Error desconocido al iniciar sesión"
+//                    )
+//                }
+//
+//                else -> {
+//                    _validation.value = ValidationStateLogin.Error("Error desconocido al iniciar sesión")
+//                }
+//            }
+//        }
+//    }
 
 
 }

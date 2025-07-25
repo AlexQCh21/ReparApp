@@ -1,178 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="10dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_logo"
-                android:contentDescription="@string/user_group" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/home"
-            android:textColor="@android:color/black"
-            android:textSize="28sp"
-            android:textStyle="bold"/>
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_weight="1"/>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_btn_perfil_user"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:cardCornerRadius="40dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/person_perfil"
-                android:contentDescription="@string/user_group" />
-        </com.google.android.material.card.MaterialCardView>
-
-
-    </LinearLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        >
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_fondo"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="20dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_titulo_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/home"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_usuario_notificacion"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/icon_noti_act"
+                app:layout_constraintEnd_toStartOf="@id/img_usuario_perfil"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_usuario_perfil"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/icon_profile_pru"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_saludo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Hola, "
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_titulo_home"
+                app:layout_constraintTop_toBottomOf="@id/tv_titulo_home" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="David"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_saludo"
+                app:layout_constraintTop_toBottomOf="@id/tv_titulo_home" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/headerLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            android:orientation="vertical"
-            >
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mis Operaciones"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+
+                    >
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/icon_ticket_prueba" />
+
+                    <TextView
+                        android:id="@+id/tv_agregar_ticket"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:text="Agregar ticket"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center|end"
+                        android:src="@drawable/icon_arrow_right" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="start|center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/icon_device_prueba" />
+
+                    <TextView
+                        android:id="@+id/tv_agregar_dispositivo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:text="Agregar Dispositivo"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center|end"
+                        android:src="@drawable/icon_arrow_right" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                >
+                android:layout_marginTop="15dp">
+
                 <TextView
+                    android:id="@+id/tv_titulo_mis_tickets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mis Tickets"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_ver_todos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="Ver Todos"
+                    android:textColor="#298AB6"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_titulo_mis_tickets"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="4dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_historial_tickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:paddingHorizontal="10dp"
+                    tools:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/item_ticket_prueba"
+                    tools:orientation="vertical" />
+            </androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_mis_disipositivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mis Dispositivos"
-                    android:textColor="@android:color/black"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-                <ImageView
-                    android:id="@+id/img_ir_a_dispositivos"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_arrow_right_png"
-                    android:contentDescription="@string/see_all"
-                    android:layout_marginEnd="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_ver_dispositivos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="Ver Todos"
+                    android:textColor="#298AB6"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_lista_dispositivos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/misDevicesTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
+                tools:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/item_device"
-                tools:layoutManager="LinearLayoutManager"
-                tools:orientation="horizontal"/>
+                tools:orientation="horizontal" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                >
-                <TextView
-                    android:id="@+id/misTicketsTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Historial de Tickets"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_arrow_right_png"
-                    android:contentDescription="@string/see_all"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginEnd="20dp"
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_historial_tickets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/misTicketsTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                tools:listitem="@layout/item_ticket_card"
-                tools:layoutManager="LinearLayoutManager"
-                tools:orientation="horizontal"/>
         </LinearLayout>
-    </ScrollView>
 
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fab_agregar"
-        android:src="@drawable/ic_add_white"
-        app:backgroundTint="@android:color/black"
-        app:tint="@android:color/white"
-        app:fabSize="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="20dp"
-        android:contentDescription="fabadd"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>

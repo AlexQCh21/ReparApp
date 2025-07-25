@@ -133,7 +133,9 @@ class SignUpParte2Fragment : Fragment() {
 
         val userData = Usuario(
             id = "",
-            nombreApellido = "${binding.etNombre.text} ${binding.etApellidos.text}",
+            nombreUsuario = binding.etUsuario.text.toString(),
+            nombre = binding.etNombre.text.toString(),
+            apellido = binding.etApellidos.text.toString(),
             email = email,
             telefono = binding.etTelefono.text.toString(),
             rol = "cliente",

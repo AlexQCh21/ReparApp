@@ -54,8 +54,18 @@ class LoginFragment : Fragment() {
             val credential = oneTapClient.getSignInCredentialFromIntent(result.data)
             val idToken = credential.googleIdToken
             if (idToken != null) {
-                val account = GoogleSignIn.getLastSignedInAccount(requireContext())
-                viewModel.signInWithGoogle(idToken,account)
+                val idToken = credential.googleIdToken?:""
+                val nombre = credential.givenName ?: ""
+                val apellido = credential.familyName ?: ""
+                val email = credential.id ?: ""
+
+                viewModel.signInWithGoogle(
+                    idToken = idToken,
+                    nombre = nombre,
+                    apellido = apellido,
+                    email = email
+                )
+
             } else {
                 Toast.makeText(requireContext(), "No se pudo obtener el token", Toast.LENGTH_SHORT).show()
             }

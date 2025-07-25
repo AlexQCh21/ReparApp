@@ -3,6 +3,7 @@ package com.cursokotlin.reparapp.views.ui.activities
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavGraph
@@ -26,6 +27,9 @@ class PrincipalActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
+
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
+
 
         val userRole = intent.getStringExtra("userRole") ?: "cliente"
 

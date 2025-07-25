@@ -28,7 +28,7 @@ class HomeTechnicalFragment : Fragment() {
     }
 
     private fun showPerfilTech(){
-        binding.cardBtnPerfilTecnico.setOnClickListener {
+        binding.imgUsuarioPerfil.setOnClickListener {
             findNavController().navigate(R.id.action_homeTechnicalFragment_to_profileFragment)
         }
     }

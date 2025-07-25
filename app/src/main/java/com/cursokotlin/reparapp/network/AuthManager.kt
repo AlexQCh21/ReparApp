@@ -20,11 +20,13 @@ import com.google.firebase.auth.GoogleAuthProvider
 class AuthManager @Inject constructor(
     //private val firebaseAuth: FirebaseAuth
 ) {
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
     companion object {
         const val TAG = "AuthManager"
     }
 
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
     // Verifica si hay un usuario logueado (Flow para observación reactiva)
     fun observeCurrentUser(): Flow<FirebaseUser?> = flow {
@@ -58,23 +60,6 @@ class AuthManager @Inject constructor(
     }
 
     // Inicia sesión (suspend + Result)
-//    suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
-//        return try {
-//            val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-//            val user = authResult.user ?: throw AuthError.UnknownError(Exception("Usuario nulo").message)
-//            Result.Success(user)
-//        } catch (e: FirebaseAuthInvalidCredentialsException) {
-//            val error = when (e.errorCode) {
-//                "ERROR_INVALID_EMAIL" -> AuthError.InvalidEmail
-//                "ERROR_WRONG_PASSWORD" -> AuthError.WeakPassword
-//                else -> AuthError.UnknownError(e.message)
-//            }
-//            Result.Failure(error)
-//        } catch (e: Exception) {
-//            Result.Failure(AuthError.UnknownError(e.message))
-//        }
-//    }
-
     suspend fun signInUser(email: String, password: String): Result<FirebaseUser> {
         return try {
             val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()

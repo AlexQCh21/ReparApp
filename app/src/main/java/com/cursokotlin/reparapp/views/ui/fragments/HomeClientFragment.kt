@@ -28,7 +28,7 @@ class HomeClientFragment : Fragment() {
     }
 
     private fun showPerfilUser(){
-        binding.cardBtnPerfilUser.setOnClickListener {
+        binding.imgUsuarioPerfil.setOnClickListener {
             findNavController().navigate(R.id.action_homeClientFragment_to_profileFragment)
         }
     }

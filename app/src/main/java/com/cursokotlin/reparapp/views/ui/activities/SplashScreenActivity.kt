@@ -52,13 +52,13 @@ class SplashScreenActivity : AppCompatActivity() {
                         val intent = Intent(this@SplashScreenActivity, PrincipalActivity::class.java).apply {
                             putExtra("userRole", state.userRole)
                         }
-                        Toast.makeText(this@SplashScreenActivity, "autenticado", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this@SplashScreenActivity, "autenticado", Toast.LENGTH_LONG).show()
                         startActivity(intent)
                         finish()
                     }
                     is SplashUiState.NavigateToLogin -> {
                         //Te redirige al login
-                        Toast.makeText(this@SplashScreenActivity, "No autenticado", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this@SplashScreenActivity, "No autenticado", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
                         finish()
                     }

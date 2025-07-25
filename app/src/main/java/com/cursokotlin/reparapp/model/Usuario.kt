@@ -8,8 +8,14 @@ import java.util.Date
 data class Usuario(
     var id: String, // Corresponderá al UID de Firebase Auth
 
-    @JvmField @PropertyName("nombre_apellido")
-    var nombreApellido: String = "",
+    @JvmField @PropertyName("username")
+    var nombreUsuario: String = "",
+
+    @JvmField @PropertyName("nombre")
+    var nombre: String = "",
+
+    @JvmField @PropertyName("apellido")
+    var apellido: String = "",
 
     @JvmField @PropertyName("email")
     var email: String = "",
@@ -45,5 +51,5 @@ data class Usuario(
     var breakTime: String? = null
 ) {
     // Constructor sin argumentos requerido por Firestore para la deserialización
-    constructor() : this("", "", "", "", "cliente", true, null, null, null, null, null, null)
+    constructor() : this("","", "", "","", "", "cliente", true, null, null, null, null, null, null)
 }
