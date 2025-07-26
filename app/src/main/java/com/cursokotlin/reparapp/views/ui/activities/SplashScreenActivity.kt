@@ -12,7 +12,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.ActivitySplashScreenBinding
 import com.cursokotlin.reparapp.model.Usuario
@@ -22,6 +24,7 @@ import com.cursokotlin.reparapp.viewmodel.SplashViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,38 +42,33 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
 
-
     private fun observeUiState() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.uiState.collect { state ->
-                when (state) {
-                    is SplashUiState.Loading -> {
-                        binding.pbCarga.visibility = View.VISIBLE
-                    }
-                    is SplashUiState.NavigateToMain -> {
-                        //Cuando esta autenticado te redirige a la vista home
-                        val intent = Intent(this@SplashScreenActivity, PrincipalActivity::class.java).apply {
-                            putExtra("userRole", state.userRole)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        is SplashUiState.Loading -> {
+                            binding.pbCarga.visibility = View.VISIBLE
                         }
-                        //Toast.makeText(this@SplashScreenActivity, "autenticado", Toast.LENGTH_LONG).show()
-                        startActivity(intent)
-                        finish()
-                    }
-                    is SplashUiState.NavigateToLogin -> {
-                        //Te redirige al login
-                        //Toast.makeText(this@SplashScreenActivity, "No autenticado", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
-                        finish()
-                    }
-                    is SplashUiState.ShowError -> {
-                        //Te redirige al login
-                        Toast.makeText(this@SplashScreenActivity, "Error", Toast.LENGTH_LONG).show()
-                        Toast.makeText(this@SplashScreenActivity, state.message, Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
-                        finish()
+                        is SplashUiState.NavigateToMain -> {
+                            startActivity(Intent(this@SplashScreenActivity, PrincipalActivity::class.java).apply {
+                                putExtra("userRole", state.userRole)
+                            })
+                            finish()
+                        }
+                        is SplashUiState.NavigateToLogin -> {
+                            startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
+                            finish()
+                        }
+                        is SplashUiState.ShowError -> {
+                            Toast.makeText(this@SplashScreenActivity, "Error: ${state.message}", Toast.LENGTH_LONG).show()
+                            startActivity(Intent(this@SplashScreenActivity, AuthActivity::class.java))
+                            finish()
+                        }
                     }
                 }
             }
         }
     }
+
 }

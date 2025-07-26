@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.domain.repository.UserRepository
-import com.cursokotlin.reparapp.network.AuthManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,7 +30,7 @@ class SplashViewModel @Inject constructor(
 
     private fun checkUserAuthentication() {
         viewModelScope.launch {
-            delay(1000)
+            delay(500)
             val currentUser = authManager.getCurrentUser()
             Log.i("SPLASH", "Usuario actual: ${currentUser?.email}")
             if (currentUser != null) {
