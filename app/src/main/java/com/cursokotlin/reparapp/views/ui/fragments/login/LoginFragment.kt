@@ -1,8 +1,15 @@
 package com.cursokotlin.reparapp.views.ui.fragments.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,9 +32,22 @@ import com.cursokotlin.reparapp.views.ui.fragments.CustomDialogFragment
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import android.util.Log
+import androidx.annotation.RequiresApi
+import com.facebook.AccessToken
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.CallbackManager
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
+import java.security.MessageDigest
+import java.util.Arrays
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -41,6 +61,10 @@ class LoginFragment : Fragment() {
     companion object{
         val PROVIDER_GOOGLE = "GOOGLE"
         val PROVIDER_FACEBOOK = "FACEBOOK"
+    }
+
+    object Global{
+        var callbackManager = CallbackManager.Factory.create()
     }
 
     // 🔹 One Tap Client y Launcher
@@ -86,6 +110,7 @@ class LoginFragment : Fragment() {
         setupGoogleSignIn()
         setupEventListeners()
         initDialog()
+
         return binding.root
     }
 
@@ -108,7 +133,27 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeFieldErrors()
         observeLoginState()
+        mostrarKeyHash()
     }
+
+    private fun mostrarKeyHash() {
+        try {
+            val info = activity?.packageManager?.getPackageInfo(
+                requireActivity().packageName,
+                PackageManager.GET_SIGNATURES
+            )
+
+            info?.signatures?.forEach { signature ->
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val keyHash = Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+                Log.e("KEYHASH", keyHash)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 
     private fun observeFieldErrors() {
         lifecycleScope.launch {
@@ -135,7 +180,7 @@ class LoginFragment : Fragment() {
                 if(loginProvider == PROVIDER_GOOGLE){
                     initSesionWithGoogle()
                 }else if (loginProvider == PROVIDER_FACEBOOK){
-
+                    login_facebook()
                 }
             }
 
@@ -154,7 +199,11 @@ class LoginFragment : Fragment() {
                 val intentSenderRequest = IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
                 googleSignInLauncher.launch(intentSenderRequest)
             }
-            .addOnFailureListener {
+            .addOnFailureListener { e ->
+                Log.e("GoogleSignIn", "Fallo inicio sesión: ${e.message}", e)
+                if (e is ApiException) {
+                    Log.e("GoogleSignIn", "Status code: ${e.statusCode}")
+                }
                 Toast.makeText(requireContext(), "No se pudo iniciar sesión con Google", Toast.LENGTH_SHORT).show()
             }
     }
@@ -211,7 +260,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.cardBtnFacebook.setOnClickListener {
-            Toast.makeText(requireContext(), "Login con Facebook (en desarrollo)", Toast.LENGTH_SHORT).show()
+            loginProvider = PROVIDER_FACEBOOK
             showDialog()
         }
 
@@ -251,4 +300,61 @@ class LoginFragment : Fragment() {
         // Opcional: deshabilitar botón mientras carga
         binding.btnIniciarSesion.isEnabled = !isLoading
     }
+
+    fun login_facebook(){
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("email"));
+        LoginManager.getInstance().registerCallback(
+            Global.callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    Log.d("LOGIN_FACEBOOK_EXITO", "facebook:onSuccess:$loginResult")
+                    handleFacebookAccessToken(loginResult.accessToken)
+                }
+
+                override fun onCancel() {
+                    Log.d("LOGIN_FACEBOOK_CANCEL", "facebook:onCancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.e("LOGIN_FACEEBOK_ERROR", "facebook:onError", error)
+                    Toast.makeText(requireContext(), "ERROR DE FACEBOOK: ${error.message}", Toast.LENGTH_LONG).show()
+                }
+            },
+        )
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    showLoading(false)
+                    Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireContext(), PrincipalActivity::class.java).apply {
+                        putExtra("userRole", "cliente")
+                    }
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        startActivity(intent)
+                        requireActivity().finish()
+                    }, 250)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("AUTH_FACEBOOK", "signInWithCredential:failure", task.exception)
+                    Toast.makeText(
+                        requireContext(),
+                        "Usuario/Contraseña incorrecto(s) - "+task.exception?.message,
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Pass the activity result back to the Facebook SDK
+        Global.callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
 }

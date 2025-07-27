@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.media3.common.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,4 +76,6 @@ dependencies {
     //Lottie
     implementation("com.airbnb.android:lottie:6.4.0")
 
+    //Facebook
+    implementation("com.facebook.android:facebook-login:latest.release")
 }
