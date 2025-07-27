@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.cursokotlin.reparapp" />
+                  <option name="mobileSdkAppId" value="1:140750798895:android:49db324d3034e6c1bc46da" />
+                  <option name="projectId" value="reparapp-18d32" />
+                  <option name="projectNumber" value="140750798895" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
