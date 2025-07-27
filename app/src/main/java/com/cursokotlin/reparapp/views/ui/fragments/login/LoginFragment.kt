@@ -40,6 +40,7 @@ import com.facebook.AccessToken
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.CallbackManager
+import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.common.api.ApiException
@@ -324,31 +325,21 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleFacebookAccessToken(token: AccessToken) {
-        val credential = FacebookAuthProvider.getCredential(token.token)
-        FirebaseAuth.getInstance().signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    showLoading(false)
-                    Toast.makeText(requireContext(), "Bienvenido", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireContext(), PrincipalActivity::class.java).apply {
-                        putExtra("userRole", "cliente")
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        startActivity(intent)
-                        requireActivity().finish()
-                    }, 250)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("AUTH_FACEBOOK", "signInWithCredential:failure", task.exception)
-                    Toast.makeText(
-                        requireContext(),
-                        "Usuario/Contraseña incorrecto(s) - "+task.exception?.message,
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                }
-            }
+        val request = GraphRequest.newMeRequest(token) { obj, _ ->
+            val nombre = obj?.optString("first_name") ?: ""
+            val apellido = obj?.optString("last_name") ?: ""
+            val email = obj?.optString("email") ?: ""
+
+            viewModel.signInWithFacebook(token, nombre, apellido, email)
+        }
+
+        val parameters = Bundle()
+        parameters.putString("fields", "first_name,last_name,email")
+        request.parameters = parameters
+        request.executeAsync()
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -2,6 +2,7 @@ package com.cursokotlin.reparapp.domain.repository
 
 import com.google.firebase.auth.FirebaseUser
 import com.cursokotlin.reparapp.domain.model.Result
+import com.facebook.AccessToken
 import kotlinx.coroutines.flow.Flow
 
 interface AuthRepository {
@@ -12,4 +13,8 @@ interface AuthRepository {
     fun userValidate(user:FirebaseUser): Boolean
     fun getCurrentUser(): FirebaseUser?
     fun observeCurrentUser(): Flow<FirebaseUser?>
+
+    //Facebook
+    suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser>
+
 }

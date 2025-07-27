@@ -10,6 +10,7 @@ import javax.inject.Inject
 import com.cursokotlin.reparapp.domain.model.Result
 import com.cursokotlin.reparapp.domain.repository.UserRepository
 import com.cursokotlin.reparapp.model.Usuario
+import com.facebook.AccessToken
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -154,6 +155,69 @@ class LoginViewModel @Inject constructor(
             }
         }
     }
+
+
+
+    /*
+     * Facebook
+     */
+
+    fun signInWithFacebook(token: AccessToken, nombre: String, apellido: String, email: String) {
+        viewModelScope.launch {
+            _validation.value = ValidationStateLogin.Loading
+
+            val result = authRepository.signInWithFacebook(token)
+
+            when (result) {
+                is Result.Success -> {
+                    val user = authRepository.getCurrentUser()
+                    val userId = user?.uid ?: ""
+
+                    val userDataResult = userRepository.getUser(userId)
+
+                    if (userDataResult is Result.Failure) {
+                        val username = "$nombre ${apellido.firstOrNull() ?: ""}".trim()
+
+                        val nuevoUsuario = Usuario(
+                            id = userId,
+                            nombreUsuario = username,
+                            nombre = nombre,
+                            apellido = apellido,
+                            email = email,
+                            telefono = "",
+                            rol = "cliente"
+                        )
+
+                        val saveResult = userRepository.saveUser(nuevoUsuario)
+                        if (saveResult is Result.Failure) {
+                            _validation.value = ValidationStateLogin.Error("No se pudo guardar el usuario")
+                            return@launch
+                        }
+                    }
+
+                    val userRoleResult = userRepository.getUserRole(userId)
+
+                    if (userRoleResult is Result.Success) {
+                        _validation.value = ValidationStateLogin.Verified(userRoleResult.data)
+                    } else {
+                        _validation.value = ValidationStateLogin.Error("No se pudo obtener el rol")
+                    }
+
+                }
+
+                is Result.Failure -> {
+                    _validation.value = ValidationStateLogin.Error(
+                        result.error.message ?: "Error desconocido al iniciar sesión"
+                    )
+                }
+
+                else -> {
+                    _validation.value = ValidationStateLogin.Error("Error desconocido al iniciar sesión")
+                }
+            }
+        }
+    }
+
 
 
 }

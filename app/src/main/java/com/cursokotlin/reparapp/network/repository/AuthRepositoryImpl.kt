@@ -4,6 +4,7 @@ import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.domain.repository.AuthRepository
 import com.cursokotlin.reparapp.network.AuthManager
 import com.cursokotlin.reparapp.domain.model.Result
+import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -38,4 +39,10 @@ class AuthRepositoryImpl @Inject constructor(
     override fun observeCurrentUser(): Flow<FirebaseUser?> {
         return authManager.observeCurrentUser()
     }
+
+    //Facebook
+    override suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser> {
+        return authManager.signInWithFacebook(token)
+    }
+
 }

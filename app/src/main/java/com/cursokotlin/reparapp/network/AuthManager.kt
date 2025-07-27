@@ -12,6 +12,8 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.cursokotlin.reparapp.domain.model.Result
+import com.facebook.AccessToken
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -167,5 +169,27 @@ class AuthManager @Inject constructor(
             Result.Failure(AuthError.UnknownError(e.message))
         }
     }
+
+
+
+    /*
+     *Login con facebook
+     */
+    suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser> {
+        return try {
+            val credential = FacebookAuthProvider.getCredential(token.token)
+            val authResult = firebaseAuth.signInWithCredential(credential).await()
+            val user = authResult.user
+            if (user != null) {
+                Result.Success(user)
+            } else {
+                Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Facebook."))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al iniciar sesión con Facebook", e)
+            Result.Failure(AuthError.UnknownError(e.message))
+        }
+    }
+
 
 }
