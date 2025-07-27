@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
+    android:layout_height="80dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="1dp">
-    <LinearLayout
+
+    <ImageView
+        android:id="@+id/icon_map"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_map"
+        android:contentDescription="@string/ubicacion_icono"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/v_linea"
+        android:layout_marginStart="4dp" />
+
+    <TextView
+        android:id="@+id/tv_local_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_explore"
-            android:contentDescription="@string/ubicacion_icono"
-            android:scaleType="fitXY"
-            app:tint="@color/black"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+        android:text="Local"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/icon_map"
+        app:layout_constraintTop_toTopOf="@id/icon_map"
+        android:layout_marginStart="8dp"
+        />
 
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/tv_local_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Local"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/tv_local_direccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Av.xxxx"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
-            </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/tv_local_direccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Av.xxxx"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_local_nombre"
+        app:layout_constraintTop_toBottomOf="@id/tv_local_nombre"
+        />
+
+    <View
+        android:id="@+id/v_linea"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="4dp"
+        android:background="#E4E4E4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

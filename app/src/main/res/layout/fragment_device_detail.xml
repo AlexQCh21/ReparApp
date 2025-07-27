@@ -1,6 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_fondo"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="18dp"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img_flecha_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/icon_close2"
+            />
+
+        <TextView
+            android:id="@+id/tv_titulo_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Nuevo Dispositivo"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/img_flecha_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_info"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/icon_info"
+            android:layout_marginEnd="5dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+
+
+            <EditText
+                android:id="@+id/et_nombre_dispositivo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/item_text_field"
+                android:drawableStart="@drawable/icon_device_text"
+                android:drawablePadding="16dp"
+                android:drawableTint="#49454F"
+                android:ems="10"
+                android:hint="Nombre"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#D9D9D9"
+                android:textSize="16sp"
+                />
+
+            <EditText
+                android:id="@+id/et_tipo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/item_text_field"
+                android:drawableStart="@drawable/icon_category"
+                android:drawablePadding="16dp"
+                android:drawableTint="#49454F"
+                android:ems="10"
+                android:hint="Tipo"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#D9D9D9"
+                android:textSize="16sp"
+                />
+
+            <EditText
+                android:id="@+id/et_marca"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/item_text_field"
+                android:drawableStart="@drawable/icon_label"
+                android:drawablePadding="16dp"
+                android:drawableTint="#49454F"
+                android:ems="10"
+                android:hint="Marca"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#D9D9D9"
+                android:textSize="16sp"
+                />
+
+            <EditText
+                android:id="@+id/et_modelo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/item_text_field"
+                android:drawableStart="@drawable/icon_model"
+                android:drawablePadding="16dp"
+                android:drawableTint="#49454F"
+                android:ems="10"
+                android:hint="Modelo"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#D9D9D9"
+                android:textSize="16sp"
+                />
+            <EditText
+                android:id="@+id/et_serie"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/item_text_field"
+                android:drawableStart="@drawable/icon_serie"
+                android:drawablePadding="16dp"
+                android:drawableTint="#49454F"
+                android:ems="10"
+                android:hint="Número de serie"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="#D9D9D9"
+                android:textSize="16sp"
+                />
+
+
+
+            <FrameLayout
+                android:id="@+id/frame_adjuntar_foto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/dashed_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                >
+                <ImageView
+                    android:id="@+id/img_preview_foto"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Seleccionar imagen"
+                    android:src="@drawable/photo" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Tomar o cargar foto"
+                android:textColor="#444444"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_guardar_dispositivo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="8dp"
+                android:drawableStart="@drawable/icon_plane"
+                android:layout_marginTop="20dp"
+                android:text="Agregar Dispositivo"
+                android:textColor="@color/white"
+                android:paddingHorizontal="60dp"
+                android:background="@drawable/bg_button"
+                android:textSize="18dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
