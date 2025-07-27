@@ -50,7 +50,6 @@
     <string name="facebook_client_token">8e0cd03cccbc3a1d4fad8f41e9b62226</string>
 
 
-
     <string-array name="dispositivos_tipos">
         <item>Tipod de dispositivo</item>
         <item>Celular</item>

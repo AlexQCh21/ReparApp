@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentProfileBinding
 import com.cursokotlin.reparapp.views.ui.activities.AuthActivity
 import com.cursokotlin.reparapp.network.AuthManager
@@ -17,8 +19,6 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onCreateView(
@@ -26,57 +26,16 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-
-//        consultarRolUsuario { rol ->
-//            if (rol == "cliente") {
-//                binding.cardBtnDisponibilidad.visibility = View.INVISIBLE
-//            }
-//        }
-//
-//        eventListeners()
+        eventsListeners()
         return binding.root
     }
 
-//    private fun eventListeners() {
-//        binding.cardBtnCerrarSesion.setOnClickListener {
-//            // Cierra sesión
-//            authManager.logout()
-//
-//            // Redirige a AuthActivity
-//            val intent = Intent(requireContext(), AuthActivity::class.java)
-//            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
-//
-//            // Finaliza la actividad actual
-//            requireActivity().finish()
-//        }
-//    }
 
-//    private fun consultarRolUsuario(onResult: (String?) -> Unit) {
-//        val user = authManager.getCurrentUser()
-//        if (user != null) {
-//            val uid = user.uid
-//            val firestore = FirebaseFirestore.getInstance()
-//
-//            firestore.collection("usuarios")
-//                .document(uid)
-//                .get()
-//                .addOnSuccessListener { document ->
-//                    if (document.exists()) {
-//                        val rol = document.getString("rol")
-//                        onResult(rol)
-//                    } else {
-//                        onResult(null)
-//                    }
-//                }
-//                .addOnFailureListener { e ->
-//                    onResult(null)
-//                }
-//        } else {
-//            onResult(null)
-//        }
-//    }
-
+    private fun eventsListeners(){
+        //Botón para regresar al fragment anterior
+        binding.imgFlechaBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
 
 }
