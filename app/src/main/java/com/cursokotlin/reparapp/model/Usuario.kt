@@ -6,7 +6,7 @@ import java.util.Date
 
 // Usamos @JvmField para que Firestore pueda acceder directamente a las propiedades
 data class Usuario(
-    var id: String, // Corresponderá al UID de Firebase Auth
+    var id: String,
 
     @JvmField @PropertyName("username")
     var nombreUsuario: String = "",

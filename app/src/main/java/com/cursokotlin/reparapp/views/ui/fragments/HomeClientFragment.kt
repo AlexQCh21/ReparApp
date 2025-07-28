@@ -46,12 +46,22 @@ class HomeClientFragment : Fragment() {
         binding.llAddDevice.setOnClickListener {
             findNavController().navigate(R.id.action_homeClientFragment_to_agregarDispositivo)
         }
+
+        //Ver notificaciones
+        binding.imgUsuarioNotificacion.setOnClickListener {
+            findNavController().navigate(R.id.action_homeClientFragment_to_notificationFragment)
+        }
+
+        //Ver mis tickets generados
+        binding.tvVerTodos.setOnClickListener{
+            findNavController().navigate(R.id.action_homeClientFragment_to_ticketListUser)
+        }
+
     }
 
     private fun initValueComponents(){
         //Mostrar el username del usuario
         observeViewModel()
-
     }
 
     private fun observeViewModel() {

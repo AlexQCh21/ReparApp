@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.database.ktx)
     implementation(libs.androidx.media3.common.ktx)
+    //implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,4 +79,7 @@ dependencies {
 
     //Facebook
     implementation("com.facebook.android:facebook-login:latest.release")
+
+    //Firebase storage
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 }

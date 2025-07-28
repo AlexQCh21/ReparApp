@@ -144,6 +144,9 @@
             <action
                 android:id="@+id/action_homeClientFragment_to_agregarDispositivo"
                 app:destination="@id/agregarDispositivo" />
+            <action
+                android:id="@+id/action_homeClientFragment_to_ticketListUser"
+                app:destination="@id/ticketListUser" />
         </fragment>
 
         <fragment
@@ -207,6 +210,12 @@
             android:name="com.cursokotlin.reparapp.views.ui.fragments.DeviceDetailFragment"
             android:label="Agregar Dispositivo"
             tools:layout="@layout/fragment_device_detail" />
+
+        <fragment
+            android:id="@+id/ticketListUser"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.TicketListUserFragment"
+            android:label="Tickets del Usuario"
+            tools:layout="@layout/fragment_ticket_list_user"/>
 
         <fragment
             android:id="@+id/ubicationFragment"

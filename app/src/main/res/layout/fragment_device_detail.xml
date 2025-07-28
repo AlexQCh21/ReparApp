@@ -148,17 +148,16 @@
                 />
 
 
-
             <FrameLayout
                 android:id="@+id/frame_adjuntar_foto"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@drawable/dashed_border"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                >
+                android:background="@drawable/dashed_border"
+                android:clickable="true"
+                android:focusable="true">
+
                 <ImageView
                     android:id="@+id/img_preview_foto"
                     android:layout_width="64dp"
