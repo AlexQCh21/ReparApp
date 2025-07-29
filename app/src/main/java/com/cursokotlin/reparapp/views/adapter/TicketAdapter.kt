@@ -10,33 +10,44 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.model.Ticket
 
 class TicketAdapter(
-    val listaTickets : List<Ticket>,
-    //val firestoreService : FirestoreService,
-    val ticketListener: TicketListener,
-    val onItemClick: (Ticket) -> Unit):
-    RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
-    class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val descripcionTicket: TextView = itemView.findViewById(R.id.tv_descripcion_problema)
-        val fechaTicket: TextView = itemView.findViewById(R.id.tv_ticket_fecha_reporte)
-        val btnVerDetalle: Button = itemView.findViewById(R.id.btn_ticket_ver_detalle)
+    private var listaTickets: List<Ticket>,
+    private val ticketListener: TicketListener
+) : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
+    inner class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val idTicket: TextView = itemView.findViewById(R.id.tv_nombre_ticket)
+        val fechaTicket: TextView = itemView.findViewById(R.id.etFecha)
+        //val btnVerDetalle: Button = itemView.findViewById(R.id.btn_ticket_ver_detalle)
+
+        init {
+//            btnVerDetalle.setOnClickListener {
+//                val position = adapterPosition
+//                if (position != RecyclerView.NO_POSITION) {
+//                    ticketListener.onTicketClicked(listaTickets[position], position)
+//                }
+//            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_ticket, parent, false)
+            .inflate(R.layout.item_ticket_prueba, parent, false)
         return TicketViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
         val ticket = listaTickets[position]
-        //holder.descripcionTicket.text = ticket.descripcion
-        //holder.fechaTicket
-        holder.btnVerDetalle.setOnClickListener{
-            ticketListener.onTicketClicked(ticket, position)
-        }
+        holder.fechaTicket.text = ticket.createAt?.toString() ?: "Fecha no disponible"
+        val idTicketShort = ticket.id
+        holder.idTicket.text = "TIC-$idTicketShort..."
     }
 
     override fun getItemCount(): Int = listaTickets.size
+
+    fun actualizarLista(nuevaLista: List<Ticket>) {
+        listaTickets = nuevaLista
+        notifyDataSetChanged()
+    }
 }
+
 

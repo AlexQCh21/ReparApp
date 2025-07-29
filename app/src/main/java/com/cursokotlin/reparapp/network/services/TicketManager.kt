@@ -4,9 +4,11 @@ import android.util.Log
 import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.domain.model.Result
 import com.cursokotlin.reparapp.domain.model.flatMap
+import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.model.EstadoTicket
 import com.cursokotlin.reparapp.model.Notificacion
 import com.cursokotlin.reparapp.model.Ticket
+import com.cursokotlin.reparapp.network.AuthManager
 import com.cursokotlin.reparapp.network.FirestoreManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -18,6 +20,7 @@ import javax.inject.Singleton
 class TicketManager @Inject constructor(
     private val firestore: FirebaseFirestore,
     private val userManager: FirestoreManager,
+    private val authManager: AuthManager,
     private val notificacionManager: NotificacionManager
 ) {
 
@@ -61,6 +64,32 @@ class TicketManager @Inject constructor(
             Log.d(TAG, "Tickets obtenidos con éxito: ${tickets.size}")
             Result.Success(tickets)
         } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "Datos del ticket inválidos", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener tickets", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    suspend fun getMyTickets(): Result<List<Ticket>>{
+        return try {
+            val uid = authManager.getCurrentUser()?.uid
+                ?: return Result.Failure(AuthError.Unauthorized)
+
+            val snapshot = firestore.collection(COLLECTION_TICKETS)
+                .whereEqualTo("usuario_id", uid)
+                .get()
+                .await()
+
+            val lista = snapshot.documents.map { doc ->
+                val ticket = doc.toObject(Ticket::class.java)
+                ticket?.id = doc.id
+                ticket!!
+            }
+
+            return Result.Success(lista)
+        }catch (e: IllegalArgumentException) {
             Log.e(TAG, "Datos del ticket inválidos", e)
             Result.Failure(AuthError.InvalidUserData)
         } catch (e: Exception) {
