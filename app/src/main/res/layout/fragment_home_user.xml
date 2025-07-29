@@ -240,18 +240,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_ver_dispositivos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:text="Ver Todos"
-                    android:textColor="#298AB6"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_lista_dispositivos"
                 android:layout_width="match_parent"

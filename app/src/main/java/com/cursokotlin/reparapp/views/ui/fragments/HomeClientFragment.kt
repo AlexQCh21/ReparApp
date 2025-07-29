@@ -12,6 +12,7 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentHomeUserBinding
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.viewmodel.HomeUserViewModel
+import com.cursokotlin.reparapp.views.adapter.DeviceAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ class HomeClientFragment : Fragment(), TicketListener {
 
     private lateinit var binding: FragmentHomeUserBinding
     private lateinit var ticketAdapter: TicketAdapter
+    private lateinit var dispositivoAdapter: DeviceAdapter
     private val viewModel:HomeUserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,7 @@ class HomeClientFragment : Fragment(), TicketListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //Cargar los tickets
         ticketAdapter = TicketAdapter(emptyList(), this)
         binding.rvHistorialTickets.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistorialTickets.adapter = ticketAdapter
@@ -46,6 +49,18 @@ class HomeClientFragment : Fragment(), TicketListener {
         }
 
         viewModel.getTicketsClient()
+
+        //Cargar los dispositivos
+        dispositivoAdapter = DeviceAdapter(emptyList())
+        binding.rvListaDispositivos.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListaDispositivos.adapter = dispositivoAdapter
+
+        viewModel.dispositivo.observe(viewLifecycleOwner) { dispositivos ->
+            dispositivoAdapter.actualizarLista(dispositivos)
+        }
+
+        viewModel.getDispositivosClient()
+
     }
 
     private fun eventsListeners(){
