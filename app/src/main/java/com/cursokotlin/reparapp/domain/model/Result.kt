@@ -3,7 +3,9 @@ package com.cursokotlin.reparapp.domain.model
 // Result.kt
 sealed class Result<out T> {
     data class Success<out T>(val data: T) : Result<T>()
-    data class Failure(val error: AuthError) : Result<Nothing>()
+    data class Failure(val error: Throwable) : Result<Nothing>()
+
+    //data class Failure(val error: AuthError) : Result<Nothing>()
 }
 
 // Función map para transformar el valor de éxito

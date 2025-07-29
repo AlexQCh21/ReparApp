@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentDeviceDetailBinding
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.viewmodel.DeviceDetailViewModel
@@ -49,6 +52,7 @@ class DeviceDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDeviceDetailBinding.inflate(inflater, container, false)
         eventsListeners()
+        initComponents()
         return binding.root
     }
 
@@ -70,9 +74,20 @@ class DeviceDetailFragment : Fragment() {
         }
     }
 
+    private fun initComponents(){
+        val spinner: Spinner = binding.etTipo
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.dispositivos_tipos,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+    }
+
     private fun saveDeviceClient() {
         val nombre = binding.etNombreDispositivo.text.toString().trim()
-        val tipo = binding.etTipo.text.toString().trim()
+        val tipo = binding.etTipo.selectedItem.toString().trim()
         val marca = binding.etMarca.text.toString().trim()
         val modelo = binding.etModelo.text.toString().trim()
         val serie = binding.etSerie.text.toString().trim()

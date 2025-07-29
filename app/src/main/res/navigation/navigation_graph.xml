@@ -203,7 +203,7 @@
             android:id="@+id/reportarProblemaFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportarProblemaFragment"
             android:label="ReportarProblemaFragment"
-            tools:layout="@layout/fragment_ticket" />
+            tools:layout="@layout/fragment_reportar_problema" />
 
         <fragment
             android:id="@+id/agregarDispositivo"

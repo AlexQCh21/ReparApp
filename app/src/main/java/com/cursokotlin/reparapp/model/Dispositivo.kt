@@ -1,10 +1,14 @@
 package com.cursokotlin.reparapp.model
 
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.PropertyName
 import com.google.firebase.firestore.ServerTimestamp
 import java.util.Date
 
 data class Dispositivo(
+    @get:Exclude
+    var id: String = "",
+
     @JvmField @PropertyName("nombre_modelo")
     var nombre: String = "",
 
@@ -30,6 +34,6 @@ data class Dispositivo(
     @JvmField @PropertyName("create_at")
     var createAt: Date? = null
 ) {
-    constructor() : this("", "", "","","", "", "",null)
+    constructor() : this("","", "", "","","", "", "",null)
 }
 

@@ -11,6 +11,7 @@ sealed class AuthError(message: String? = null, cause: Throwable? = null) : Exce
     object WrongPassword : AuthError()
     data class DatabaseError(override val cause: Exception) : AuthError("Error de base de datos", cause)
     data class UnknownError(override val message: String?) : AuthError(message)
+    object Unauthorized : AuthError()
 }
 
 // Actualiza tu Result.Failure para usarlo:

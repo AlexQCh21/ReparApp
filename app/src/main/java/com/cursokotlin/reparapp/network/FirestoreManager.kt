@@ -87,4 +87,25 @@ class FirestoreManager @Inject constructor(
             Result.Failure(AuthError.DatabaseError(e))
         }
     }
+
+    suspend fun getAllTecnicos(): Result<List<Usuario>> {
+        return try {
+            val snapshot = firestore.collection(COLLECTION_USERS)
+                .whereEqualTo("rol", "tecnico")
+                .get()
+                .await()
+
+            val tecnicos = snapshot.documents.mapNotNull { doc ->
+                doc.toObject(Usuario::class.java)?.apply {
+                    id = doc.id // Asegúrate de asignar el ID del documento
+                }
+            }
+
+            Result.Success(tecnicos)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener técnicos", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
 }

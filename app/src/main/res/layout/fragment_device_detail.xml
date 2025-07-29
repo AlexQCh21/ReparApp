@@ -80,22 +80,48 @@
                 android:textSize="16sp"
                 />
 
-            <EditText
-                android:id="@+id/et_tipo"
+<!--            <EditText-->
+<!--                android:id="@+id/et_tipo"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:background="@drawable/item_text_field"-->
+<!--                android:drawableStart="@drawable/icon_category"-->
+<!--                android:drawablePadding="16dp"-->
+<!--                android:drawableTint="#49454F"-->
+<!--                android:ems="10"-->
+<!--                android:hint="Tipo"-->
+<!--                android:inputType="text"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="#D9D9D9"-->
+<!--                android:textSize="16sp"-->
+<!--                />-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/item_text_field"
-                android:drawableStart="@drawable/icon_category"
-                android:drawablePadding="16dp"
-                android:drawableTint="#49454F"
-                android:ems="10"
-                android:hint="Tipo"
-                android:inputType="text"
-                android:padding="16dp"
-                android:textColor="#D9D9D9"
-                android:textSize="16sp"
-                />
+                android:gravity="start|center"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="12dp"
+                    android:contentDescription="Icono tipo dispositivo"
+                    android:src="@drawable/icon_device_text" />
+
+                <!--Se cambia el color desde el backend-->
+                <Spinner
+                    android:id="@+id/et_tipo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:prompt="@string/prompt_tipo_dispositivo" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_marca"
