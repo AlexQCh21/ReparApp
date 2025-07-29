@@ -76,11 +76,8 @@
                     android:id="@+id/spinner_tipo_dispositivo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:prompt="@string/prompt_tipo_dispositivo" />
+                    android:layout_weight="1" />
             </LinearLayout>
-
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutDescripcion"

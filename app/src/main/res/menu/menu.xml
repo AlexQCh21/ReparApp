@@ -14,9 +14,4 @@
         android:id="@+id/nav_maps"
         android:icon="@drawable/icon_location"
         android:title="Locales" />
-
-    <item
-        android:id="@+id/nav_history"
-        android:icon="@drawable/icon_configuration"
-        android:title="Configuración" />
 </menu>

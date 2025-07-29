@@ -51,7 +51,6 @@
 
 
     <string-array name="dispositivos_tipos">
-        <item>Tipod de dispositivo</item>
         <item>Celular</item>
         <item>All in one</item>
         <item>Laptop</item>
