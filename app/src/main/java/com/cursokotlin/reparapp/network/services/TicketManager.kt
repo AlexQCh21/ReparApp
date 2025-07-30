@@ -30,13 +30,39 @@ class TicketManager @Inject constructor(
         private const val SUBCOLLECTION_ESTADOS = "estados"
     }
 
-    suspend fun saveTicket(ticket: Ticket): Result<Unit> {
+//    suspend fun saveTicket(ticket: Ticket): Result<Unit> {
+//        return try {
+//            val docRef = firestore.collection(COLLECTION_TICKETS).document()
+//            val ticketWithId = ticket.copy(id = docRef.id)
+//
+//            val asignacionResult = asignarTicket(ticketWithId)
+//            if (asignacionResult is Result.Failure) return asignacionResult
+//
+//            firestore.collection(COLLECTION_TICKETS)
+//                .document(ticketWithId.id!!)
+//                .set(ticketWithId, SetOptions.merge())
+//                .await()
+//
+//            notificar(ticketWithId, "Se te asignó un nuevo ticket")
+//
+//            Log.d(TAG, "Ticket guardado con éxito: $ticketWithId")
+//            Result.Success(Unit)
+//        } catch (e: IllegalArgumentException) {
+//            Log.e(TAG, "Datos del ticket inválidos", e)
+//            Result.Failure(AuthError.InvalidUserData)
+//        } catch (e: Exception) {
+//            Log.e(TAG, "Error al guardar ticket", e)
+//            Result.Failure(AuthError.DatabaseError(e))
+//        }
+//    }
+
+    suspend fun saveTicket(ticket: Ticket): Result<Ticket> {
         return try {
             val docRef = firestore.collection(COLLECTION_TICKETS).document()
             val ticketWithId = ticket.copy(id = docRef.id)
 
             val asignacionResult = asignarTicket(ticketWithId)
-            if (asignacionResult is Result.Failure) return asignacionResult
+            if (asignacionResult is Result.Failure) return Result.Failure(asignacionResult.error)
 
             firestore.collection(COLLECTION_TICKETS)
                 .document(ticketWithId.id!!)
@@ -46,7 +72,7 @@ class TicketManager @Inject constructor(
             notificar(ticketWithId, "Se te asignó un nuevo ticket")
 
             Log.d(TAG, "Ticket guardado con éxito: $ticketWithId")
-            Result.Success(Unit)
+            Result.Success(ticketWithId) // <-- Devuelve el ticket creado con su id
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "Datos del ticket inválidos", e)
             Result.Failure(AuthError.InvalidUserData)

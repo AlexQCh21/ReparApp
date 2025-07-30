@@ -20,9 +20,9 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 @Singleton
 class AuthManager @Inject constructor(
-    //private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth
 ) {
-    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    //private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     companion object {
         const val TAG = "AuthManager"

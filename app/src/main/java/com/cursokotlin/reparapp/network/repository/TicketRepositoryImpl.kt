@@ -12,7 +12,7 @@ class TicketRepositoryImpl @Inject constructor(
     private val ticketManager: TicketManager
 ) {
 
-    suspend fun saveTicket(ticket: Ticket): Result<Unit> {
+    suspend fun saveTicket(ticket: Ticket): Result<Ticket> {
         return ticketManager.saveTicket(ticket)
     }
 
