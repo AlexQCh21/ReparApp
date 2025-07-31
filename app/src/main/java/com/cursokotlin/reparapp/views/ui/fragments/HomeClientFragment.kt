@@ -39,6 +39,18 @@ class HomeClientFragment : Fragment(), TicketListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.tickets.observe(viewLifecycleOwner) { tickets ->
+            ticketAdapter.actualizarLista(tickets)
+            if (tickets.isNullOrEmpty()) {
+                binding.tvNoTickets.visibility = View.VISIBLE
+                binding.rvHistorialTickets.visibility = View.GONE
+            } else {
+                binding.tvNoTickets.visibility = View.GONE
+                binding.rvHistorialTickets.visibility = View.VISIBLE
+            }
+        }
+
+
         //Cargar los tickets
         ticketAdapter = TicketAdapter(emptyList(), this)
         binding.rvHistorialTickets.layoutManager = LinearLayoutManager(requireContext())
@@ -104,6 +116,8 @@ class HomeClientFragment : Fragment(), TicketListener {
     override fun onTicketClicked(ticket: Ticket, position: Int) {
         //findNavController().navigate(R.id.action_homeClientFragment_to_reportarProblemaFragment)
     }
+
+
 
 
 }

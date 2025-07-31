@@ -14,9 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentReportarProblemaBinding
 import com.cursokotlin.reparapp.viewmodel.ReportarProblemaViewModel
 import com.cursokotlin.reparapp.viewmodel.ResultState
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -53,7 +55,7 @@ class ReportarProblemaFragment : Fragment() {
     ): View {
         _binding = FragmentReportarProblemaBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this)[ReportarProblemaViewModel::class.java]
-
+        ocultarMBotoomNavigationView()
         setupUI()
         return binding.root
     }
@@ -149,6 +151,18 @@ class ReportarProblemaFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
     }
+
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+
 }
 

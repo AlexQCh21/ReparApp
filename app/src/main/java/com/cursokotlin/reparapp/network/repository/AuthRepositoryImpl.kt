@@ -40,6 +40,10 @@ class AuthRepositoryImpl @Inject constructor(
         return authManager.observeCurrentUser()
     }
 
+    override fun logOut() {
+        authManager.logout()
+    }
+
     //Facebook
     override suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser> {
         return authManager.signInWithFacebook(token)

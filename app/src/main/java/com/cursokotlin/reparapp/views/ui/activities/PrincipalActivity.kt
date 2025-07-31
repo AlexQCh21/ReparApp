@@ -23,7 +23,7 @@ class PrincipalActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityPrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // Ajusta los insets para pantalla completa
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
@@ -32,33 +32,26 @@ class PrincipalActivity : AppCompatActivity() {
 
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
-
         val userRole = intent.getStringExtra("userRole") ?: "cliente"
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Inflar el grafo completo
         val navGraph = navController.navInflater.inflate(R.navigation.navigation_graph)
-
-         // Aquí cambiamos el startDestination del GRAFO RAÍZ según el rol
         navGraph.setStartDestination(R.id.main_flow)
 
-        // Ahora dentro de main_flow ponemos el destino inicial según el rol
         val mainFlow = navGraph.findNode(R.id.main_flow) as NavGraph
         mainFlow.setStartDestination(
             if (userRole == "cliente") R.id.homeClientFragment else R.id.homeTechnicalFragment
         )
 
-        // Asigna el grafo modificado al NavController
         navController.graph = navGraph
 
-
-        // Configura el BottomNavigationView
-        binding = ActivityPrincipalBinding.inflate(layoutInflater)
+        // ESTA ES LA FORMA CORRECTA
         binding.bnvNavegacionPrincipal.setupWithNavController(navController)
     }
+
 
 
 

@@ -20,7 +20,8 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 @Singleton
 class AuthManager @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val firestoreManager: FirestoreManager
 ) {
     //private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -159,37 +160,100 @@ class AuthManager @Inject constructor(
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             val authResult = firebaseAuth.signInWithCredential(credential).await()
             val user = authResult.user
+
             if (user != null) {
-                Result.Success(user)
+                val email = user.email ?: return Result.Failure(AuthError.UnknownError("No se pudo obtener el email del usuario"))
+
+                // Verificar si ya existe un usuario en la colección "usuarios" con ese email
+                val userExists = firestoreManager.userExistsByEmail(email)
+
+                return if (userExists) {
+                    Result.Failure(AuthError.ExistingUserError)
+                } else {
+                    Result.Success(user)
+                }
             } else {
                 Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Google."))
             }
+
         } catch (e: Exception) {
             Log.e(TAG, "Error al iniciar sesión con Google", e)
             Result.Failure(AuthError.UnknownError(e.message))
         }
     }
 
+//    suspend fun signInWithGoogle(idToken: String): Result<FirebaseUser> {
+//        return try {
+//            val credential = GoogleAuthProvider.getCredential(idToken, null)
+//            val authResult = firebaseAuth.signInWithCredential(credential).await()
+//            val user = authResult.user
+//            if (user != null) {
+//                Result.Success(user)
+//            } else {
+//                Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Google."))
+//            }
+//        } catch (e: Exception) {
+//            Log.e(TAG, "Error al iniciar sesión con Google", e)
+//            Result.Failure(AuthError.UnknownError(e.message))
+//        }
+//    }
+
 
 
     /*
      *Login con facebook
      */
+//    suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser> {
+//        return try {
+//            val credential = FacebookAuthProvider.getCredential(token.token)
+//            val authResult = firebaseAuth.signInWithCredential(credential).await()
+//            val user = authResult.user
+//            if (user != null) {
+//                Result.Success(user)
+//            } else {
+//                Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Facebook."))
+//            }
+//        } catch (e: Exception) {
+//            Log.e(TAG, "Error al iniciar sesión con Facebook", e)
+//            Result.Failure(AuthError.UnknownError(e.message))
+//        }
+//    }
+
     suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser> {
         return try {
             val credential = FacebookAuthProvider.getCredential(token.token)
             val authResult = firebaseAuth.signInWithCredential(credential).await()
             val user = authResult.user
+
             if (user != null) {
-                Result.Success(user)
+                // Comprobamos si el proveedor es Facebook
+                val isFacebookUser = user.providerData.any {
+                    it.providerId == FacebookAuthProvider.PROVIDER_ID
+                }
+
+                if (isFacebookUser) {
+                    // Si inició con Facebook, tratamos como verificado
+                    Log.d(TAG, "Usuario con Facebook, se considera verificado automáticamente: ${user.email}")
+                    Result.Success(user)
+                } else if (user.isEmailVerified) {
+                    // Si no fue por Facebook pero el email está verificado
+                    Log.d(TAG, "Usuario con email verificado: ${user.email}")
+                    Result.Success(user)
+                } else {
+                    Log.w(TAG, "Usuario no verificado: ${user.email}")
+                    Result.Failure(AuthError.EmailNotVerified)
+                }
+
             } else {
                 Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Facebook."))
             }
+
         } catch (e: Exception) {
             Log.e(TAG, "Error al iniciar sesión con Facebook", e)
             Result.Failure(AuthError.UnknownError(e.message))
         }
     }
+
 
 
 }

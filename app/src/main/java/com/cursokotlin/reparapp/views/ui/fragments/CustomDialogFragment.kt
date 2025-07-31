@@ -55,6 +55,7 @@ class CustomDialogFragment : DialogFragment() {
         return dialog
     }
 
+
     fun setDialogListener(listener: DialogListener) {
         this.listener = listener
     }

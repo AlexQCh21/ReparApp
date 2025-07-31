@@ -88,13 +88,29 @@
                         android:textSize="16sp"
                         />
 
-                    <TextView
-                        android:id="@+id/tv_nombre_completos"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="David Emanuel"
-                        android:textColor="#5D5D5D"
-                        android:textSize="20sp" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_nombre_completos"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            tools:text="David Emanuel"
+                            android:textColor="#5D5D5D"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/imgUpdateNombres"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_edit2"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -106,13 +122,28 @@
                         android:layout_marginTop="12dp"
                         />
 
-                    <TextView
-                        android:id="@+id/tv_apellidos_completos"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Rojas Jimenez"
-                        android:textColor="#5D5D5D"
-                        android:textSize="20sp" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_apellidos_completos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:text="Rojas Jimenez"
+                            android:textColor="#5D5D5D"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/imgUpdateApellidos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_edit2"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -134,16 +165,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="968****05"
+                            tools:text="968****05"
                             android:textColor="#5D5D5D"
                             android:textSize="20sp" />
 
                         <ImageView
+                            android:id="@+id/imgUpdateCelular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_arrow_right2"
+                            android:src="@drawable/icon_edit2"
                             android:layout_gravity="center"
                             />
+
 
                     </LinearLayout>
 
@@ -167,16 +200,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="davidemanuelrojas...@gmail.com"
+                            tools:text="davidemanuelrojas...@gmail.com"
                             android:textColor="#5D5D5D"
                             android:textSize="20sp" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/icon_edit2"
-                            android:layout_gravity="center"
-                            />
+
 
                     </LinearLayout>
 
@@ -201,11 +229,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Urb. Villa Agraria..."
+                            tools:text="Urb. Villa Agraria..."
                             android:textColor="#5D5D5D"
                             android:textSize="20sp" />
 
                         <ImageView
+                            android:id="@+id/imgUpdateDireccion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/icon_edit2"
@@ -215,6 +244,26 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cerrar sesión"
+                android:drawableLeft="@drawable/ic_logout"
+                android:background="@drawable/btn_logout"
+                android:textSize="18sp"
+                android:textColor="#666666"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
+
         </LinearLayout>
 
     </ScrollView>

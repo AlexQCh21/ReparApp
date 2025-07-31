@@ -84,4 +84,47 @@ class HomeUserViewModel @Inject constructor(
             }
         }
     }
+
+    fun actualizarCampoUsuario(
+        campo: String,
+        nuevoValor: String,
+        onResultado: (Boolean, String?) -> Unit
+    ) {
+        val usuarioActual = _usuario.value
+        if (usuarioActual != null) {
+            val usuarioModificado = usuarioActual.copy().apply {
+                when (campo) {
+                    "nombre" -> nombre = nuevoValor
+                    "apellido" -> apellido = nuevoValor
+                    "telefono" -> telefono = nuevoValor
+                    "direccion" -> direccion = nuevoValor
+                    else -> {
+                        onResultado(false, "Campo desconocido")
+                        return
+                    }
+                }
+            }
+
+            viewModelScope.launch {
+                when (val result = userRepository.saveUser(usuarioModificado)) {
+                    is Result.Success -> {
+                        _usuario.value = usuarioModificado
+                        onResultado(true, null)
+                    }
+                    is Result.Failure -> {
+                        onResultado(false, result.error.message ?: "Error desconocido")
+                    }
+                    else -> onResultado(false, "Error inesperado")
+                }
+            }
+        } else {
+            onResultado(false, "No se ha cargado el usuario aún")
+        }
+    }
+
+
+    fun cerrarSesion(){
+        authRepository.logOut()
+
+    }
 }

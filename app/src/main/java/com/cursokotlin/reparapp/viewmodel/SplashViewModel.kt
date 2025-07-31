@@ -13,7 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.cursokotlin.reparapp.domain.model.Result
 import com.cursokotlin.reparapp.domain.repository.AuthRepository
+import com.cursokotlin.reparapp.network.AuthManager.Companion.TAG
+import com.google.firebase.auth.FacebookAuthProvider
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
@@ -33,18 +37,30 @@ class SplashViewModel @Inject constructor(
             delay(500)
             val currentUser = authManager.getCurrentUser()
             Log.i("SPLASH", "Usuario actual: ${currentUser?.email}")
+
             if (currentUser != null) {
-                when (val userResult = userRepository.getUser(currentUser.uid)) {
+                val userResult = withContext(Dispatchers.IO) {
+                    userRepository.getUser(currentUser.uid)
+                }
+
+                when (userResult) {
                     is Result.Success -> {
                         val usuario = userResult.data
-                        val isVerified = authManager.getCurrentUser()?.isEmailVerified == true
+
+                        val firebaseUser = authManager.getCurrentUser()
+                        val isFacebookUser = firebaseUser?.providerData?.any {
+                            it.providerId == FacebookAuthProvider.PROVIDER_ID
+                        } == true
+                        val isVerified = isFacebookUser || firebaseUser?.isEmailVerified == true
+
                         if (usuario.isActive && isVerified) {
-                            // Usuario activo y verificado -> navega a PrincipalActivity con su rol
                             _uiState.value = SplashUiState.NavigateToMain(usuario.rol)
                         } else {
-                            _uiState.value = SplashUiState.ShowError("Tu cuenta está desactivada. Contacta al administrador.")
+                            Log.d(TAG, "Verificado : $isVerified | Proveedor Facebook: $isFacebookUser")
+                            _uiState.value = SplashUiState.ShowError("Tu cuenta está desactivada o no verificada. Contacta al administrador.")
                         }
                     }
+
                     is Result.Failure -> {
                         val errorMsg = when (userResult.error) {
                             AuthError.UserNotFound -> "No se encontraron datos del usuario."
@@ -58,12 +74,10 @@ class SplashViewModel @Inject constructor(
                 }
 
             } else {
-                // Usuario no autenticado -> navega al login
                 _uiState.value = SplashUiState.NavigateToLogin
             }
         }
     }
-
 
 
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
+        android:id="@+id/homeClientFragment"
         android:icon="@drawable/ic_home"
         android:title="Inicio" />
 
     <item
-        android:id="@+id/nav_inventario"
+        android:id="@+id/ticketListUser"
         android:icon="@drawable/ic_ticket_nav"
         android:title="Tickets" />
 
     <item
-        android:id="@+id/nav_maps"
+        android:id="@+id/ubicationFragment"
         android:icon="@drawable/icon_location"
         android:title="Locales" />
 </menu>

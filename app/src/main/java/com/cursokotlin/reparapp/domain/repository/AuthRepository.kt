@@ -14,6 +14,8 @@ interface AuthRepository {
     fun getCurrentUser(): FirebaseUser?
     fun observeCurrentUser(): Flow<FirebaseUser?>
 
+    fun logOut()
+
     //Facebook
     suspend fun signInWithFacebook(token: AccessToken): Result<FirebaseUser>
 

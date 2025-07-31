@@ -2,6 +2,7 @@ package com.cursokotlin.reparapp.domain.model
 
 sealed class AuthError(message: String? = null, cause: Throwable? = null) : Exception(message, cause) {
     object UserNotLoggedIn : AuthError("Usuario no autenticado")
+    object ExistingUserError : AuthError("Ya existe una cuenta con este correo.")
     object InvalidEmail : AuthError("Email no válido")
     object WeakPassword : AuthError("Contraseña débil")
     object UserCollision : AuthError("Usuario ya existe")
@@ -9,9 +10,10 @@ sealed class AuthError(message: String? = null, cause: Throwable? = null) : Exce
     object InvalidUserData : AuthError("Datos de usuario no válidos")
     object EmailAlreadyVerified : AuthError("El correo ya está verificado")
     object WrongPassword : AuthError()
+    object EmailNotVerified : AuthError("Debes verificar tu correo electrónico")
+    object Unauthorized : AuthError()
     data class DatabaseError(override val cause: Exception) : AuthError("Error de base de datos", cause)
     data class UnknownError(override val message: String?) : AuthError(message)
-    object Unauthorized : AuthError()
 }
 
 // Actualiza tu Result.Failure para usarlo:

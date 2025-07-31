@@ -108,4 +108,18 @@ class FirestoreManager @Inject constructor(
         }
     }
 
+    suspend fun userExistsByEmail(email: String): Boolean {
+        return try {
+            val snapshot = firestore.collection(COLLECTION_USERS)
+                .whereEqualTo("email", email)
+                .get()
+                .await()
+            !snapshot.isEmpty
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al buscar usuario por email", e)
+            false // Por seguridad, asumimos que no existe si hay error
+        }
+    }
+
+
 }

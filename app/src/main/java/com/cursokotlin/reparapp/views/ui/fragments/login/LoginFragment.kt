@@ -194,6 +194,7 @@ class LoginFragment : Fragment() {
         dialog.show(parentFragmentManager, "CustomDialog")
     }
 
+
     private fun initSesionWithGoogle(){
         oneTapClient.beginSignIn(signInRequest)
             .addOnSuccessListener { result ->

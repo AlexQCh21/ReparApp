@@ -22,6 +22,7 @@ import com.cursokotlin.reparapp.databinding.FragmentDeviceDetailBinding
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.viewmodel.DeviceDetailViewModel
 import com.cursokotlin.reparapp.viewmodel.ResultState
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -52,6 +53,7 @@ class DeviceDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDeviceDetailBinding.inflate(inflater, container, false)
         eventsListeners()
+        ocultarMBotoomNavigationView()
         initComponents()
         return binding.root
     }
@@ -172,6 +174,20 @@ class DeviceDetailFragment : Fragment() {
             "${requireContext().packageName}.fileprovider",
             file
         )
+    }
+
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
     }
 
 
