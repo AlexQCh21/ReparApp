@@ -10,9 +10,12 @@ interface AuthRepository {
     suspend fun signIn(email: String, password: String): Result<FirebaseUser>
     suspend fun signInWithGoogle(token: String): Result<FirebaseUser>
     suspend fun sendEmailVerification(user: FirebaseUser?=null): Result<Unit>
+    suspend fun sendPasswordReset(email: String): Result<Unit>
     fun userValidate(user:FirebaseUser): Boolean
     fun getCurrentUser(): FirebaseUser?
     fun observeCurrentUser(): Flow<FirebaseUser?>
+
+
 
     fun logOut()
 

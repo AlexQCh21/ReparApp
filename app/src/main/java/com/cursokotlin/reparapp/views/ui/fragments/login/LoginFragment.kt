@@ -276,6 +276,10 @@ class LoginFragment : Fragment() {
             binding.etContenedorClave.error = null
         }
 
+        binding.tvRecuperarClave.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_loginParte2Fragment)
+        }
+
     }
 
     private fun login() {

@@ -33,7 +33,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:fontFamily="@font/roboto"
-            android:text="Llene los datos"/>
+            android:text="Recuperar Contraseña"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:textColor="#3c3c3c"
             android:fontFamily="@font/roboto"
             android:layout_marginBottom="20dp"
-            android:text="Ingrese sus datos para continuar"/>
+            android:text="Ingrese tu correo para la recuperación"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -51,76 +51,76 @@
             app:boxStrokeColor="@color/black"
             app:hintTextColor="@color/black"
             app:cursorColor="@color/your_cursor_color"
-            android:hint="Usuario">
+            android:hint="Correo">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_usuario"
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/your_cursor_color"
-            android:hint="Nombre">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            app:boxBackgroundMode="outline"-->
+<!--            app:boxStrokeColor="@color/black"-->
+<!--            app:hintTextColor="@color/black"-->
+<!--            app:cursorColor="@color/your_cursor_color"-->
+<!--            android:hint="Nombre">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_nombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/black"
-                />
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/et_nombre"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="text"-->
+<!--                android:textColor="@color/black"-->
+<!--                />-->
 
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/your_cursor_color"
-            android:hint="Apellidos">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            app:boxBackgroundMode="outline"-->
+<!--            app:boxStrokeColor="@color/black"-->
+<!--            app:hintTextColor="@color/black"-->
+<!--            app:cursorColor="@color/your_cursor_color"-->
+<!--            android:hint="Apellidos">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_apellidos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/black"
-                />
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/et_apellidos"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="text"-->
+<!--                android:textColor="@color/black"-->
+<!--                />-->
 
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="@color/black"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/your_cursor_color"
-            android:hint="Teléfono">
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            app:boxBackgroundMode="outline"-->
+<!--            app:boxStrokeColor="@color/black"-->
+<!--            app:hintTextColor="@color/black"-->
+<!--            app:cursorColor="@color/your_cursor_color"-->
+<!--            android:hint="Teléfono">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_telefono"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/black"
-                />
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/et_telefono"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="text"-->
+<!--                android:textColor="@color/black"-->
+<!--                />-->
 
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_continuar_login"

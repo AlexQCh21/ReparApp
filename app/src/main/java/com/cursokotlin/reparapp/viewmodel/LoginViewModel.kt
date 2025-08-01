@@ -97,6 +97,26 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun sendResetPassword(email: String) {
+        viewModelScope.launch {
+            _validation.value = ValidationStateLogin.Loading
+            val result = authRepository.sendPasswordReset(email)
+            when (result) {
+                is Result.Success -> {
+                    _validation.value = ValidationStateLogin.Error("Se envió el correo para restablecer la contraseña")
+                }
+
+                is Result.Failure -> {
+                    _validation.value = ValidationStateLogin.Error(
+                        result.error.message ?: "Error al enviar el correo de restablecimiento"
+                    )
+                }
+                else ->{}
+            }
+        }
+    }
+
+
     fun signInWithGoogle(idToken: String, nombre: String, apellido: String, email: String) {
         viewModelScope.launch {
             _validation.value = ValidationStateLogin.Loading
