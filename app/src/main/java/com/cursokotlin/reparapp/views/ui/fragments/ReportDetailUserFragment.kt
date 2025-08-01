@@ -59,7 +59,13 @@ class ReportDetailUserFragment : Fragment() {
 
     private fun eventListeners(){
         binding.imgCerrar.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(
+                R.id.homeClientFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.homeClientFragment, false)
+                    .build()
+            )
         }
     }
 
