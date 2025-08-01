@@ -5,39 +5,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cursokotlin.reparapp.R
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.cursokotlin.reparapp.databinding.FragmentUbicationBinding
+import com.cursokotlin.reparapp.model.Local
+import com.cursokotlin.reparapp.viewmodel.LocalViewModel
+import com.cursokotlin.reparapp.views.adapter.LocalAdapter
+import com.cursokotlin.reparapp.views.adapter.LocalListener
+import dagger.hilt.android.AndroidEntryPoint
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class UbicationFragment : Fragment(),LocalListener {
+    private lateinit var binding: FragmentUbicationBinding
+    private val viewModel: LocalViewModel by viewModels()
+    private lateinit var localAdapter: LocalAdapter
 
-
-class UbicationFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ubication, container, false)
+        binding = FragmentUbicationBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UbicationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        localAdapter = LocalAdapter(emptyList(), this)
+        binding.rvLocalesDisponibles.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvLocalesDisponibles.adapter = localAdapter
+
+        viewModel.locales.observe(viewLifecycleOwner) { locales ->
+            localAdapter.actualizarLista(locales)
+        }
+
+        viewModel.getTicketsClient()
     }
+
+    override fun onLocalClicked(local: Local, position: Int) {
+        val action = UbicationFragmentDirections.actionUbicationFragmentToUbicationDetailDialogFragment(local)
+        findNavController().navigate(action)
+    }
+
 }

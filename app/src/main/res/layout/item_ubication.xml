@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingStart="10dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="1dp">
 
@@ -11,6 +13,7 @@
         android:id="@+id/icon_map"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/icon_map"
         android:contentDescription="@string/ubicacion_icono"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,16 +41,18 @@
         android:text="Av.xxxx"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="@id/tv_local_nombre"
         app:layout_constraintTop_toBottomOf="@id/tv_local_nombre"
         />
+
 
     <View
         android:id="@+id/v_linea"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="4dp"
         android:background="#E4E4E4"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 

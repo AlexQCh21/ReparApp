@@ -265,7 +265,27 @@
             android:id="@+id/ubicationDetailDialogFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.UbicationDetailDialogFragment"
             android:label="UbicationDetailDialogFragment"
-            tools:layout="@layout/fragment_ubication_detail_dialog" />
+            tools:layout="@layout/fragment_ubication_detail_dialog" >
+            <argument
+                android:name="local"
+                app:argType="com.cursokotlin.reparapp.model.Local"
+                app:nullable="false" />
+            <action
+                android:id="@+id/action_ubicationDetailDialogFragment_to_mapLocalFragment"
+                app:destination="@id/mapLocalFragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/mapLocalFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.MapLocalFragment"
+            android:label="MapLocalFragment"
+            tools:layout="@layout/fragment_map_local" >
+            <argument
+                android:name="local"
+                app:argType="com.cursokotlin.reparapp.model.Local"
+                app:nullable="false" />
+
+        </fragment>
 
     </navigation>
 
