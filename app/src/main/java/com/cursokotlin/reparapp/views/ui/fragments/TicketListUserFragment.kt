@@ -57,7 +57,8 @@ class TicketListUserFragment : Fragment(),TicketListener {
     }
 
     override fun onTicketClicked(ticket: Ticket, position: Int) {
-        TODO("Not yet implemented")
+        val action = TicketListUserFragmentDirections.actionTicketListUserToDetailTicket(ticket)
+        findNavController().navigate(action)
     }
 
 }

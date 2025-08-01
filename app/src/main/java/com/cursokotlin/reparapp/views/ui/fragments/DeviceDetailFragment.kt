@@ -92,16 +92,16 @@ class DeviceDetailFragment : Fragment() {
         val tipo = binding.etTipo.selectedItem.toString().trim()
         val marca = binding.etMarca.text.toString().trim()
         val modelo = binding.etModelo.text.toString().trim()
-        val serie = binding.etSerie.text.toString().trim()
+        //val serie = binding.etSerie.text.toString().trim()
 
-        val campos = listOf(nombre, tipo, marca, modelo, serie)
+        val campos = listOf(nombre, tipo, marca, modelo)
 
         if (campos.all { it.isNotBlank() }) {
             // Aquí puedes construir el objeto Dispositivo (si ya tienes la clase definida)
             var dispositivo = Dispositivo(
                 nombre = nombre,
                 tipo = tipo,
-                serie = serie,
+                //serie = serie,
                 modelo =modelo,
                 marca = marca
             )

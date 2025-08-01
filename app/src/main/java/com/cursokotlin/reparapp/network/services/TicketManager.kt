@@ -30,13 +30,13 @@ class TicketManager @Inject constructor(
         private const val SUBCOLLECTION_ESTADOS = "estados"
     }
 
-//    suspend fun saveTicket(ticket: Ticket): Result<Unit> {
+//    suspend fun saveTicket(ticket: Ticket): Result<Ticket> {
 //        return try {
 //            val docRef = firestore.collection(COLLECTION_TICKETS).document()
 //            val ticketWithId = ticket.copy(id = docRef.id)
 //
 //            val asignacionResult = asignarTicket(ticketWithId)
-//            if (asignacionResult is Result.Failure) return asignacionResult
+//            if (asignacionResult is Result.Failure) return Result.Failure(asignacionResult.error)
 //
 //            firestore.collection(COLLECTION_TICKETS)
 //                .document(ticketWithId.id!!)
@@ -46,7 +46,7 @@ class TicketManager @Inject constructor(
 //            notificar(ticketWithId, "Se te asignó un nuevo ticket")
 //
 //            Log.d(TAG, "Ticket guardado con éxito: $ticketWithId")
-//            Result.Success(Unit)
+//            Result.Success(ticketWithId) // <-- Devuelve el ticket creado con su id
 //        } catch (e: IllegalArgumentException) {
 //            Log.e(TAG, "Datos del ticket inválidos", e)
 //            Result.Failure(AuthError.InvalidUserData)
@@ -64,15 +64,21 @@ class TicketManager @Inject constructor(
             val asignacionResult = asignarTicket(ticketWithId)
             if (asignacionResult is Result.Failure) return Result.Failure(asignacionResult.error)
 
-            firestore.collection(COLLECTION_TICKETS)
-                .document(ticketWithId.id!!)
-                .set(ticketWithId, SetOptions.merge())
-                .await()
+            // Guardamos el ticket en Firestore
+            docRef.set(ticketWithId, SetOptions.merge()).await()
 
-            notificar(ticketWithId, "Se te asignó un nuevo ticket")
+            // Volvemos a obtener el ticket desde Firestore para que traiga el timestamp generado por el servidor
+            val snapshot = docRef.get().await()
+            val ticketConTimestamp = snapshot.toObject(Ticket::class.java)?.copy(id = docRef.id)
 
-            Log.d(TAG, "Ticket guardado con éxito: $ticketWithId")
-            Result.Success(ticketWithId) // <-- Devuelve el ticket creado con su id
+            // Notificamos
+            if (ticketConTimestamp != null) {
+                notificar(ticketConTimestamp, "Se te asignó un nuevo ticket")
+                Log.d(TAG, "Ticket guardado con éxito: $ticketConTimestamp")
+                Result.Success(ticketConTimestamp)
+            } else {
+                Result.Failure(AuthError.DatabaseError(Exception("No se pudo obtener el ticket guardado")))
+            }
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "Datos del ticket inválidos", e)
             Result.Failure(AuthError.InvalidUserData)
@@ -81,6 +87,7 @@ class TicketManager @Inject constructor(
             Result.Failure(AuthError.DatabaseError(e))
         }
     }
+
 
     suspend fun getAll(): Result<List<Ticket>> {
         return try {

@@ -156,22 +156,22 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 />
-            <EditText
-                android:id="@+id/et_serie"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/item_text_field"
-                android:drawableStart="@drawable/icon_serie"
-                android:drawablePadding="16dp"
-                android:drawableTint="#49454F"
-                android:ems="10"
-                android:hint="Número de serie"
-                android:inputType="text"
-                android:padding="16dp"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                />
+<!--            <EditText-->
+<!--                android:id="@+id/et_serie"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_margin="8dp"-->
+<!--                android:background="@drawable/item_text_field"-->
+<!--                android:drawableStart="@drawable/icon_serie"-->
+<!--                android:drawablePadding="16dp"-->
+<!--                android:drawableTint="#49454F"-->
+<!--                android:ems="10"-->
+<!--                android:hint="Número de serie"-->
+<!--                android:inputType="text"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="16sp"-->
+<!--                />-->
 
 
             <FrameLayout

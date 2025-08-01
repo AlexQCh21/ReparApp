@@ -114,7 +114,8 @@ class HomeClientFragment : Fragment(), TicketListener {
     }
 
     override fun onTicketClicked(ticket: Ticket, position: Int) {
-        //findNavController().navigate(R.id.action_homeClientFragment_to_reportarProblemaFragment)
+        val action = HomeClientFragmentDirections.actionHomeClientFragmentToDetailTicket(ticket)
+        findNavController().navigate(action)
     }
 
 

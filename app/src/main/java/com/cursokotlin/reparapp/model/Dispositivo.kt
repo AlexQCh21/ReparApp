@@ -21,8 +21,8 @@ data class Dispositivo(
     @JvmField @PropertyName("rutaImg")
     var ruta: String = "",
 
-    @JvmField @PropertyName("numero_serie")
-    var serie: String = "",
+//    @JvmField @PropertyName("numero_serie")
+//    var serie: String = "",
 
     @JvmField @PropertyName("modelo")
     var modelo: String = "",
@@ -34,6 +34,6 @@ data class Dispositivo(
     @JvmField @PropertyName("create_at")
     var createAt: Date? = null
 ) {
-    constructor() : this("","", "", "","","", "", "",null)
+    constructor() : this("","",  "","","", "", "",null)
 }
 

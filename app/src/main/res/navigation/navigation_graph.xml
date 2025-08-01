@@ -147,6 +147,9 @@
             <action
                 android:id="@+id/action_homeClientFragment_to_ticketListUser"
                 app:destination="@id/ticketListUser" />
+            <action
+                android:id="@+id/action_homeClientFragment_to_detailTicket"
+                app:destination="@id/detailTicket" />
         </fragment>
 
         <fragment
@@ -203,7 +206,11 @@
             android:id="@+id/reportarProblemaFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportarProblemaFragment"
             android:label="ReportarProblemaFragment"
-            tools:layout="@layout/fragment_reportar_problema" />
+            tools:layout="@layout/fragment_reportar_problema" >
+            <action
+                android:id="@+id/action_reportarProblemaFragment_to_reportDetailUser"
+                app:destination="@id/reportDetailUser" />
+        </fragment>
 
         <fragment
             android:id="@+id/agregarDispositivo"
@@ -215,7 +222,34 @@
             android:id="@+id/ticketListUser"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.TicketListUserFragment"
             android:label="Tickets del Usuario"
-            tools:layout="@layout/fragment_ticket_list_user"/>
+            tools:layout="@layout/fragment_ticket_list_user">
+            <action
+                android:id="@+id/action_ticketListUser_to_detailTicket"
+                app:destination="@id/detailTicket" />
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/detailTicket"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.DetailTicketFragment"
+            android:label="Tickets del Usuario"
+            tools:layout="@layout/fragment_detail_ticket">
+            <argument
+                android:name="ticket"
+                app:argType="com.cursokotlin.reparapp.model.Ticket"
+                app:nullable="false" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/reportDetailUser"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportDetailUserFragment"
+            android:label="Tickets del Usuario"
+            tools:layout="@layout/fragment_report_detail_user">
+
+            <action
+                android:id="@+id/action_reportDetailUser_to_reportarProblemaFragment"
+                app:destination="@id/reportarProblemaFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/ubicationFragment"

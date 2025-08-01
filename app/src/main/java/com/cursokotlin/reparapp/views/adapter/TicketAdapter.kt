@@ -20,12 +20,12 @@ class TicketAdapter(
         //val btnVerDetalle: Button = itemView.findViewById(R.id.btn_ticket_ver_detalle)
 
         init {
-//            btnVerDetalle.setOnClickListener {
-//                val position = adapterPosition
-//                if (position != RecyclerView.NO_POSITION) {
-//                    ticketListener.onTicketClicked(listaTickets[position], position)
-//                }
-//            }
+               itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    ticketListener.onTicketClicked(listaTickets[position], position)
+                }
+            }
         }
     }
 

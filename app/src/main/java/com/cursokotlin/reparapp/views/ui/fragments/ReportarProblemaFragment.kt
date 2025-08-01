@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentReportarProblemaBinding
 import com.cursokotlin.reparapp.viewmodel.ReportarProblemaViewModel
 import com.cursokotlin.reparapp.viewmodel.ResultState
+import com.cursokotlin.reparapp.viewmodel.SharedTicketViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -28,6 +30,7 @@ class ReportarProblemaFragment : Fragment() {
     private var _binding: FragmentReportarProblemaBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ReportarProblemaViewModel
+    private val sharedTicketViewModel: SharedTicketViewModel by activityViewModels()
 
     private val CAMERA_REQUEST = 1001
     private val GALLERY_REQUEST = 1002
@@ -88,6 +91,15 @@ class ReportarProblemaFragment : Fragment() {
         }
 
         lifecycleScope.launchWhenStarted {
+            viewModel.nuevoTicketCreado.collect { ticketCreado ->
+                if (ticketCreado != null) {
+                    sharedTicketViewModel.setTicket(ticketCreado)
+                }
+            }
+        }
+
+
+        lifecycleScope.launchWhenStarted {
             viewModel.crearTicketResult.collect { result ->
                 when (result) {
                     is ResultState.Loading -> {
@@ -98,7 +110,15 @@ class ReportarProblemaFragment : Fragment() {
                     is ResultState.Success -> {
                         if (result.data) {
                             Toast.makeText(requireContext(), "Ticket creado exitosamente", Toast.LENGTH_SHORT).show()
-                            findNavController().popBackStack()
+
+//                            findNavController().navigate(
+//                                R.id.action_reportarProblemaFragment_to_reportDetailUser,
+//                                null,
+//                                NavOptions.Builder()
+//                                    .setPopUpTo(R.id.reportarProblemaFragment, true)
+//                                    .build()
+//                            )
+                            findNavController().navigate(R.id.action_reportarProblemaFragment_to_reportDetailUser)
                         } else {
                             binding.btnAddTicket.isEnabled = true
                             binding.btnAddTicket.text = "Agregar Ticket"
