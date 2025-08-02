@@ -21,9 +21,6 @@ data class Dispositivo(
     @JvmField @PropertyName("rutaImg")
     var ruta: String = "",
 
-//    @JvmField @PropertyName("numero_serie")
-//    var serie: String = "",
-
     @JvmField @PropertyName("modelo")
     var modelo: String = "",
 

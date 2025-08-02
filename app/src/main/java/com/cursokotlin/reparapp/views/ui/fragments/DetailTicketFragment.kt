@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentDetailTicketBinding
 import com.cursokotlin.reparapp.model.Ticket
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -43,6 +44,11 @@ class DetailTicketFragment : Fragment() {
         // Puedes usar ticket aquí
     }
 
+    override fun onResume() {
+        super.onResume()
+        ocultarMBotoomNavigationView()
+    }
+
     private fun eventListeners(){
         binding.imgCerrar.setOnClickListener {
             findNavController().navigate(
@@ -70,5 +76,18 @@ class DetailTicketFragment : Fragment() {
         binding.tvHora.text = hora.toString()
     }
 
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
+    }
 
 }

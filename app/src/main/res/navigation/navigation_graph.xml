@@ -119,6 +119,9 @@
             <action
                 android:id="@+id/action_homeTechnicalFragment_to_reportarProblemaFragment"
                 app:destination="@id/reportarProblemaFragment" />
+            <action
+                android:id="@+id/action_homeTechnicalFragment_to_ticketDetailFragment"
+                app:destination="@id/ticketDetailFragment" />
         </fragment>
 
         <fragment
@@ -135,9 +138,6 @@
             <action
                 android:id="@+id/action_homeClientFragment_to_reportarProblemaFragment"
                 app:destination="@id/reportarProblemaFragment" />
-            <action
-                android:id="@+id/action_homeClientFragment_to_myTicketsFragment"
-                app:destination="@id/myTicketsFragment" />
             <action
                 android:id="@+id/action_homeClientFragment_to_profileFragment"
                 app:destination="@id/profileFragment" />
@@ -162,7 +162,7 @@
             android:id="@+id/myTicketsFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.MyTicketsFragment"
             android:label="fragment_my_tickets"
-            tools:layout="@layout/fragment_report" >
+            tools:layout="@layout/fragment_my_tickets" >
             <action
                 android:id="@+id/action_myTicketsFragment_to_ticketDetailFragment"
                 app:destination="@id/ticketDetailFragment" />
@@ -172,7 +172,12 @@
             android:id="@+id/ticketDetailFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.TicketDetailFragment"
             android:label="fragment_ticket_detail"
-            tools:layout="@layout/fragment_report_detail_dialog" />
+            tools:layout="@layout/fragment_ticket_detail" >
+            <argument
+                android:name="ticket"
+                app:argType="com.cursokotlin.reparapp.model.Ticket"
+                app:nullable="false" />
+        </fragment>
 
         <fragment
             android:id="@+id/profileFragment"

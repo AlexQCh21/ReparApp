@@ -191,7 +191,11 @@ class LoginFragment : Fragment() {
             }
         })
 
-        dialog.show(parentFragmentManager, "CustomDialog")
+        // Previene múltiples instancias del dialog
+        val prev = parentFragmentManager.findFragmentByTag("CustomDialog")
+        if (prev == null) {
+            dialog.show(parentFragmentManager, "CustomDialog")
+        }
     }
 
 

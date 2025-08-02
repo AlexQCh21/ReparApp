@@ -5,24 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.cursokotlin.reparapp.R
+import com.cursokotlin.reparapp.databinding.FragmentTicketDetailBinding
+import com.cursokotlin.reparapp.model.Ticket
+import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
+@AndroidEntryPoint
 class TicketDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding:FragmentTicketDetailBinding
+    private val args: TicketDetailFragmentArgs by navArgs()
+    private val viewModel:TicketsAsignadoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -30,8 +32,63 @@ class TicketDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_report_detail_dialog, container, false)
+        binding = FragmentTicketDetailBinding.inflate(inflater,container,false)
+
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val ticket = args.ticket
+        viewModel.getDispositivoTicket(ticket.dispositivoId)
+        initView(ticket)
 
+
+        // Puedes usar ticket aquí
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ocultarMBotoomNavigationView()
+    }
+
+    private fun initView(ticket: Ticket){
+        val fecha = ticket.createAt?.let {
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(it)
+        } ?: "Fecha no disponible"
+
+        val hora = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(ticket.createAt)
+
+        binding.tvCodigoTicket.text = ticket.id.toString()
+        binding.tvEstado.text = ticket.estadoActual
+        binding.tvDescripcionProblema.text = ticket.descripcion
+        binding.tvFecha.text = fecha
+        binding.tvHora.text = hora.toString()
+        binding.tvDescripcionProblema.text = ticket.descripcion
+
+
+        viewModel.dispositivo.observe(viewLifecycleOwner){dispositivo->
+            binding.tvModelo.text = dispositivo.modelo
+            binding.tvTipoDispositivo.text = dispositivo.tipo
+
+            Glide.with(requireContext())
+                .load(dispositivo.ruta)
+                .placeholder(R.drawable.icon_map)
+                .into(binding.imgDispositivo)
+        }
+    }
+
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
+    }
 }

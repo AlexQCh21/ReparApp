@@ -62,4 +62,24 @@ class DispositivoManager @Inject constructor(
         }
     }
 
+    suspend fun getDispositivoById(dispositivoId: String): Result<Dispositivo> {
+        return try {
+            val docSnapshot = firestore.collection(COLLECTION_DEVICES)
+                .document(dispositivoId)
+                .get()
+                .await()
+
+            val dispositivo = docSnapshot.toObject(Dispositivo::class.java)
+            if (dispositivo != null) {
+                dispositivo.id = docSnapshot.id
+                Result.Success(dispositivo)
+            } else {
+                Result.Failure(AuthError.DatabaseError(Exception("No se encontró el dispositivo")))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener dispositivo por id", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
 }

@@ -46,6 +46,14 @@ class PrincipalActivity : AppCompatActivity() {
             if (userRole == "cliente") R.id.homeClientFragment else R.id.homeTechnicalFragment
         )
 
+        if(userRole!="cliente"){
+            binding.bnvNavegacionPrincipal.menu.clear()
+            binding.bnvNavegacionPrincipal.inflateMenu(R.menu.menu_tecnico)
+        }else{
+            binding.bnvNavegacionPrincipal.menu.clear()
+            binding.bnvNavegacionPrincipal.inflateMenu(R.menu.menu)
+        }
+
         navController.graph = navGraph
 
         // ESTA ES LA FORMA CORRECTA

@@ -30,32 +30,6 @@ class TicketManager @Inject constructor(
         private const val SUBCOLLECTION_ESTADOS = "estados"
     }
 
-//    suspend fun saveTicket(ticket: Ticket): Result<Ticket> {
-//        return try {
-//            val docRef = firestore.collection(COLLECTION_TICKETS).document()
-//            val ticketWithId = ticket.copy(id = docRef.id)
-//
-//            val asignacionResult = asignarTicket(ticketWithId)
-//            if (asignacionResult is Result.Failure) return Result.Failure(asignacionResult.error)
-//
-//            firestore.collection(COLLECTION_TICKETS)
-//                .document(ticketWithId.id!!)
-//                .set(ticketWithId, SetOptions.merge())
-//                .await()
-//
-//            notificar(ticketWithId, "Se te asignó un nuevo ticket")
-//
-//            Log.d(TAG, "Ticket guardado con éxito: $ticketWithId")
-//            Result.Success(ticketWithId) // <-- Devuelve el ticket creado con su id
-//        } catch (e: IllegalArgumentException) {
-//            Log.e(TAG, "Datos del ticket inválidos", e)
-//            Result.Failure(AuthError.InvalidUserData)
-//        } catch (e: Exception) {
-//            Log.e(TAG, "Error al guardar ticket", e)
-//            Result.Failure(AuthError.DatabaseError(e))
-//        }
-//    }
-
     suspend fun saveTicket(ticket: Ticket): Result<Ticket> {
         return try {
             val docRef = firestore.collection(COLLECTION_TICKETS).document()
@@ -127,6 +101,32 @@ class TicketManager @Inject constructor(
             Result.Failure(AuthError.InvalidUserData)
         } catch (e: Exception) {
             Log.e(TAG, "Error al obtener tickets", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    suspend fun getTicketsAsignados(): Result<List<Ticket>> {
+        return try {
+            val uid = authManager.getCurrentUser()?.uid
+                ?: return Result.Failure(AuthError.Unauthorized)
+
+            val snapshot = firestore.collection(COLLECTION_TICKETS)
+                .whereEqualTo("tecnico_id", uid)
+                .get()
+                .await()
+
+            val lista = snapshot.documents.mapNotNull { doc ->
+                val ticket = doc.toObject(Ticket::class.java)
+                ticket?.id = doc.id
+                ticket
+            }
+
+            Result.Success(lista)
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "Datos del ticket inválidos", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener tickets asignados", e)
             Result.Failure(AuthError.DatabaseError(e))
         }
     }
