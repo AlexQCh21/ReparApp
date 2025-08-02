@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.cursokotlin.reparapp.R
@@ -60,7 +61,7 @@ class TicketDetailFragment : Fragment() {
                         is ResultState.Success -> {
                             // Este método debe existir en tu ViewModel y llamar a TicketManager.getTicketById
                             viewModel.getTicketById(ticket.id ?: "")
-                            Toast.makeText(requireContext(), "Estado actualizado", Toast.LENGTH_SHORT).show()
+                            //Toast.makeText(requireContext(), "Estado actualizado", Toast.LENGTH_SHORT).show()
                         }
                         is ResultState.Error -> {
                             Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
@@ -87,6 +88,10 @@ class TicketDetailFragment : Fragment() {
     private fun eventListener(){
         binding.fabAgregarTicket.setOnClickListener {
             mostrarDialogCambioEstado(args.ticket)
+        }
+
+        binding.imgClose.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

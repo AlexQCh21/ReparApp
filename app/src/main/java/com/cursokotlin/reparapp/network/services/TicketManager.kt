@@ -63,48 +63,6 @@ class TicketManager @Inject constructor(
         }
     }
 
-//    suspend fun avanzarEstadoTicket(ticketId: String, comentario: String = "", automatico: Boolean = true): Result<Unit> {
-//        return try {
-//            // 1. Obtener el ticket actual
-//            val ticketRef = firestore.collection(COLLECTION_TICKETS).document(ticketId)
-//            val ticketSnapshot = ticketRef.get().await()
-//            val ticket = ticketSnapshot.toObject(Ticket::class.java)
-//            if (ticket == null) {
-//                return Result.Failure(AuthError.DatabaseError(Exception("No se encontró el ticket")))
-//            }
-//
-//            // 2. Determinar el nuevo estado
-//            val estadoActual = ticket.estadoActual
-//            val nuevoEstado = when (estadoActual) {
-//                Estado.ASIGNADO.toString() -> Estado.INICIADO.toString()
-//                Estado.INICIADO.toString() -> Estado.TERMINADO.toString()
-//                else -> estadoActual // No avanza si ya está en TERMINADO u otro
-//            }
-//            if (estadoActual == nuevoEstado) {
-//                return Result.Failure(AuthError.DatabaseError(Exception("El ticket ya está en el estado final")))
-//            }
-//
-//            // 3. Actualizar el campo 'ultimo_estado'
-//            ticketRef.set(mapOf("ultimo_estado" to nuevoEstado), SetOptions.merge()).await()
-//
-//            // 4. Agregar el nuevo estado a la subcolección 'estados'
-//            val estadoRef = ticketRef.collection(SUBCOLLECTION_ESTADOS).document()
-//            val estadoTicket = EstadoTicket(
-//                id = estadoRef.id,
-//                estado = nuevoEstado,
-//                automatico = automatico,
-//                comentario = comentario
-//            )
-//            estadoRef.set(estadoTicket).await()
-//
-//            Log.d(TAG, "Estado del ticket $ticketId actualizado automáticamente a $nuevoEstado y subcolección de estados actualizada.")
-//            Result.Success(Unit)
-//        } catch (e: Exception) {
-//            Log.e(TAG, "Error al avanzar el estado del ticket $ticketId", e)
-//            Result.Failure(AuthError.DatabaseError(e))
-//        }
-//    }
-
     suspend fun avanzarEstadoTicket(ticketId: String, comentario: String = "", automatico: Boolean = true): Result<Unit> {
         return try {
             // 1. Obtener el ticket actual

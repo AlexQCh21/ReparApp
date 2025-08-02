@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/ticketListUser"
-        android:icon="@drawable/ic_ticket_nav"
+        android:icon="@drawable/ic_ticket"
         android:title="Tickets" />
 
     <item

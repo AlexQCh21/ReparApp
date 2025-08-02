@@ -7,11 +7,11 @@
 
     <item
         android:id="@+id/myTicketsFragment"
-        android:icon="@drawable/ic_ticket_nav"
+        android:icon="@drawable/ic_ticket_black"
         android:title="Tickets" />
 
     <item
         android:id="@+id/inventarioFragment"
-        android:icon="@drawable/icon_location"
+        android:icon="@drawable/ic_ticket_nav"
         android:title="Inventario" />
 </menu>
