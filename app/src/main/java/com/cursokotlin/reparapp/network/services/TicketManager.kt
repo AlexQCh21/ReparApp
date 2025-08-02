@@ -5,6 +5,7 @@ import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.domain.model.Result
 import com.cursokotlin.reparapp.domain.model.flatMap
 import com.cursokotlin.reparapp.model.Dispositivo
+import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.EstadoTicket
 import com.cursokotlin.reparapp.model.Notificacion
 import com.cursokotlin.reparapp.model.Ticket
@@ -62,6 +63,111 @@ class TicketManager @Inject constructor(
         }
     }
 
+//    suspend fun avanzarEstadoTicket(ticketId: String, comentario: String = "", automatico: Boolean = true): Result<Unit> {
+//        return try {
+//            // 1. Obtener el ticket actual
+//            val ticketRef = firestore.collection(COLLECTION_TICKETS).document(ticketId)
+//            val ticketSnapshot = ticketRef.get().await()
+//            val ticket = ticketSnapshot.toObject(Ticket::class.java)
+//            if (ticket == null) {
+//                return Result.Failure(AuthError.DatabaseError(Exception("No se encontró el ticket")))
+//            }
+//
+//            // 2. Determinar el nuevo estado
+//            val estadoActual = ticket.estadoActual
+//            val nuevoEstado = when (estadoActual) {
+//                Estado.ASIGNADO.toString() -> Estado.INICIADO.toString()
+//                Estado.INICIADO.toString() -> Estado.TERMINADO.toString()
+//                else -> estadoActual // No avanza si ya está en TERMINADO u otro
+//            }
+//            if (estadoActual == nuevoEstado) {
+//                return Result.Failure(AuthError.DatabaseError(Exception("El ticket ya está en el estado final")))
+//            }
+//
+//            // 3. Actualizar el campo 'ultimo_estado'
+//            ticketRef.set(mapOf("ultimo_estado" to nuevoEstado), SetOptions.merge()).await()
+//
+//            // 4. Agregar el nuevo estado a la subcolección 'estados'
+//            val estadoRef = ticketRef.collection(SUBCOLLECTION_ESTADOS).document()
+//            val estadoTicket = EstadoTicket(
+//                id = estadoRef.id,
+//                estado = nuevoEstado,
+//                automatico = automatico,
+//                comentario = comentario
+//            )
+//            estadoRef.set(estadoTicket).await()
+//
+//            Log.d(TAG, "Estado del ticket $ticketId actualizado automáticamente a $nuevoEstado y subcolección de estados actualizada.")
+//            Result.Success(Unit)
+//        } catch (e: Exception) {
+//            Log.e(TAG, "Error al avanzar el estado del ticket $ticketId", e)
+//            Result.Failure(AuthError.DatabaseError(e))
+//        }
+//    }
+
+    suspend fun avanzarEstadoTicket(ticketId: String, comentario: String = "", automatico: Boolean = true): Result<Unit> {
+        return try {
+            // 1. Obtener el ticket actual
+            val ticketRef = firestore.collection(COLLECTION_TICKETS).document(ticketId)
+            val ticketSnapshot = ticketRef.get().await()
+            val ticket = ticketSnapshot.toObject(Ticket::class.java)
+            if (ticket == null) {
+                return Result.Failure(AuthError.DatabaseError(Exception("No se encontró el ticket")))
+            }
+
+            // 2. Determinar el nuevo estado
+            val estadoActual = ticket.estadoActual
+            val nuevoEstado = when (estadoActual) {
+                Estado.ASIGNADO.toString() -> Estado.INICIADO.toString()
+                Estado.INICIADO.toString() -> Estado.TERMINADO.toString()
+                else -> estadoActual // No avanza si ya está en TERMINADO u otro
+            }
+            if (estadoActual == nuevoEstado) {
+                return Result.Failure(AuthError.DatabaseError(Exception("El ticket ya está en el estado final")))
+            }
+
+            // 3. Actualizar el campo 'ultimo_estado'
+            ticketRef.set(mapOf("ultimo_estado" to nuevoEstado), SetOptions.merge()).await()
+
+            // 4. Agregar el nuevo estado a la subcolección 'estados'
+            val estadoRef = ticketRef.collection(SUBCOLLECTION_ESTADOS).document()
+            val estadoTicket = EstadoTicket(
+                id = estadoRef.id,
+                estado = nuevoEstado,
+                automatico = automatico,
+                comentario = comentario
+            )
+            estadoRef.set(estadoTicket).await()
+
+            // 5. Notificar al usuario dueño del ticket
+            val notificacion = Notificacion(
+                visto = false,
+                mensaje = if (comentario.isNotBlank()) comentario else "El estado del ticket ha cambiado a $nuevoEstado",
+                receptorId = ticket.cliente, // usuario_id del ticket
+                tipoUSuario = "tecnico",
+                asuntoId = ticket.id ?: ""
+            )
+            // Usar suspendCancellableCoroutine para esperar el callback de la notificación
+            kotlinx.coroutines.suspendCancellableCoroutine<Unit> { cont ->
+                notificacionManager.enviarNotificacion(notificacion) { result ->
+                    when (result) {
+                        is Result.Success -> cont.resume(Unit) {}
+                        is Result.Failure -> {
+                            Log.e(TAG, "Error al enviar notificación de cambio de estado", result.error)
+                            cont.resume(Unit) {} // Continúa aunque falle la notificación
+                        }
+                        else -> cont.resume(Unit) {}
+                    }
+                }
+            }
+
+            Log.d(TAG, "Estado del ticket $ticketId actualizado automáticamente a $nuevoEstado, subcolección de estados y notificación generada.")
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al avanzar el estado del ticket $ticketId", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
 
     suspend fun getAll(): Result<List<Ticket>> {
         return try {
@@ -75,6 +181,21 @@ class TicketManager @Inject constructor(
             Result.Failure(AuthError.InvalidUserData)
         } catch (e: Exception) {
             Log.e(TAG, "Error al obtener tickets", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    suspend fun getTicketById(ticketId: String): Result<Ticket> {
+        return try {
+            val doc = firestore.collection(COLLECTION_TICKETS).document(ticketId).get().await()
+            val ticket = doc.toObject(Ticket::class.java)?.copy(id = doc.id)
+            if (ticket != null) {
+                Result.Success(ticket)
+            } else {
+                Result.Failure(AuthError.DatabaseError(Exception("No se encontró el ticket")))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al obtener ticket por id", e)
             Result.Failure(AuthError.DatabaseError(e))
         }
     }

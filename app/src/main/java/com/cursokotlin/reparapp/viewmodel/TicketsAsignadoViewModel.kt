@@ -30,6 +30,11 @@ class TicketsAsignadoViewModel @Inject constructor(
     private val _obtenerTicketsAsignadosResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Success(false))
     val obtenerTicketsAsignadosResult: StateFlow<ResultState<Boolean>> = _obtenerTicketsAsignadosResult
 
+    // Flow para el resultado de cambio de estado
+    private val _cambiarEstadoResult = MutableStateFlow<ResultState<Unit>>(ResultState.Success(Unit))
+    val cambiarEstadoResult: StateFlow<ResultState<Unit>> get() = _cambiarEstadoResult
+
+
     fun getTicketsAsignados(){
         viewModelScope.launch {
             when(val result = ticketManager.getTicketsAsignados()){
@@ -51,6 +56,29 @@ class TicketsAsignadoViewModel @Inject constructor(
         }
     }
 
+    fun cambiarEstadoTicket(ticketId: String, comentario: String = "") {
+        viewModelScope.launch {
+            _cambiarEstadoResult.value = ResultState.Loading
+            when(val result = ticketManager.avanzarEstadoTicket(ticketId, comentario)) {
+                is Result.Success -> _cambiarEstadoResult.value = ResultState.Success(Unit)
+                is Result.Failure -> _cambiarEstadoResult.value =
+                    ResultState.Error("Error al cambiar estado: ${result.error.message}")
+                else -> {}
+            }
+        }
+    }
 
+    private val _ticket = MutableLiveData<Ticket>()
+    val ticket: LiveData<Ticket> get() = _ticket
+
+    fun getTicketById(ticketId: String) {
+        viewModelScope.launch {
+            when(val result = ticketManager.getTicketById(ticketId)) {
+                is Result.Success -> _ticket.value = result.data
+                is Result.Failure -> { /* Muestra error si quieres */ }
+                else -> {}
+            }
+        }
+    }
 
 }
