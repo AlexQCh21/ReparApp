@@ -11,6 +11,11 @@
         android:title="Tickets" />
 
     <item
+        android:id="@+id/reportarProblemaTecnicoFragment"
+        android:icon="@drawable/ic_add_white"
+        android:title="Añadir ticket" />
+
+    <item
         android:id="@+id/inventarioFragment"
         android:icon="@drawable/ic_ticket_nav"
         android:title="Inventario" />

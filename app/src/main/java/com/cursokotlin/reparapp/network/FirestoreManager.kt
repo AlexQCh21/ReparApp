@@ -121,5 +121,33 @@ class FirestoreManager @Inject constructor(
         }
     }
 
+    // MÉTODO NUEVO: Buscar usuario por DNI
+    suspend fun getUserByDni(dni: String): Result<Usuario> {
+        return try {
+            require(dni.isNotEmpty()) { throw AuthError.InvalidUserData }
+
+            val snapshot = firestore.collection(COLLECTION_USERS)
+                .whereEqualTo("dni", dni)
+                .limit(1)
+                .get()
+                .await()
+
+            if (!snapshot.isEmpty) {
+                val doc = snapshot.documents.first()
+                doc.toObject(Usuario::class.java)?.apply { id = doc.id }?.let { user ->
+                    Result.Success(user)
+                } ?: Result.Failure(AuthError.InvalidUserData)
+            } else {
+                Result.Failure(AuthError.UserNotFound)
+            }
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "DNI de usuario inválido", e)
+            Result.Failure(AuthError.InvalidUserData)
+        } catch (e: Exception) {
+            Log.e(TAG, "Error al buscar usuario por DNI", e)
+            Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
 
 }

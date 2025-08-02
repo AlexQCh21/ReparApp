@@ -35,6 +35,7 @@
     <string name="paso2">¿Necesitas contactar a un proveedor?</string>
     <string name="paso1">Sigue estos pasos para corregirlo:</string>
     <string name="todo">TODO</string>
+    <string name="token_dni">2d6a4b66806ed14079cb7134bd73fa742afe9cf9324576d712fa7f750fe6431c</string>
     <string name="codigo">TIC-003943</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!</string>
     <string name="terminos_y_condiciones">

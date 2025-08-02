@@ -117,11 +117,11 @@
                 android:id="@+id/action_homeTechnicalFragment_to_inventarioFragment"
                 app:destination="@id/inventarioFragment" />
             <action
-                android:id="@+id/action_homeTechnicalFragment_to_reportarProblemaFragment"
-                app:destination="@id/reportarProblemaFragment" />
-            <action
                 android:id="@+id/action_homeTechnicalFragment_to_ticketDetailFragment"
                 app:destination="@id/ticketDetailFragment" />
+            <action
+                android:id="@+id/action_homeTechnicalFragment_to_reportarProblemaTecnicoFragment"
+                app:destination="@id/reportarProblemaTecnicoFragment" />
         </fragment>
 
         <fragment
@@ -157,6 +157,12 @@
             android:name="com.cursokotlin.reparapp.views.ui.fragments.InventarioFragment"
             android:label="fragment_inventario"
             tools:layout="@layout/fragment_inventory" />
+
+        <fragment
+            android:id="@+id/reportarProblemaTecnicoFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportProblemaTecnicoFragment"
+            android:label="fragment_report_problema_tecnico"
+            tools:layout="@layout/fragment_report_problema_tecnico" />
 
         <fragment
             android:id="@+id/myTicketsFragment"
