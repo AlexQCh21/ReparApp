@@ -27,9 +27,16 @@ class PrincipalActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bnvNavegacionPrincipal) { view, insets ->
+            val navInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, 0, 0, 0) // Elimina cualquier padding automático
+            insets
+        }
+
 
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
