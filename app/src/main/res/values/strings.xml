@@ -41,6 +41,7 @@
     <string name="terminos_y_condiciones">
     Al registrarte en ReparApp, aceptas el uso de tus datos personales para brindarte acceso a nuestros servicios de soporte técnico.\n\nLa aplicación permite la creación y gestión de tickets entre usuarios y técnicos, con el fin de optimizar la atención y solución de problemas.\n\nReparApp utiliza Google Maps para ayudarte a ubicar los locales de servicio más cercanos.\n\nNos comprometemos a proteger tu información y a utilizarla únicamente para fines relacionados con el funcionamiento de la app.\n\nSi no estás de acuerdo con estos términos, por favor no completes el registro.
     </string>
+    <string name="mensaje_warning_estado">Este ticket ya ha sido finalizado.</string>
 
     <!--API KEY-->
     <string name="web_client_id">140750798895-l2jag71ha8m69konall9kapiecou858u.apps.googleusercontent.com</string>

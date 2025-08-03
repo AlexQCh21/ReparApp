@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.model.Notificacion
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class NotificacionAdapter (
     private var listaNotificaciones: List<Notificacion>,
@@ -45,6 +47,14 @@ class NotificacionAdapter (
             holder.titulo.text = "El técnico ha actualizado tu ticket"
         }
         holder.mensaje.text = notify.mensaje
+        val fechaHora = notify.createAt?.let { date ->
+            val fecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
+            val hora = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(date)
+            "$fecha - $hora"
+        } ?: "Fecha no disponible"
+
+        holder.fecha.text = fechaHora
+
     }
 
     fun actualizarLista(nuevaLista: List<Notificacion>) {
