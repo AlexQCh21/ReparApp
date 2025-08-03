@@ -34,7 +34,7 @@ class SplashViewModel @Inject constructor(
 
     private fun checkUserAuthentication() {
         viewModelScope.launch {
-            delay(500)
+            //delay(500)
             val currentUser = authManager.getCurrentUser()
             Log.i("SPLASH", "Usuario actual: ${currentUser?.email}")
 
