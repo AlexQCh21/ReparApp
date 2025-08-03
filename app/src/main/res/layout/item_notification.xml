@@ -1,66 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white">
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:layout_margin="4dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/img_notifi"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/icon_noti_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_titulo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center_vertical">
+        android:text="¡Dispositivo listo para recoger!"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/img_notifi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/img_notifi"
+        android:layout_marginStart="8dp"
+        />
 
-        <ImageView
-            android:id="@+id/notificationIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_phone_outline"
-            android:contentDescription="Notification Type Icon"
-            app:tint="@android:color/black"
-            android:layout_marginEnd="12dp" />
+    <TextView
+        android:id="@+id/tv_mensaje"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Puedes acercarte a recoger tu equipo en la oficina de soporte técnico."
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/tv_titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_titulo"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_hora"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="19 jul. 2025 - 5:16 pm"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/tv_titulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mensaje"/>
 
-            <TextView
-                android:id="@+id/notificationTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SE TE ASIGNÓ UN TICKET"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+    <View
+        android:id="@+id/v_linea"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#E4E4E4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_hora_ticket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hoy 9:14 Am"
-                android:textColor="#5D5C5D"
-                android:textSize="14sp"
-                android:layout_marginTop="4dp" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/bellIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_bell_red_outline"
-            android:contentDescription="@string/notification_bell"
-            app:tint="#FF6B6B"
-            android:layout_marginStart="12dp" />
-
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

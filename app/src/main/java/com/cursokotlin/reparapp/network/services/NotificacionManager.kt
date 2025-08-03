@@ -4,6 +4,7 @@ import com.cursokotlin.reparapp.network.FirestoreManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.cursokotlin.reparapp.domain.model.Result
 import com.cursokotlin.reparapp.model.Notificacion
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,26 +30,19 @@ class NotificacionManager @Inject constructor(
             }
     }
 
-    fun obtenerNotificacionesPorUsuario(
-        userId: String,
-        tipoUsuario: String,
-        onResult: (Result<List<Notificacion>>) -> Unit
-    ) {
-        firestore.collection(COLLECTION_NOTIFICACIONES)
-            .whereEqualTo("receptorId", userId)
-            .whereEqualTo("tipo_usuario", tipoUsuario)
-            .orderBy("fecha_creacion", com.google.firebase.firestore.Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener { querySnapshot ->
-                val notificaciones = querySnapshot.documents.mapNotNull { doc ->
-                    val notif = doc.toObject(Notificacion::class.java)
-                    notif?.apply { id = doc.id }
-                }
-                onResult(Result.Success(notificaciones))
-            }
-            .addOnFailureListener { e ->
-                onResult(Result.Failure(e))
-            }
+    suspend fun obtenerNotificacionesPorUsuario(userId: String): Result<List<Notificacion>> {
+        return try {
+            val snapshot = firestore
+                .collection(COLLECTION_NOTIFICACIONES)
+                .whereEqualTo("receptorId", userId)
+                .get()
+                .await()
+
+            val notificaciones = snapshot.documents.mapNotNull { it.toObject(Notificacion::class.java) }
+            Result.Success(notificaciones)
+        } catch (e: Exception) {
+            Result.Failure(e)
+        }
     }
 
     fun marcarNotificacionComoLeida(

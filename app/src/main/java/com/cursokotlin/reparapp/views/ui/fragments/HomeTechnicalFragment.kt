@@ -79,6 +79,10 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
             binding.tvTicketsTerminados.text = terminados.toString()
 
             // Aquí puedes actualizar tu UI con los valores
+
+            binding.imgUsuarioNotificacion.setOnClickListener {
+                findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
+            }
         }
     }
 
