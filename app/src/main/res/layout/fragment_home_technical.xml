@@ -107,7 +107,7 @@
                                 android:layout_height="32dp"
                                 android:layout_gravity="center"
                                 android:contentDescription="Ticket Icon"
-                                android:src="@drawable/ic_ticket_while"
+                                android:src="@drawable/icon_ticket_white"
                                 app:tint="#FF6B6B" />
 
                             <TextView
@@ -158,7 +158,7 @@
                                 android:layout_height="32dp"
                                 android:layout_gravity="center"
                                 android:contentDescription="Ticket Icon"
-                                android:src="@drawable/ic_ticket_while"
+                                android:src="@drawable/icon_ticket_white"
                                 app:tint="#4A90E2" />
 
                             <TextView
@@ -208,7 +208,7 @@
                                 android:layout_height="32dp"
                                 android:layout_gravity="center"
                                 android:contentDescription="Ticket Icon"
-                                android:src="@drawable/ic_ticket_while"
+                                android:src="@drawable/icon_ticket_white"
                                 app:tint="#5CB85C" />
 
                             <TextView
