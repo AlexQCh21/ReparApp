@@ -8,6 +8,8 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.model.Ticket
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class TicketAdapter(
     private var listaTickets: List<Ticket>,
@@ -37,9 +39,17 @@ class TicketAdapter(
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
         val ticket = listaTickets[position]
-        holder.fechaTicket.text = ticket.createAt?.toString() ?: "Fecha no disponible"
+
         val idTicketShort = ticket.id
         holder.idTicket.text = "TIC-$idTicketShort..."
+
+        val fechaHora = ticket.createAt?.let { date ->
+            val fecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
+            val hora = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(date)
+            "$fecha - $hora"
+        } ?: "Fecha no disponible"
+
+        holder.fechaTicket.text = fechaHora
     }
 
     override fun getItemCount(): Int = listaTickets.size
