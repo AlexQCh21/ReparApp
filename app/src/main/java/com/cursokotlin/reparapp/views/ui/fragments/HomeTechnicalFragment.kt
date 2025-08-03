@@ -1,27 +1,37 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentHomeTechnicalBinding
+import com.cursokotlin.reparapp.model.BaseConocimiento
 import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
+import com.cursokotlin.reparapp.viewmodel.BaseConocimientoViewModel
 import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
+import com.cursokotlin.reparapp.views.adapter.BaseConocimientoAdapter
+import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
 import com.cursokotlin.reparapp.views.adapter.TicketAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeTechnicalFragment : Fragment(), TicketListener {
+class HomeTechnicalFragment : Fragment(), TicketListener, BaseConocimientoListener {
     private lateinit var binding: FragmentHomeTechnicalBinding
     private val viewModel: TicketsAsignadoViewModel by viewModels()
     private lateinit var ticketAdapter: TicketAdapter
+
+    private val viewModelBase: BaseConocimientoViewModel by viewModels()
+    private lateinit var baseConocimientoAdapter: BaseConocimientoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +71,18 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
         }
 
         viewModel.getTicketsAsignados()
+
+        //Cargar base de conocimiento
+        baseConocimientoAdapter = BaseConocimientoAdapter(emptyList(), this)
+        binding.rvBaseConocimientos.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvBaseConocimientos.adapter = baseConocimientoAdapter
+
+        viewModelBase.baseConocimiento.observe(viewLifecycleOwner) { locales ->
+            baseConocimientoAdapter.actualizarLista(locales)
+        }
+
+        viewModelBase.getBaseConocimientoClient()
     }
 
     private fun initComponents(){
@@ -84,6 +106,10 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
                 findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
             }
         }
+
+        binding.tvVerMas.setOnClickListener {
+            findNavController().navigate(R.id.action_homeTechnicalFragment_to_baseConocimientoFragment)
+        }
     }
 
     private fun showPerfilTech(){
@@ -95,6 +121,18 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
     override fun onTicketClicked(ticket: Ticket, position: Int) {
         val action = HomeTechnicalFragmentDirections.actionHomeTechnicalFragmentToTicketDetailFragment(ticket)
         findNavController().navigate(action)
+    }
+
+    override fun onBaseConocimientoClicked(
+        baseConocimiento: BaseConocimiento,
+        position: Int
+    ) {
+        val url = baseConocimiento.enlace
+        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context?.let {
+            ContextCompat.startActivity(it, intent, null)
+        }
     }
 
 }

@@ -13,6 +13,7 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.ActivityPrincipalBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class PrincipalActivity : AppCompatActivity() {
 
@@ -58,9 +59,6 @@ class PrincipalActivity : AppCompatActivity() {
 
         // ESTA ES LA FORMA CORRECTA
         binding.bnvNavegacionPrincipal.setupWithNavController(navController)
+
     }
-
-
-
-
 }
