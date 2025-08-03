@@ -14,6 +14,7 @@ import com.cursokotlin.reparapp.network.FirestoreManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -89,11 +90,12 @@ class TicketManager @Inject constructor(
 
             // 4. Agregar el nuevo estado a la subcolección 'estados'
             val estadoRef = ticketRef.collection(SUBCOLLECTION_ESTADOS).document()
-            val estadoTicket = EstadoTicket(
-                id = estadoRef.id,
-                estado = nuevoEstado,
-                automatico = automatico,
-                comentario = comentario
+            val estadoTicket = mapOf(
+                "id" to estadoRef.id,
+                "estado" to nuevoEstado,
+                "automatico" to automatico,
+                "comentario" to comentario,
+                "fecha_creacion" to com.google.firebase.firestore.FieldValue.serverTimestamp()
             )
             estadoRef.set(estadoTicket).await()
 
@@ -365,6 +367,49 @@ class TicketManager @Inject constructor(
                 is Result.Failure -> Log.e(TAG, "Error al enviar notificación", result.error.cause)
                 else -> {}
             }
+        }
+    }
+
+
+    //Revertir estado
+    suspend fun revertirEstadoTicket(ticketId: String): Result<Unit> {
+        try {
+            val ticketRef = firestore.collection(COLLECTION_TICKETS).document(ticketId)
+            val estadosSnapshot = ticketRef.collection(SUBCOLLECTION_ESTADOS)
+                .orderBy("fecha_creacion", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                .limit(2)
+                .get().await()
+
+            val estados = estadosSnapshot.documents.mapNotNull { it.toObject(EstadoTicket::class.java) }
+            if (estados.size < 2) return Result.Failure(AuthError.DatabaseError(Exception("No hay historial suficiente para revertir")))
+
+            val estadoActual = estados[0]
+            val estadoAnterior = estados[1]
+
+            // Verifica que el último cambio sea dentro de la hora
+            val ahora = Date()
+            val haceMenosDeUnaHora = estadoActual.fecha_creacion?.let {
+                val diff = ahora.time - it.time
+                diff < 60 * 60 * 1000 // 1 hora en milisegundos
+            } ?: false
+
+            if (!haceMenosDeUnaHora) {
+                return Result.Failure(AuthError.DatabaseError(Exception("No es posible revertir después de 1 hora")))
+            }
+
+            // Actualiza el campo 'ultimo_estado' al anterior
+            ticketRef.set(mapOf("ultimo_estado" to estadoAnterior.estado), SetOptions.merge()).await()
+
+            // Agrega un registro de "reversión" en la subcolección
+            val estadoRevertido = EstadoTicket(
+                estado = estadoAnterior.estado,
+                automatico = false,
+                comentario = "Reversión de estado a ${estadoAnterior.estado} por el técnico"
+            )
+            ticketRef.collection(SUBCOLLECTION_ESTADOS).document().set(estadoRevertido).await()
+            return Result.Success(Unit)
+        } catch (e: Exception) {
+            return Result.Failure(AuthError.DatabaseError(e))
         }
     }
 }

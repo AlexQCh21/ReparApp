@@ -337,11 +337,11 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_historial_tickets"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="10dp"
+                            android:layout_height="300dp"
+                            android:paddingHorizontal="4dp"
                             tools:layoutManager="LinearLayoutManager"
-                            tools:listitem="@layout/item_ticket_card"
-                            tools:orientation="horizontal" />
+                            tools:listitem="@layout/item_ticket"
+                            tools:orientation="vertical" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.constraintlayout.widget.ConstraintLayout

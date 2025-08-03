@@ -1,6 +1,7 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,7 @@ class TicketDetailFragment : Fragment() {
         val ticket = args.ticket
         viewModel.getDispositivoTicket(ticket.dispositivoId)
         initView(ticket)
+        viewModel.checarSiPuedeRevertir(ticket.id ?: "")
 
         // Observa el resultado del cambio de estado
         viewLifecycleOwner.lifecycleScope.launch {
@@ -59,9 +61,7 @@ class TicketDetailFragment : Fragment() {
                 viewModel.cambiarEstadoResult.collect { result ->
                     when (result) {
                         is ResultState.Success -> {
-                            // Este método debe existir en tu ViewModel y llamar a TicketManager.getTicketById
                             viewModel.getTicketById(ticket.id ?: "")
-                            //Toast.makeText(requireContext(), "Estado actualizado", Toast.LENGTH_SHORT).show()
                         }
                         is ResultState.Error -> {
                             Toast.makeText(requireContext(), result.message, Toast.LENGTH_LONG).show()
@@ -74,9 +74,35 @@ class TicketDetailFragment : Fragment() {
             }
         }
 
+        // Después de mostrar el Toast en el Fragment:
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.revertirEstadoResult.collect { result ->
+                    when (result) {
+                        is ResultState.Success -> {
+                            Toast.makeText(requireContext(), "Estado revertido con éxito", Toast.LENGTH_SHORT).show()
+                            viewModel.getTicketById(args.ticket.id ?: "")
+                            viewModel.checarSiPuedeRevertir(args.ticket.id ?: "")
+                            viewModel.setRevertirEstadoIdle()
+                        }
+                        is ResultState.Error -> {
+                            Log.e("TicketDetailFragment", "Error al revertir estado", Throwable(result.message))
+                            Toast.makeText(requireContext(), "No se pudo revertir: ${result.message}", Toast.LENGTH_LONG).show()
+                            viewModel.setRevertirEstadoIdle()
+                        }
+                        is ResultState.Loading -> {
+                            // Loader opcional
+                        }
+                    }
+                }
+            }
+        }
+
         viewModel.ticket.observe(viewLifecycleOwner) { ticketActualizado ->
             actualizarEstadoVisual(ticketActualizado.estadoActual ?: "ASIGNADO")
-            // Refresca otros datos si necesitas
+            // Mostrar el botón SOLO si el estado NO es ASIGNADO
+            val estado = ticketActualizado.estadoActual ?: "ASIGNADO"
+            binding.btnRevertirEstado.visibility = if (estado != "ASIGNADO") View.VISIBLE else View.GONE
         }
     }
 
@@ -92,6 +118,10 @@ class TicketDetailFragment : Fragment() {
 
         binding.imgClose.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.btnRevertirEstado.setOnClickListener {
+            viewModel.revertirEstadoTicket(args.ticket.id ?: "")
         }
     }
 
@@ -109,7 +139,6 @@ class TicketDetailFragment : Fragment() {
         binding.tvHora.text = hora.toString()
         binding.tvDescripcionProblema.text = ticket.descripcion
 
-
         viewModel.dispositivo.observe(viewLifecycleOwner){dispositivo->
             binding.tvModelo.text = dispositivo.modelo
             binding.tvTipoDispositivo.text = dispositivo.tipo
@@ -122,15 +151,12 @@ class TicketDetailFragment : Fragment() {
     }
 
     private fun ocultarMBotoomNavigationView(){
-        // Oculta el BottomNavigationView
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
         bottomNav?.visibility = View.GONE
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        // Muestra el BottomNavigationView de nuevo
         val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
         bottomNav?.visibility = View.VISIBLE
     }
@@ -157,7 +183,6 @@ class TicketDetailFragment : Fragment() {
         binding.btnCambiarEstado.isEnabled = estado != "TERMINADO"
     }
     private fun mostrarDialogCambioEstado(ticket: Ticket) {
-        // Inflar la vista personalizada
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.fragmen_estado_popup, null)
 
         val tvEstadoActual = dialogView.findViewById<TextView>(R.id.tvEstadoActual)
@@ -165,18 +190,15 @@ class TicketDetailFragment : Fragment() {
         val btnCancelar = dialogView.findViewById<MaterialButton>(R.id.btnCancelar)
         val btnConfirmar = dialogView.findViewById<Button>(R.id.btnConfirmar)
 
-        // Estado actual
         tvEstadoActual.text = ticket.estadoActual
 
-        // Determinar el siguiente estado
         val siguienteEstado = when(ticket.estadoActual) {
             "ASIGNADO" -> "INICIADO"
             "INICIADO" -> "TERMINADO"
-            else -> "TERMINADO" // Si ya es TERMINADO, permanece igual
+            else -> "TERMINADO"
         }
         tvEstadoCambio.text = siguienteEstado
 
-        // Crear el AlertDialog
         val dialog = android.app.AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .setCancelable(false)
@@ -184,7 +206,6 @@ class TicketDetailFragment : Fragment() {
 
         btnCancelar.setOnClickListener { dialog.dismiss() }
         btnConfirmar.setOnClickListener {
-            // Llama al método de tu viewModel para cambiar el estado
             viewModel.cambiarEstadoTicket(ticket.id ?: "", comentario = "Se ha actulizado el estado del ticket")
             dialog.dismiss()
         }

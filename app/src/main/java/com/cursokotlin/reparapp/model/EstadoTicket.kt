@@ -17,9 +17,10 @@ data class EstadoTicket(
     @get:PropertyName("comentario") @set:PropertyName("comentario")
     var comentario: String = "",
 
+    // NOMBRE DEL CAMPO Y VARIABLE IGUALES, Y SOLO 'var fecha_creacion'
     @ServerTimestamp
     @get:PropertyName("fecha_creacion") @set:PropertyName("fecha_creacion")
-    var createAt: Date? = null
+    var fecha_creacion: Date? = null
 ) {
     constructor() : this(null, "", true, "", null)
 }

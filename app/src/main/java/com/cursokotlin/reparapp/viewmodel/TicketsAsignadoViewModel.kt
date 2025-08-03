@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,7 +34,6 @@ class TicketsAsignadoViewModel @Inject constructor(
     // Flow para el resultado de cambio de estado
     private val _cambiarEstadoResult = MutableStateFlow<ResultState<Unit>>(ResultState.Success(Unit))
     val cambiarEstadoResult: StateFlow<ResultState<Unit>> get() = _cambiarEstadoResult
-
 
     fun getTicketsAsignados(){
         viewModelScope.launch {
@@ -80,5 +80,48 @@ class TicketsAsignadoViewModel @Inject constructor(
             }
         }
     }
+
+    // --- NUEVO: Estado de si se puede revertir ---
+    private val _puedeRevertir = MutableLiveData<Boolean>()
+    val puedeRevertir: LiveData<Boolean> get() = _puedeRevertir
+
+    fun checarSiPuedeRevertir(ticketId: String) {
+        viewModelScope.launch {
+            val estados = ticketManager.obtenerEstados(ticketId)
+            if (estados is Result.Success && estados.data.size >= 2) {
+                val ultimoEstado = estados.data.last()
+                val ahora = Date()
+                val puedeDeshacer = ultimoEstado.fecha_creacion?.let {
+                    ahora.time - it.time < 60 * 60 * 1000
+                } ?: false
+                _puedeRevertir.postValue(puedeDeshacer)
+            } else {
+                _puedeRevertir.postValue(false)
+            }
+        }
+    }
+
+    // --- FIN NUEVO ---
+
+    //Revertir estado
+    private val _revertirEstadoResult = MutableStateFlow<ResultState<Unit>>(ResultState.Loading)
+    val revertirEstadoResult: StateFlow<ResultState<Unit>> get() = _revertirEstadoResult
+
+    fun revertirEstadoTicket(ticketId: String) {
+        viewModelScope.launch {
+            _revertirEstadoResult.value = ResultState.Loading
+            when(val result = ticketManager.revertirEstadoTicket(ticketId)) {
+                is Result.Success -> _revertirEstadoResult.value = ResultState.Success(Unit)
+                is Result.Failure -> _revertirEstadoResult.value = ResultState.Error(result.error.message.toString())
+                else -> {}
+            }
+        }
+    }
+
+    fun setRevertirEstadoIdle() {
+        _revertirEstadoResult.value = ResultState.Loading
+    }
+
+
 
 }
