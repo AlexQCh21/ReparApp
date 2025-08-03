@@ -55,9 +55,9 @@ class MyTicketsFragment : Fragment(),TicketListener {
 
     private fun eventsListeners(){
         //Boton para regresar a la vista anterior
-        binding.imgFlechaBack.setOnClickListener{
-            findNavController().navigateUp()
-        }
+//        binding.imgFlechaBack.setOnClickListener{
+//            findNavController().navigateUp()
+//        }
 
         binding.imgFilter.setOnClickListener {
             mostrarDialogFiltro()

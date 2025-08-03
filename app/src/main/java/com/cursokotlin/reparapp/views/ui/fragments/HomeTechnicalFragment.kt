@@ -17,6 +17,7 @@ import com.cursokotlin.reparapp.model.BaseConocimiento
 import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.viewmodel.BaseConocimientoViewModel
+import com.cursokotlin.reparapp.viewmodel.NotificationViewModel
 import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoAdapter
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
@@ -29,6 +30,7 @@ class HomeTechnicalFragment : Fragment(), TicketListener, BaseConocimientoListen
     private lateinit var binding: FragmentHomeTechnicalBinding
     private val viewModel: TicketsAsignadoViewModel by viewModels()
     private lateinit var ticketAdapter: TicketAdapter
+    private val viewModelNotify: NotificationViewModel by viewModels()
 
     private val viewModelBase: BaseConocimientoViewModel by viewModels()
     private lateinit var baseConocimientoAdapter: BaseConocimientoAdapter
@@ -83,6 +85,15 @@ class HomeTechnicalFragment : Fragment(), TicketListener, BaseConocimientoListen
         }
 
         viewModelBase.getBaseConocimientoClient()
+
+        //Notificacion
+        viewModelNotify.notificaciones.observe(viewLifecycleOwner) { notificaciones ->
+            if(notificaciones.size > 0){
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_act)
+            }else{
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_des)
+            }
+        }
     }
 
     private fun initComponents(){
@@ -102,14 +113,17 @@ class HomeTechnicalFragment : Fragment(), TicketListener, BaseConocimientoListen
 
             // Aquí puedes actualizar tu UI con los valores
 
-            binding.imgUsuarioNotificacion.setOnClickListener {
-                findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
-            }
+
+        }
+
+        binding.imgUsuarioNotificacion.setOnClickListener {
+            findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
         }
 
         binding.tvVerMas.setOnClickListener {
             findNavController().navigate(R.id.action_homeTechnicalFragment_to_baseConocimientoFragment)
         }
+
     }
 
     private fun showPerfilTech(){

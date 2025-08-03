@@ -12,6 +12,7 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentHomeUserBinding
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.viewmodel.HomeUserViewModel
+import com.cursokotlin.reparapp.viewmodel.NotificationViewModel
 import com.cursokotlin.reparapp.views.adapter.DeviceAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketListener
@@ -24,6 +25,7 @@ class HomeClientFragment : Fragment(), TicketListener {
     private lateinit var ticketAdapter: TicketAdapter
     private lateinit var dispositivoAdapter: DeviceAdapter
     private val viewModel:HomeUserViewModel by viewModels()
+    private val viewModelNotify: NotificationViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -72,6 +74,15 @@ class HomeClientFragment : Fragment(), TicketListener {
         }
 
         viewModel.getDispositivosClient()
+
+        //Notificacion
+        viewModelNotify.notificaciones.observe(viewLifecycleOwner) { notificaciones ->
+            if(notificaciones.size > 0){
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_act)
+            }else{
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_des)
+            }
+        }
 
     }
 
