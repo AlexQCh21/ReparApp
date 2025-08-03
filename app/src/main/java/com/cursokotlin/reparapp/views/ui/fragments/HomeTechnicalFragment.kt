@@ -12,6 +12,7 @@ import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentHomeTechnicalBinding
 import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
+import com.cursokotlin.reparapp.viewmodel.NotificationViewModel
 import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
 import com.cursokotlin.reparapp.views.adapter.TicketAdapter
 import com.cursokotlin.reparapp.views.adapter.TicketListener
@@ -22,6 +23,7 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
     private lateinit var binding: FragmentHomeTechnicalBinding
     private val viewModel: TicketsAsignadoViewModel by viewModels()
     private lateinit var ticketAdapter: TicketAdapter
+    private val viewModelNotify: NotificationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,15 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
         }
 
         viewModel.getTicketsAsignados()
+
+        //Notificacion
+        viewModelNotify.notificaciones.observe(viewLifecycleOwner) { notificaciones ->
+            if(notificaciones.size > 0){
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_act)
+            }else{
+                binding.imgUsuarioNotificacion.setImageResource(R.drawable.icon_noti_des)
+            }
+        }
     }
 
     private fun initComponents(){
@@ -80,10 +91,13 @@ class HomeTechnicalFragment : Fragment(), TicketListener {
 
             // Aquí puedes actualizar tu UI con los valores
 
-            binding.imgUsuarioNotificacion.setOnClickListener {
-                findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
-            }
+
         }
+
+        binding.imgUsuarioNotificacion.setOnClickListener {
+            findNavController().navigate(R.id.action_homeTechnicalFragment_to_notificationFragment)
+        }
+
     }
 
     private fun showPerfilTech(){
