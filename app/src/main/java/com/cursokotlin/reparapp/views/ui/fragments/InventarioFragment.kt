@@ -1,6 +1,8 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentInventoryBinding
+import com.cursokotlin.reparapp.model.Componente
 import com.cursokotlin.reparapp.viewmodel.ComponenteViewModel
 import com.cursokotlin.reparapp.viewmodel.LocalViewModel
 import com.cursokotlin.reparapp.views.adapter.ComponenteAdapter
@@ -40,10 +43,32 @@ class InventarioFragment : Fragment() {
         binding.rvListaPiezasDisponibles.layoutManager = LinearLayoutManager(requireContext())
         binding.rvListaPiezasDisponibles.adapter = componenteAdapter
 
+        var listaCompleta: List<Componente> = emptyList()
+
         viewModel.componente.observe(viewLifecycleOwner) { componentes ->
+            listaCompleta = componentes
             componenteAdapter.updateList(componentes)
         }
 
+        // Agrega el filtro de búsqueda aquí
+        binding.etBuscarRefacciones.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val textoFiltrado = s.toString().trim()
+                val listaFiltrada = if (textoFiltrado.isEmpty()) {
+                    listaCompleta
+                } else {
+                    listaCompleta.filter {
+                        it.nombre.contains(textoFiltrado, ignoreCase = true)
+                    }
+                }
+                componenteAdapter.updateList(listaFiltrada)
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
         viewModel.getComponentes()
     }
+
 }
