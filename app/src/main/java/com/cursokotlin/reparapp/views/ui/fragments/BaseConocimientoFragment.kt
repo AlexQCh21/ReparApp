@@ -1,6 +1,7 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -76,11 +78,21 @@ class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
         position: Int
     ) {
         val url = baseConocimiento.enlace
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context?.let {
-            ContextCompat.startActivity(it, intent, null)
+
+        if (!url.isNullOrBlank() && url.startsWith("http", ignoreCase = true)) {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            try {
+                context?.let {
+                    ContextCompat.startActivity(it, intent, null)
+                }
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(context, "No hay app disponible para abrir el enlace.", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(context, "Enlace inválido o no disponible.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
 }

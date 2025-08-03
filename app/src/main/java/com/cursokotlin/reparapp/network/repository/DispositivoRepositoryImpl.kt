@@ -23,6 +23,10 @@ class DispositivoRepositoryImpl @Inject constructor(
         return dispositivoManager.getAll()
     }
 
+    override suspend fun getAllDispositivosLibres(): Result<List<Dispositivo>> {
+        return dispositivoManager.getAllDeviceFree()
+    }
+
     override suspend fun changeDispositivo(dispositivoId: String): Result<Dispositivo> {
         TODO("Not yet implemented")
     }

@@ -48,7 +48,7 @@ class ReportarProblemaViewModel @Inject constructor(
 
     private fun obtenerDispositivos() {
         viewModelScope.launch {
-            when (val result = dispositivoRepositoryImpl.getAllDispositivo()) {
+            when (val result = dispositivoRepositoryImpl.getAllDispositivosLibres()) {
                 is Result.Success -> _dispositivos.value = result.data
                 is Result.Failure -> _crearTicketResult.value = ResultState.Error("Error al cargar dispositivos: ${result.error.message}")
                 else -> {}

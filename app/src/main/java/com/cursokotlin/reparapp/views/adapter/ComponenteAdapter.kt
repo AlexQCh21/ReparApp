@@ -17,7 +17,7 @@ class ComponenteAdapter(
 
     inner class ComponenteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titulo: TextView = itemView.findViewById(R.id.tv_titulo)
-        val cantidad: TextView = itemView.findViewById(R.id.tv_unidad_medida)
+        val cantidad: TextView = itemView.findViewById(R.id.tv_cantidad_componente)
         val img: ImageView = itemView.findViewById(R.id.img_refaccion)
     }
 

@@ -1,5 +1,7 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentTicketDetailBinding
+import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.viewmodel.ResultState
 import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
@@ -32,6 +35,8 @@ class TicketDetailFragment : Fragment() {
     private lateinit var binding:FragmentTicketDetailBinding
     private val args: TicketDetailFragmentArgs by navArgs()
     private val viewModel:TicketsAsignadoViewModel by viewModels()
+    private var ticketActual: Ticket? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +55,9 @@ class TicketDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val ticket = args.ticket
+        viewModel.getTicketById(ticket.id ?: "")
         viewModel.getDispositivoTicket(ticket.dispositivoId)
-        initView(ticket)
+        //initView(ticket)
 
         // Observa el resultado del cambio de estado
         viewLifecycleOwner.lifecycleScope.launch {
@@ -75,10 +81,28 @@ class TicketDetailFragment : Fragment() {
         }
 
         viewModel.ticket.observe(viewLifecycleOwner) { ticketActualizado ->
-            binding.tvEstado.text = ticketActualizado.estadoActual
-            // Refresca otros datos si necesitas
+            ticketActual = ticketActualizado
+            actualizarUI(ticketActualizado)
         }
+
+
     }
+
+    private fun actualizarUI(ticket: Ticket) {
+        binding.tvCodigoTicket.text = ticket.id.toString()
+        binding.tvEstado.text = ticket.estadoActual
+        binding.tvDescripcionProblema.text = ticket.descripcion
+
+        val fecha = ticket.createAt?.let {
+            SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(it)
+        } ?: "Fecha no disponible"
+
+        val hora = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(ticket.createAt)
+
+        binding.tvFecha.text = fecha
+        binding.tvHora.text = hora.toString()
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -87,8 +111,14 @@ class TicketDetailFragment : Fragment() {
 
     private fun eventListener(){
         binding.fabAgregarTicket.setOnClickListener {
-            mostrarDialogCambioEstado(args.ticket)
+            val ticket = ticketActual ?: return@setOnClickListener
+            if (ticket.estadoActual != Estado.TERMINADO.name) {
+                mostrarDialogCambioEstado(ticket)
+            } else {
+                requireContext().mostrarDialogo(getString(R.string.mensaje_warning_estado))
+            }
         }
+
 
         binding.imgClose.setOnClickListener {
             findNavController().navigateUp()
@@ -170,4 +200,20 @@ class TicketDetailFragment : Fragment() {
 
         dialog.show()
     }
+
+    fun Context.mostrarDialogo(
+        mensaje: String,
+        titulo: String = "Aviso",
+        icono: Int = android.R.drawable.ic_dialog_alert // ícono por defecto de advertencia
+    ) {
+        AlertDialog.Builder(this)
+            .setTitle(titulo)
+            .setMessage(mensaje)
+            .setIcon(icono)
+            .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+            .setCancelable(false)
+            .show()
+    }
+
+
 }

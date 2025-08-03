@@ -27,7 +27,7 @@ class TicketManager @Inject constructor(
 
     companion object {
         private const val TAG = "TicketManager"
-        private const val COLLECTION_TICKETS = "tickets"
+        const val COLLECTION_TICKETS = "tickets"
         private const val SUBCOLLECTION_ESTADOS = "estados"
     }
 
@@ -284,17 +284,26 @@ class TicketManager @Inject constructor(
                     val snapshot = firestore.collection(COLLECTION_TICKETS).get().await()
                     val tickets = snapshot.toObjects(Ticket::class.java)
 
-                    val ticketsPorTecnico = tickets.groupingBy { it.tecnico }.eachCount()
+                    // Filtra solo tickets con estado "ASIGNADO" o "INICIADO"
+                    val ticketsAsignadosOIniciados = tickets.filter {
+                        it.estadoActual == Estado.ASIGNADO.toString() || it.estadoActual == Estado.INICIADO.toString()
+                    }
 
+                    // Cuenta cuántos tickets de estos tiene cada técnico
+                    val cargaPorTecnico = ticketsAsignadosOIniciados.groupingBy { it.tecnico }.eachCount()
+
+                    // Encuentra la carga mínima entre los técnicos
                     val cargaMinima = tecnicos.minOf { tecnico ->
-                        ticketsPorTecnico[tecnico.id] ?: 0
+                        cargaPorTecnico[tecnico.id] ?: 0
                     }
 
-                    val tecnicosDisponibles = tecnicos.filter {
-                        (ticketsPorTecnico[it.id] ?: 0) == cargaMinima
+                    // Filtra los técnicos que tienen esa carga mínima
+                    val tecnicosConMenorCarga = tecnicos.filter {
+                        (cargaPorTecnico[it.id] ?: 0) == cargaMinima
                     }
 
-                    val tecnicoAsignado = tecnicosDisponibles.random()
+                    // Elige aleatoriamente entre los que tienen menor carga
+                    val tecnicoAsignado = tecnicosConMenorCarga.random()
                     ticket.tecnico = tecnicoAsignado.id
 
                     Result.Success(Unit)
@@ -305,6 +314,41 @@ class TicketManager @Inject constructor(
             }
         }
     }
+
+
+//    suspend fun asignarTicket(ticket: Ticket): Result<Unit> {
+//        // Evita reasignar si ya tiene técnico
+//        if (!ticket.tecnico.isNullOrBlank()) return Result.Success(Unit)
+//
+//        return userManager.getAllTecnicos().flatMap { tecnicos ->
+//            if (tecnicos.isEmpty()) {
+//                Result.Failure(AuthError.UnknownError("No hay técnicos disponibles"))
+//            } else {
+//                try {
+//                    val snapshot = firestore.collection(COLLECTION_TICKETS).get().await()
+//                    val tickets = snapshot.toObjects(Ticket::class.java)
+//
+//                    val ticketsPorTecnico = tickets.groupingBy { it.tecnico }.eachCount()
+//
+//                    val cargaMinima = tecnicos.minOf { tecnico ->
+//                        ticketsPorTecnico[tecnico.id] ?: 0
+//                    }
+//
+//                    val tecnicosDisponibles = tecnicos.filter {
+//                        (ticketsPorTecnico[it.id] ?: 0) == cargaMinima
+//                    }
+//
+//                    val tecnicoAsignado = tecnicosDisponibles.random()
+//                    ticket.tecnico = tecnicoAsignado.id
+//
+//                    Result.Success(Unit)
+//                } catch (e: Exception) {
+//                    Log.e(TAG, "Error al asignar ticket", e)
+//                    Result.Failure(AuthError.DatabaseError(e))
+//                }
+//            }
+//        }
+//    }
 
     fun notificar(ticket: Ticket, asunto: String) {
         val notificacion = Notificacion(
