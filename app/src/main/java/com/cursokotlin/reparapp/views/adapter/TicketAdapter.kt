@@ -15,9 +15,9 @@ class TicketAdapter(
 ) : RecyclerView.Adapter<TicketAdapter.TicketViewHolder>() {
 
     inner class TicketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val idTicket: TextView = itemView.findViewById(R.id.tv_nombre_ticket)
-        val fechaTicket: TextView = itemView.findViewById(R.id.etFecha)
-        //val btnVerDetalle: Button = itemView.findViewById(R.id.btn_ticket_ver_detalle)
+        val idTicket: TextView = itemView.findViewById(R.id.ticket_codigo)
+        val fechaTicket: TextView = itemView.findViewById(R.id.ticket_fecha_reporte)
+        val btnVerDetalle: Button = itemView.findViewById(R.id.btn_ticket_ver_detalle)
 
         init {
                itemView.setOnClickListener {
@@ -31,15 +31,19 @@ class TicketAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_ticket_prueba, parent, false)
+            .inflate(R.layout.item_ticket, parent, false)
         return TicketViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TicketViewHolder, position: Int) {
         val ticket = listaTickets[position]
+
         holder.fechaTicket.text = ticket.createAt?.toString() ?: "Fecha no disponible"
-        val idTicketShort = ticket.id
-        holder.idTicket.text = "TIC-$idTicketShort..."
+        holder.idTicket.text = "TIC-${ticket.id}..."
+
+        holder.btnVerDetalle.setOnClickListener {
+            ticketListener.onTicketClicked(ticket, position)
+        }
     }
 
     override fun getItemCount(): Int = listaTickets.size

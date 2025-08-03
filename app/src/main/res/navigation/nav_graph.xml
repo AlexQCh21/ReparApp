@@ -103,7 +103,7 @@
             tools:layout="@layout/fragment_home_technical" >
             <action
                 android:id="@+id/action_homeTechnicalFragment_to_myTicketsFragment"
-                app:destination="@id/myTicketsFragment" />
+                app:destination="@id/reportFragment" />
             <action
                 android:id="@+id/action_homeTechnicalFragment_to_profileFragment"
                 app:destination="@id/profileFragment" />
@@ -165,12 +165,12 @@
             tools:layout="@layout/fragment_report_problema_tecnico" />
 
         <fragment
-            android:id="@+id/myTicketsFragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.MyTicketsFragment"
+            android:id="@+id/reportFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.ReportFragment"
             android:label="fragment_my_tickets"
-            tools:layout="@layout/fragment_my_tickets" >
+            tools:layout="@layout/fragment_report" >
             <action
-                android:id="@+id/action_myTicketsFragment_to_ticketDetailFragment"
+                android:id="@+id/action_reportFragment_to_ticketDetailFragment"
                 app:destination="@id/ticketDetailFragment" />
         </fragment>
 
@@ -203,7 +203,7 @@
 
         <fragment
             android:id="@+id/baseConocimientoFragment"
-            android:name="com.cursokotlin.reparapp.views.ui.fragments.BaseConocimientoFragment"
+            android:name="com.cursokotlin.reparapp.views.ui.fragments.KnowledgeBaseFragment"
             android:label="BaseConocimientoFragment"
             tools:layout="@layout/fragment_knowledge_base" />
 

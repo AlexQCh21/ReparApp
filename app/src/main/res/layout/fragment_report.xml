@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.ui.fragments.MyTicketsFragment">
+    tools:context=".views.ui.fragments.ReportFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
@@ -57,6 +57,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="20dp"
-        tools:listitem="@layout/item_ticket_prueba" />
+        tools:listitem="@layout/item_ticket" />
 
 </LinearLayout>

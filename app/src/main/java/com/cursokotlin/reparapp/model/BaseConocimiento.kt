@@ -25,8 +25,8 @@ data class BaseConocimiento(
     @JvmField @PropertyName("titulo")
     var titulo: String = "",
 
-    @JvmField @PropertyName("enlace")
-    var enlace: String = "",
+    @JvmField @PropertyName("imagen")
+    var imagen: String = "",
 
 ){
     constructor() : this("","", "",null,"", "", "")

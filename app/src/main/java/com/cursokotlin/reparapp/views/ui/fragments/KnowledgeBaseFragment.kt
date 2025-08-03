@@ -1,8 +1,6 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,24 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentKnowledgeBaseBinding
-import com.cursokotlin.reparapp.databinding.FragmentUbicationBinding
 import com.cursokotlin.reparapp.model.BaseConocimiento
 import com.cursokotlin.reparapp.viewmodel.BaseConocimientoViewModel
-import com.cursokotlin.reparapp.viewmodel.LocalViewModel
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoAdapter
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
-import com.cursokotlin.reparapp.views.adapter.LocalAdapter
 import kotlin.getValue
 import androidx.core.net.toUri
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
+class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
 
     private lateinit var binding: FragmentKnowledgeBaseBinding
     private val viewModel: BaseConocimientoViewModel by viewModels()
@@ -75,12 +68,12 @@ class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
         baseConocimiento: BaseConocimiento,
         position: Int
     ) {
-        val url = baseConocimiento.enlace
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context?.let {
-            ContextCompat.startActivity(it, intent, null)
+        val tecnicoId = baseConocimiento.tecnico_id
+        viewModel.getNameTech(tecnicoId) { username ->
+            val dialog = KnowledgeDetailDialogFragment(baseConocimiento, username)
+            dialog.show(parentFragmentManager, "detalle_conocimiento")
         }
+
     }
 
 }

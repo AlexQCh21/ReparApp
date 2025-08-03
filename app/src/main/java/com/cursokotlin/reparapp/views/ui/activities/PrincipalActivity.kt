@@ -39,7 +39,7 @@ class PrincipalActivity : AppCompatActivity() {
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val navGraph = navController.navInflater.inflate(R.navigation.navigation_graph)
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
         navGraph.setStartDestination(R.id.main_flow)
 
         val mainFlow = navGraph.findNode(R.id.main_flow) as NavGraph

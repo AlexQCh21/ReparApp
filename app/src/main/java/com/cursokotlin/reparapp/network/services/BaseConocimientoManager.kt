@@ -10,6 +10,7 @@ import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import okhttp3.Callback
 import javax.inject.Inject
 
 class BaseConocimientoManager @Inject constructor(
@@ -19,6 +20,7 @@ class BaseConocimientoManager @Inject constructor(
     companion object {
         private const val TAG = "BaseConocimientoManager"
         private const val COLLECTION_CONOCIMENTO = "base_conocimiento"
+        private const val COLLECTION_USUARIO = "usuarios"
     }
 
 
@@ -49,4 +51,19 @@ class BaseConocimientoManager @Inject constructor(
             Result.Failure(e)
         }
     }
+
+    fun getNameTech(tecnicoId: String, callback: (String) -> Unit){
+        firestore.collection(COLLECTION_USUARIO)
+            .document(tecnicoId)
+            .get()
+            .addOnSuccessListener { document ->
+                val nombre = document.getString("username") ?: "Anónimo"
+                callback(nombre)
+            }
+            .addOnFailureListener {
+                callback("Anónimo")
+            }
+    }
+
+
 }

@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cursokotlin.reparapp.R
-import com.cursokotlin.reparapp.databinding.FragmentMyTicketsBinding
+import com.cursokotlin.reparapp.databinding.FragmentReportBinding
 import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.viewmodel.TicketsAsignadoViewModel
@@ -19,8 +18,8 @@ import com.cursokotlin.reparapp.views.adapter.TicketListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MyTicketsFragment : Fragment(),TicketListener {
-    private lateinit var binding: FragmentMyTicketsBinding
+class ReportFragment : Fragment(),TicketListener {
+    private lateinit var binding: FragmentReportBinding
     private val viewModel: TicketsAsignadoViewModel by viewModels()
     private lateinit var ticketAdapter: TicketAdapter
     private var listaCompleta: List<Ticket> = emptyList()
@@ -35,7 +34,7 @@ class MyTicketsFragment : Fragment(),TicketListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentMyTicketsBinding.inflate(inflater,container,false)
+        binding = FragmentReportBinding.inflate(inflater,container,false)
         eventsListeners()
         return binding.root
     }
@@ -66,7 +65,7 @@ class MyTicketsFragment : Fragment(),TicketListener {
     }
 
     override fun onTicketClicked(ticket: Ticket, position: Int) {
-        val action = MyTicketsFragmentDirections.actionMyTicketsFragmentToTicketDetailFragment(ticket)
+        val action = ReportFragmentDirections.actionReportFragmentToTicketDetailFragment(ticket)
         findNavController().navigate(action)
     }
 

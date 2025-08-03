@@ -40,8 +40,11 @@
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/img_close"
             app:layout_constraintTop_toTopOf="parent" />
+        <!-- Caja de estado destacada -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -69,10 +72,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Datos de la Transaccion"
+                    android:text="Datos del Ticket"
                     android:textSize="20sp"
                     android:textColor="#2C2C2C"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_estado_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ASIGNADO"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/bg_estado_asignado"/>
 
 
             </LinearLayout>
@@ -163,25 +177,25 @@
                 android:layout_marginTop="8dp"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="Estado:"
-                    android:textColor="#3D3D3D"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:text="Estado:"-->
+<!--                    android:textColor="#3D3D3D"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textSize="18sp"-->
+<!--                    />-->
 
-                <TextView
-                    android:id="@+id/tv_estado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Iniciado"
-                    android:textStyle="bold"
-                    android:textColor="#55B85A"
-                    android:textAllCaps="true"
-                    android:textSize="18sp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_estado"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Iniciado"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="#55B85A"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textSize="18sp" />-->
             </LinearLayout>
 
             <View
@@ -341,19 +355,32 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_agregar_ticket"
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab_agregar_ticket"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/icon_edit"-->
+<!--        app:backgroundTint="#2E47A4"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:layout_marginBottom="70dp"-->
+<!--        app:fabSize="normal"-->
+<!--        android:contentDescription="@string/agregar_ticket"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:tint="@android:color/white" />-->
+    <!-- Botón para cambiar de estado -->
+    <Button
+        android:id="@+id/btn_cambiar_estado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_edit"
-        app:backgroundTint="#2E47A4"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="70dp"
-        app:fabSize="normal"
-        android:contentDescription="@string/agregar_ticket"
+        android:text="Iniciar Ticket"
+        android:layout_margin="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="#2E47A4"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 

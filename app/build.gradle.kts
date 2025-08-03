@@ -87,6 +87,7 @@ dependencies {
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
 
     //Maps
     implementation("com.google.android.gms:play-services-maps:18.2.0")
