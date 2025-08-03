@@ -68,7 +68,11 @@ class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        binding.imgFlechaBack.setOnClickListener {
+        binding.imgClose.setOnClickListener {
+            findNavController().navigate(R.id.action_baseConocimientoFragment_to_homeTechnicalFragment)
+        }
+
+        binding.imgClose.setOnClickListener {
             findNavController().popBackStack()
         }
     }

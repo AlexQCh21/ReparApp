@@ -205,13 +205,20 @@
             android:id="@+id/baseConocimientoFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.KnowledgeBaseFragment"
             android:label="BaseConocimientoFragment"
-            tools:layout="@layout/fragment_knowledge_base" />
+            tools:layout="@layout/fragment_knowledge_base"
+            >
+            <action
+                android:id="@+id/action_baseConocimientoFragment_to_homeTechnicalFragment"
+                app:destination="@id/homeTechnicalFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/disponibilidadFragment"
             android:name="com.cursokotlin.reparapp.views.ui.fragments.DisponibilidadFragment"
             android:label="DisponibilidadFragment"
-            tools:layout="@layout/fragment_profile_tech_detail_dialog" />
+            tools:layout="@layout/fragment_profile_tech_detail_dialog">
+
+        </fragment>
 
         <fragment
             android:id="@+id/reportarProblemaFragment"
