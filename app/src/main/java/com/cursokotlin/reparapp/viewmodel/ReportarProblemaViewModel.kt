@@ -9,6 +9,7 @@ import com.cursokotlin.reparapp.network.repository.AuthRepositoryImpl
 import com.cursokotlin.reparapp.network.repository.DispositivoRepositoryImpl
 import com.cursokotlin.reparapp.network.repository.TicketRepositoryImpl
 import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.network.storage.TicketStorageManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -99,7 +100,7 @@ class ReportarProblemaViewModel @Inject constructor(
 
                     val estadoInicial = EstadoTicket(
                         id = null, // Firestore lo asigna
-                        estado = "Pendiente",
+                        estado = Estado.ASIGNADO.toString(),
                         automatico = true,
                         comentario = "Ticket creado por el usuario"
                     )

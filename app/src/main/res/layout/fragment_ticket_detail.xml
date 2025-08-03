@@ -369,6 +369,7 @@
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:tint="@android:color/white" />-->
     <!-- Botón para cambiar de estado -->
+
     <Button
         android:id="@+id/btn_cambiar_estado"
         android:layout_width="wrap_content"
@@ -381,6 +382,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnRevertirEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deshacer Cambio"
+        android:layout_margin="16dp"
+        android:textAllCaps="false"
+        android:backgroundTint="#B53D2B"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_cambiar_estado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
 
 
 

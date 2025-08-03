@@ -29,7 +29,6 @@ class ReportDetailUserFragment : Fragment() {
     ): View {
         binding = FragmentReportDetailUserBinding.inflate(inflater, container, false)
         eventListeners()
-        ocultarMBotoomNavigationView()
         return binding.root
     }
 
@@ -55,6 +54,11 @@ class ReportDetailUserFragment : Fragment() {
                 binding.tvEstado.text = it.estadoActual
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ocultarMBotoomNavigationView()
     }
 
     private fun eventListeners(){
