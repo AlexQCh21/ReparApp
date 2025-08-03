@@ -18,13 +18,18 @@ import com.cursokotlin.reparapp.views.adapter.BaseConocimientoAdapter
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
 import kotlin.getValue
 import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
+import com.cursokotlin.reparapp.R
+import com.cursokotlin.reparapp.databinding.FragmentMapLocalBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
 
-    private lateinit var binding: FragmentKnowledgeBaseBinding
+    private var _binding: FragmentKnowledgeBaseBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: BaseConocimientoViewModel by viewModels()
     private lateinit var baseConocimientoAdapter: BaseConocimientoAdapter
 
@@ -37,7 +42,7 @@ class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentKnowledgeBaseBinding.inflate(inflater,container,false)
+        _binding = FragmentKnowledgeBaseBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -62,6 +67,15 @@ class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        binding.imgFlechaBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ocultarMBotoomNavigationView()
     }
 
     override fun onBaseConocimientoClicked(
@@ -74,6 +88,20 @@ class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
             dialog.show(parentFragmentManager, "detalle_conocimiento")
         }
 
+    }
+
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding =null
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
     }
 
 }
