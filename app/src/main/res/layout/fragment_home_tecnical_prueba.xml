@@ -317,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="10dp"
                     tools:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_ticket_card"
+                    tools:listitem="@layout/item_ticket"
                     tools:orientation="horizontal" />
             </androidx.cardview.widget.CardView>
 
