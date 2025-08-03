@@ -39,7 +39,7 @@ class NotificationFragment : Fragment(),NotificacionListener {
         binding = FragmentNotificationBinding.inflate(inflater, container, false)
         eventListeners()
         initValueComponents()
-        ocultarMBotoomNavigationView()
+//        ocultarMBotoomNavigationView()
         return binding.root
     }
 
@@ -61,24 +61,22 @@ class NotificationFragment : Fragment(),NotificacionListener {
     }
 
     private fun eventListeners(){
-        binding.imgFlechaBack.setOnClickListener {
+        binding.imgClose.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
-    private fun ocultarMBotoomNavigationView(){
-        // Oculta el BottomNavigationView
-        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
-        bottomNav?.visibility = View.GONE
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        // Muestra el BottomNavigationView de nuevo
-        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
-        bottomNav?.visibility = View.VISIBLE
-    }
+//    private fun ocultarMBotoomNavigationView(){
+//        // Oculta el BottomNavigationView
+//        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+//        bottomNav?.visibility = View.GONE
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+//        bottomNav?.visibility = View.VISIBLE
+//    }
 
     override fun onTicketClicked(notificacion: Notificacion, position: Int) {
 

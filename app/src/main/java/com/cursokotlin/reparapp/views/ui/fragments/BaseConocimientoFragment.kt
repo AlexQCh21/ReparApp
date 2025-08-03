@@ -25,6 +25,7 @@ import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
 import com.cursokotlin.reparapp.views.adapter.LocalAdapter
 import kotlin.getValue
 import androidx.core.net.toUri
+import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -69,6 +70,10 @@ class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        binding.imgClose.setOnClickListener {
+            findNavController().navigate(R.id.action_baseConocimientoFragment_to_homeTechnicalFragment)
+        }
     }
 
     override fun onBaseConocimientoClicked(

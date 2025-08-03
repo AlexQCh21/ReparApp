@@ -1,6 +1,7 @@
 package com.cursokotlin.reparapp.views.ui.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -57,8 +58,25 @@ class PrincipalActivity : AppCompatActivity() {
 
         navController.graph = navGraph
 
-        // ESTA ES LA FORMA CORRECTA
         binding.bnvNavegacionPrincipal.setupWithNavController(navController)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.baseConocimientoFragment -> {
+                    binding.bnvNavegacionPrincipal.visibility = View.GONE
+                }
+
+                R.id.notificationFragment -> {
+                    binding.bnvNavegacionPrincipal.visibility = View.GONE
+                }
+
+                else -> {
+                    binding.bnvNavegacionPrincipal.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
+
+
 }
