@@ -39,7 +39,7 @@ class ComponenteAdapter(
         Glide.with(holder.img.context)
             .load(item.url_foto)
             .placeholder(R.drawable.ic_ticket_nav)
-            .error(R.drawable.ic_cancel_box)
+            .error(R.drawable.ic_ticket_nav)
             .into(holder.img)
     }
 
