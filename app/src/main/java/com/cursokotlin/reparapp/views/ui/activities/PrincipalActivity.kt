@@ -28,9 +28,16 @@ class PrincipalActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bnvNavegacionPrincipal) { view, insets ->
+            val navInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, 0, 0, 0) // Elimina cualquier padding automático
+            insets
+        }
+
 
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.black)
 
@@ -40,7 +47,7 @@ class PrincipalActivity : AppCompatActivity() {
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val navGraph = navController.navInflater.inflate(R.navigation.navigation_graph)
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
         navGraph.setStartDestination(R.id.main_flow)
 
         val mainFlow = navGraph.findNode(R.id.main_flow) as NavGraph

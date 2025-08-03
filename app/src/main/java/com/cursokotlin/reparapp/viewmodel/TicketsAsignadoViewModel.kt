@@ -59,7 +59,7 @@ class TicketsAsignadoViewModel @Inject constructor(
     fun cambiarEstadoTicket(ticketId: String, comentario: String = "") {
         viewModelScope.launch {
             _cambiarEstadoResult.value = ResultState.Loading
-            when(val result = ticketManager.avanzarEstadoTicket(ticketId, comentario)) {
+            when(val result = ticketManager.avanzarEstadoTicket(ticketId)) {
                 is Result.Success -> _cambiarEstadoResult.value = ResultState.Success(Unit)
                 is Result.Failure -> _cambiarEstadoResult.value =
                     ResultState.Error("Error al cambiar estado: ${result.error.message}")

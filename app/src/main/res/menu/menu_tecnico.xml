@@ -6,14 +6,14 @@
         android:title="Inicio" />
 
     <item
-        android:id="@+id/myTicketsFragment"
+        android:id="@+id/reportarProblemaTecnicoFragment"
         android:icon="@drawable/ic_ticket_black"
-        android:title="Tickets" />
+        android:title="Ticket" />
 
     <item
-        android:id="@+id/reportarProblemaTecnicoFragment"
-        android:icon="@drawable/ic_add_white"
-        android:title="Añadir ticket" />
+        android:id="@+id/reportFragment"
+        android:icon="@drawable/icon_build_prueba"
+        android:title="Reporte" />
 
     <item
         android:id="@+id/inventarioFragment"

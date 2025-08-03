@@ -10,4 +10,5 @@ interface DispositivoRepository {
     suspend fun getDispositivo(dispositivoId: String): Result<Dispositivo>
     suspend fun changeDispositivo(dispositivoId: String): Result<Dispositivo>
     suspend fun getAllDispositivo(): Result<List<Dispositivo>>
+    suspend fun getAllDispositivosLibres(): Result<List<Dispositivo>>
 }

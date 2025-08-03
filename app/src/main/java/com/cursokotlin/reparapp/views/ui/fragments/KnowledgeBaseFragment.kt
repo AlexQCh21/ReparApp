@@ -1,8 +1,6 @@
 package com.cursokotlin.reparapp.views.ui.fragments
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,27 +10,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.databinding.FragmentKnowledgeBaseBinding
-import com.cursokotlin.reparapp.databinding.FragmentUbicationBinding
 import com.cursokotlin.reparapp.model.BaseConocimiento
 import com.cursokotlin.reparapp.viewmodel.BaseConocimientoViewModel
-import com.cursokotlin.reparapp.viewmodel.LocalViewModel
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoAdapter
 import com.cursokotlin.reparapp.views.adapter.BaseConocimientoListener
-import com.cursokotlin.reparapp.views.adapter.LocalAdapter
 import kotlin.getValue
 import androidx.core.net.toUri
-import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
+import com.cursokotlin.reparapp.R
+import com.cursokotlin.reparapp.databinding.FragmentMapLocalBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
+class KnowledgeBaseFragment : Fragment(), BaseConocimientoListener {
 
-    private lateinit var binding: FragmentKnowledgeBaseBinding
+    private var _binding: FragmentKnowledgeBaseBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: BaseConocimientoViewModel by viewModels()
     private lateinit var baseConocimientoAdapter: BaseConocimientoAdapter
 
@@ -45,7 +42,7 @@ class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentKnowledgeBaseBinding.inflate(inflater,container,false)
+        _binding = FragmentKnowledgeBaseBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -74,18 +71,41 @@ class BaseConocimientoFragment : Fragment(), BaseConocimientoListener {
         binding.imgClose.setOnClickListener {
             findNavController().navigate(R.id.action_baseConocimientoFragment_to_homeTechnicalFragment)
         }
+
+        binding.imgClose.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ocultarMBotoomNavigationView()
     }
 
     override fun onBaseConocimientoClicked(
         baseConocimiento: BaseConocimiento,
         position: Int
     ) {
-        val url = baseConocimiento.enlace
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context?.let {
-            ContextCompat.startActivity(it, intent, null)
+        val tecnicoId = baseConocimiento.tecnico_id
+        viewModel.getNameTech(tecnicoId) { username ->
+            val dialog = KnowledgeDetailDialogFragment(baseConocimiento, username)
+            dialog.show(parentFragmentManager, "detalle_conocimiento")
         }
+
+    }
+
+    private fun ocultarMBotoomNavigationView(){
+        // Oculta el BottomNavigationView
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.GONE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding =null
+        // Muestra el BottomNavigationView de nuevo
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bnv_navegacion_principal)
+        bottomNav?.visibility = View.VISIBLE
     }
 
 }

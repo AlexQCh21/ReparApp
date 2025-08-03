@@ -29,7 +29,7 @@ import java.util.Locale
 
 @AndroidEntryPoint
 class TicketDetailFragment : Fragment() {
-    private lateinit var binding:FragmentTicketDetailBinding
+    private lateinit var binding: FragmentTicketDetailBinding
     private val args: TicketDetailFragmentArgs by navArgs()
     private val viewModel:TicketsAsignadoViewModel by viewModels()
 
@@ -75,7 +75,7 @@ class TicketDetailFragment : Fragment() {
         }
 
         viewModel.ticket.observe(viewLifecycleOwner) { ticketActualizado ->
-            binding.tvEstado.text = ticketActualizado.estadoActual
+            actualizarEstadoVisual(ticketActualizado.estadoActual ?: "ASIGNADO")
             // Refresca otros datos si necesitas
         }
     }
@@ -86,7 +86,7 @@ class TicketDetailFragment : Fragment() {
     }
 
     private fun eventListener(){
-        binding.fabAgregarTicket.setOnClickListener {
+        binding.btnCambiarEstado.setOnClickListener {
             mostrarDialogCambioEstado(args.ticket)
         }
 
@@ -103,7 +103,7 @@ class TicketDetailFragment : Fragment() {
         val hora = SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(ticket.createAt)
 
         binding.tvCodigoTicket.text = ticket.id.toString()
-        binding.tvEstado.text = ticket.estadoActual
+        actualizarEstadoVisual(ticket.estadoActual ?: "ASIGNADO")
         binding.tvDescripcionProblema.text = ticket.descripcion
         binding.tvFecha.text = fecha
         binding.tvHora.text = hora.toString()
@@ -116,7 +116,7 @@ class TicketDetailFragment : Fragment() {
 
             Glide.with(requireContext())
                 .load(dispositivo.ruta)
-                .placeholder(R.drawable.icon_map)
+                .placeholder(R.drawable.icon_device_text)
                 .into(binding.imgDispositivo)
         }
     }
@@ -135,6 +135,27 @@ class TicketDetailFragment : Fragment() {
         bottomNav?.visibility = View.VISIBLE
     }
 
+    private fun actualizarEstadoVisual(estado: String){
+        val contexto = binding.root.context
+
+        val (texto, fondo) = when (estado.uppercase(Locale.getDefault())){
+            "ASIGNADO" -> Pair("ASIGNADO", R.drawable.bg_estado_asignado)
+            "INICIADO" -> Pair("INICIADO", R.drawable.bg_estado_iniciado)
+            "TERMINADO" -> Pair("TERMINADO", R.drawable.bg_estado_terminado)
+            else -> Pair(estado, R.drawable.bg_estado_asignado)
+        }
+
+        binding.tvEstadoTicket.text = texto
+        binding.tvEstadoTicket.setBackgroundResource(fondo)
+
+        binding.btnCambiarEstado.text = when(estado){
+            "ASIGNADO" -> "Iniciar Ticket"
+            "INICIADO" -> "Finalizar Ticket"
+            "TERMINADO" -> "Ticket Terminado"
+            else -> "Actualizar Estado"
+        }
+        binding.btnCambiarEstado.isEnabled = estado != "TERMINADO"
+    }
     private fun mostrarDialogCambioEstado(ticket: Ticket) {
         // Inflar la vista personalizada
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.fragmen_estado_popup, null)

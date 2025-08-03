@@ -141,12 +141,12 @@ class HomeTechnicalFragment : Fragment(), TicketListener, BaseConocimientoListen
         baseConocimiento: BaseConocimiento,
         position: Int
     ) {
-        val url = baseConocimiento.enlace
-        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context?.let {
-            ContextCompat.startActivity(it, intent, null)
-        }
+//        val url = baseConocimiento.enlace
+//        val intent = Intent(Intent.ACTION_VIEW, url.toUri())
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        context?.let {
+//            ContextCompat.startActivity(it, intent, null)
+//        }
     }
 
 }

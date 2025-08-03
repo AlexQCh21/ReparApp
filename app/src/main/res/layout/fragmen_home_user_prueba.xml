@@ -217,7 +217,7 @@
                     android:layout_height="240dp"
                     android:paddingHorizontal="10dp"
                     tools:layoutManager="LinearLayoutManager"
-                    tools:listitem="@layout/item_ticket_prueba"
+                    tools:listitem="@layout/item_ticket_card"
                     tools:orientation="vertical" />
             </androidx.cardview.widget.CardView>
             <androidx.constraintlayout.widget.ConstraintLayout
