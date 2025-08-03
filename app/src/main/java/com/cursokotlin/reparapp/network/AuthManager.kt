@@ -13,6 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import com.cursokotlin.reparapp.domain.model.Result
 import com.facebook.AccessToken
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
@@ -159,28 +160,27 @@ class AuthManager @Inject constructor(
         return try {
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             val authResult = firebaseAuth.signInWithCredential(credential).await()
-            val user = authResult.user
+            val user = authResult.user ?: return Result.Failure(AuthError.UnknownError("Usuario nulo"))
 
-            if (user != null) {
-                val email = user.email ?: return Result.Failure(AuthError.UnknownError("No se pudo obtener el email del usuario"))
+            val email = user.email ?: return Result.Failure(AuthError.UnknownError("No se pudo obtener el email del usuario"))
 
-                // Verificar si ya existe un usuario en la colección "usuarios" con ese email
-                val userExists = firestoreManager.userExistsByEmail(email)
+            // Verificamos los métodos de inicio de sesión asociados a ese email
+            val signInMethods = firebaseAuth.fetchSignInMethodsForEmail(email).await().signInMethods
 
-                return if (userExists) {
-                    Result.Failure(AuthError.ExistingUserError)
-                } else {
-                    Result.Success(user)
-                }
-            } else {
-                Result.Failure(AuthError.UnknownError("Usuario nulo después de autenticarse con Google."))
+            if (signInMethods != null && signInMethods.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
+                // Si el correo ya está registrado con email/password, NO permitir iniciar con Google
+                return Result.Failure(AuthError.ExistingUserWithDifferentAuthMethod)
             }
+
+            return Result.Success(user)
 
         } catch (e: Exception) {
             Log.e(TAG, "Error al iniciar sesión con Google", e)
             Result.Failure(AuthError.UnknownError(e.message))
         }
     }
+
+
 
 //    suspend fun signInWithGoogle(idToken: String): Result<FirebaseUser> {
 //        return try {
