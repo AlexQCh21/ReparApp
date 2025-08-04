@@ -2,7 +2,7 @@ package com.cursokotlin.reparapp.network.repository
 
 import androidx.navigation.NavHostController
 import com.cursokotlin.reparapp.R
-import com.cursokotlin.reparapp.domain.repository.AppNavigator
+import com.cursokotlin.reparapp.network.repository.AppNavigator
 
 class AppNavigatorImpl(
     private val navController: NavHostController

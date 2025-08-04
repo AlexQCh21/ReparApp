@@ -54,7 +54,7 @@
 
     <string-array name="dispositivos_tipos">
         <item>Celular</item>
-        <item>All in one</item>
+        <item>Otro</item>
         <item>Laptop</item>
         <item>Computadora</item>
     </string-array>

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Local
 import com.cursokotlin.reparapp.network.services.LocalManager
 import dagger.hilt.android.lifecycle.HiltViewModel

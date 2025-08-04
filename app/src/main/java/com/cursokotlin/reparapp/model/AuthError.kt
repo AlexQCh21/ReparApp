@@ -1,4 +1,4 @@
-package com.cursokotlin.reparapp.domain.model
+package com.cursokotlin.reparapp.model
 
 sealed class AuthError(message: String? = null, cause: Throwable? = null) : Exception(message, cause) {
     object UserNotLoggedIn : AuthError("Usuario no autenticado")

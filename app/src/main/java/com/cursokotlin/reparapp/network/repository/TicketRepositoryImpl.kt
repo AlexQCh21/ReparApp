@@ -5,7 +5,7 @@ import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.network.services.TicketManager
 import javax.inject.Inject
 import javax.inject.Singleton
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 
 @Singleton
 class TicketRepositoryImpl @Inject constructor(

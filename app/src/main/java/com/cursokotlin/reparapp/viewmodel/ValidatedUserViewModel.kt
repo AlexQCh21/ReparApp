@@ -2,9 +2,9 @@ package com.cursokotlin.reparapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cursokotlin.reparapp.domain.model.AuthError
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
-import com.cursokotlin.reparapp.domain.repository.UserRepository
+import com.cursokotlin.reparapp.model.AuthError
+import com.cursokotlin.reparapp.network.repository.AuthRepository
+import com.cursokotlin.reparapp.network.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.cursokotlin.reparapp.domain.model.Result
-import com.cursokotlin.reparapp.model.Usuario
+import com.cursokotlin.reparapp.model.Result
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 

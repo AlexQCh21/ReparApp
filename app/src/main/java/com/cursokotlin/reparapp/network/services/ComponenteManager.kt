@@ -1,12 +1,12 @@
 package com.cursokotlin.reparapp.network.services
 
 import android.util.Log
-import com.cursokotlin.reparapp.domain.model.AuthError
+import com.cursokotlin.reparapp.model.AuthError
 import com.cursokotlin.reparapp.model.Componente
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import javax.inject.Inject
 import javax.inject.Singleton
 

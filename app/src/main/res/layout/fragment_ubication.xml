@@ -65,8 +65,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/material_dynamic_tertiary95"
             android:alpha="0.2"/>
+<!--            android:backgroundTint="@color/material_dynamic_tertiary95"-->
+
         <ProgressBar
             android:id="@+id/pb_carga"
             android:layout_width="wrap_content"

@@ -1,9 +1,7 @@
-package com.cursokotlin.reparapp.domain.repository
+package com.cursokotlin.reparapp.network.repository
 
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Dispositivo
-import com.cursokotlin.reparapp.model.Ticket
-import com.cursokotlin.reparapp.model.Usuario
 
 interface DispositivoRepository {
     suspend fun saveDevice(dispositivo: Dispositivo): Result<Unit>

@@ -1,8 +1,7 @@
-package com.cursokotlin.reparapp.domain
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
-import com.cursokotlin.reparapp.domain.repository.UserRepository
-import com.cursokotlin.reparapp.network.repository.AuthRepositoryImpl
-import com.cursokotlin.reparapp.network.repository.UserRepositoryImpl
+package com.cursokotlin.reparapp.network.repository
+
+import com.cursokotlin.reparapp.network.repository.AuthRepository
+import com.cursokotlin.reparapp.network.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

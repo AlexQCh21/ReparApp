@@ -15,10 +15,10 @@ import com.cursokotlin.reparapp.network.storage.TicketStorageManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import javax.inject.Inject
 import android.net.Uri
-import com.cursokotlin.reparapp.domain.model.AuthError
+import com.cursokotlin.reparapp.model.AuthError
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.model.Estado
 import com.cursokotlin.reparapp.model.Ticket
