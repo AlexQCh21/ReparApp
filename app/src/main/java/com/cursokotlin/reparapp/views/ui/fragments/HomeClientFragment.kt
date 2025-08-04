@@ -106,11 +106,6 @@ class HomeClientFragment : Fragment(), TicketListener {
             findNavController().navigate(R.id.action_homeClientFragment_to_notificationFragment)
         }
 
-        //Ver mis tickets generados
-        binding.tvVerTodos.setOnClickListener{
-            findNavController().navigate(R.id.action_homeClientFragment_to_ticketListUser)
-        }
-
     }
 
     private fun initValueComponents(){
