@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="10dp"
     android:gravity="center_horizontal">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_knowledge_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/card_title"
         android:title="Detalle del conocimiento"
         android:titleTextColor="@android:color/white"
         app:navigationIcon="@drawable/icon_close2"

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cursokotlin.reparapp.R
 import com.cursokotlin.reparapp.model.Ticket
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 class TicketAdapter(
@@ -58,6 +59,7 @@ class TicketAdapter(
 
     fun actualizarLista(nuevaLista: List<Ticket>) {
         listaTickets = nuevaLista
+            .sortedByDescending { it.createAt ?: Date(0) }
         notifyDataSetChanged()
     }
 }
