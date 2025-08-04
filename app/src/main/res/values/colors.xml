@@ -22,5 +22,9 @@
     <color name="card_btn_decline_stroke">#d32f2f</color>
     <color name="card_btn_accept">#00B86B</color>
     <color name="card_btn_accept_stroke">#007a43</color>
+
+    <color name="primary_title">#171717</color>
+    <color name="primary_text">#1b1b1b</color>
+
     
 </resources>

@@ -26,7 +26,7 @@
         android:text="¡Dispositivo listo para recoger!"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="@color/primary_title"
         app:layout_constraintStart_toEndOf="@id/img_notifi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/img_notifi"

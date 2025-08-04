@@ -7,11 +7,11 @@
 
     <item
         android:id="@+id/ticketListUser"
-        android:icon="@drawable/ic_ticket"
+        android:icon="@drawable/icon_ticket_white"
         android:title="Tickets" />
 
     <item
         android:id="@+id/ubicationFragment"
-        android:icon="@drawable/icon_location"
+        android:icon="@drawable/icon_map_bar"
         android:title="Locales" />
 </menu>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_fondo"
+    android:background="whi"
     tools:context=".views.ui.fragments.DetailTicketFragment">
 
     <LinearLayout
@@ -12,34 +12,39 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/headerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_fondo"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            android:paddingVertical="20dp">
+            android:paddingVertical="18dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_flecha_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/icon_close2"
+                />
 
             <TextView
                 android:id="@+id/tv_titulo_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/home"
+                android:layout_marginStart="16dp"
+                android:text="ReparaApp"
                 android:textColor="@android:color/white"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/img_cerrar"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/img_cerrar" />
-
-            <ImageView
-                android:id="@+id/img_cerrar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/icon_cerrar"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -51,24 +56,36 @@
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/bg_background_white"
             android:orientation="vertical"
+            android:layout_marginTop="40dp"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/ticketMainTitle"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="Mi Ticket"
-                android:textColor="#FFC035"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                >
+                <TextView
+                    android:id="@+id/ticketMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TICKET "
+                    android:textColor="@color/primary_title"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_ticket_detail" />
+                <TextView
+                    android:id="@+id/tv_codigo_ticket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="CODK00102"
+                    android:textColor="@color/primary_title"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tv_titulo_constancia"
@@ -94,14 +111,7 @@
                     android:textColor="#3D3D3D"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/tv_codigo_ticket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="CODK00102"
-                    android:textColor="#3D3D3D"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="17/09/25"
-                    android:textColor="#3D3D3D"
+                    android:textColor="#3F3F3F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -149,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="23:04"
-                    android:textColor="#3D3D3D"
+                    android:textColor="#3F3F3F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -173,7 +183,7 @@
                     android:id="@+id/tv_estado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#3D3D3D"
+                    android:textColor="#3F3F3F"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="ASIGNADO" />
@@ -202,8 +212,8 @@
                 android:layout_marginTop="4dp"
                 android:justificationMode="inter_word"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Temporibus quidem distinctio expedita voluptatem laborum!"
-                android:textColor="#3D3D3D"
-                android:textSize="14sp" />
+                android:textColor="@color/primary_text"
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>

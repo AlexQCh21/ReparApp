@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="TICKET"
                 android:maxLines="1"
-                android:textColor="@android:color/black"
+                android:textColor="@color/primary_title"
                 android:textSize="16sp"
 
                 android:textStyle="bold" />
@@ -55,7 +55,7 @@
             android:layout_height="50dp"
             android:text="Ir"
             android:textColor="@android:color/white"
-            android:backgroundTint = "@color/black"
+            android:backgroundTint = "#121212"
             android:textSize="16sp"
             android:paddingHorizontal="10dp"
             android:textAllCaps="false"

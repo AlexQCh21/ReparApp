@@ -43,7 +43,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="14dp"
                     android:src="@drawable/icon_noti_act"
                     app:layout_constraintEnd_toStartOf="@id/img_usuario_perfil"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -266,7 +266,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tickets Asignados"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary_title"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -325,7 +325,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Tips y Soluciones"
-                            android:textColor="@color/black"
+                            android:textColor="@color/primary_title"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -353,7 +353,7 @@
                         android:layout_marginTop="10dp"
                         android:scrollbars="none"
                         tools:layoutManager="LinearLayoutManager"
-                        tools:listitem="@layout/item_know_prueba"
+                        tools:listitem="@layout/item_know"
                         tools:orientation="horizontal" />
                 </LinearLayout>
             </ScrollView>

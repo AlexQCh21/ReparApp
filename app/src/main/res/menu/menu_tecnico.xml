@@ -7,16 +7,16 @@
 
     <item
         android:id="@+id/reportarProblemaTecnicoFragment"
-        android:icon="@drawable/ic_ticket_black"
+        android:icon="@drawable/icon_ticket_white"
         android:title="Ticket" />
 
     <item
         android:id="@+id/reportFragment"
-        android:icon="@drawable/icon_build_prueba"
+        android:icon="@drawable/icon_fix"
         android:title="Reporte" />
 
     <item
         android:id="@+id/inventarioFragment"
-        android:icon="@drawable/ic_ticket_nav"
+        android:icon="@drawable/icon_store"
         android:title="Inventario" />
 </menu>

@@ -64,7 +64,7 @@ class ReportarProblemaFragment : Fragment() {
     }
 
     private fun setupUI() {
-        binding.imgFlechaBack.setOnClickListener {
+        binding.imgClose.setOnClickListener {
             findNavController().navigateUp()
         }
 

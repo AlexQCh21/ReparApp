@@ -20,7 +20,7 @@ class BaseConocimientoAdapter(
         viewType: Int
     ): BaseConocimientoViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_know_prueba, parent, false)
+            .inflate(R.layout.item_know, parent, false)
         return BaseConocimientoViewHolder(view)
     }
 
