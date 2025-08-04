@@ -17,7 +17,7 @@ data class Notificacion(
     var receptorId:String = "",
 
     @JvmField @PropertyName("tipo_usuario")
-    var tipoUSuario:String = "",
+    var tipoUsuario:String = "",
 
     @JvmField @PropertyName("asuntoId")
     var asuntoId:String = "",

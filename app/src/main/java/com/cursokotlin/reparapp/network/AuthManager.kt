@@ -12,6 +12,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Usuario
 import com.facebook.AccessToken
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FacebookAuthProvider
@@ -42,6 +43,7 @@ class AuthManager @Inject constructor(
 
     // Devuelve el usuario actual (sincrónico)
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
+
 
     // Registra un usuario con email y password (usando suspend)
     suspend fun signUpUser(email: String, password: String): Result<FirebaseUser> {
@@ -180,6 +182,10 @@ class AuthManager @Inject constructor(
         }
     }
 
+    suspend fun getUserData(): Result<Usuario>{
+        val uid = firebaseAuth.currentUser?.uid ?: return Result.Failure(AuthError.UserNotLoggedIn)
+        return firestoreManager.getUser(uid)
+    }
 
 
 //    suspend fun signInWithGoogle(idToken: String): Result<FirebaseUser> {

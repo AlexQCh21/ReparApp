@@ -28,21 +28,33 @@ class NotificationViewModel @Inject constructor(
 
     fun getNotificaciones() {
         viewModelScope.launch {
-            val userId = authRepository.getCurrentUser()?.uid
-            if (userId != null) {
-                when (val result = notificacionManager.obtenerNotificacionesPorUsuario(userId)) {
-                    is Result.Success -> {
-                        _notificaciones.value = result.data
-                        _obtenerNotificacionResult.value = ResultState.Success(true)
+            when(val userResult = authRepository.getUserData()){
+                is Result.Success -> {
+                    val usuario = userResult.data
+                    val userId = usuario.id
+                    val rolUsuario = usuario.rol
+
+                    when(val notificacionesResult = notificacionManager.obtenerNotificacionesPorUsuario(userId)){
+                        is Result.Success -> {
+                            val notificacionesFiltradas = notificacionesResult.data.filter {
+                                it.tipoUsuario == rolUsuario
+                            }
+                            _notificaciones.value = notificacionesFiltradas
+                            _obtenerNotificacionResult.value = ResultState.Success(true)
+                        }
+                        is Result.Failure -> {
+                            _obtenerNotificacionResult.value = ResultState.Error("Error al cargar notificaciones: ${notificacionesResult.error.message}")
+                        }
+                        else -> {}
                     }
-                    is Result.Failure -> {
-                        _obtenerNotificacionResult.value = ResultState.Error("Error al cargar notificaciones: ${result.error.message}")
-                    }
-                    else -> {}
+
                 }
-            } else {
-                _obtenerNotificacionResult.value = ResultState.Error("Usuario no autenticado")
+                is Result.Failure ->{
+                    _obtenerNotificacionResult.value = ResultState.Error("Error al cargar notificaciones: ${userResult.error.message}")
+                }
+                else -> {}
             }
         }
     }
 }
+

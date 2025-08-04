@@ -41,11 +41,7 @@ class NotificacionAdapter (
 
     override fun onBindViewHolder(holder: NotificacionViewHolder, position: Int) {
         val notify = listaNotificaciones[position]
-        if(notify.tipoUSuario=="tecnico"){
-            holder.titulo.text = "Nuevo ticket"
-        }else{
-            holder.titulo.text = "El técnico ha actualizado tu ticket"
-        }
+        holder.titulo.text = notify.asuntoId
         holder.mensaje.text = notify.mensaje
         val fechaHora = notify.createAt?.let { date ->
             val fecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date)
@@ -59,6 +55,7 @@ class NotificacionAdapter (
 
     fun actualizarLista(nuevaLista: List<Notificacion>) {
         listaNotificaciones = nuevaLista
+            .sortedByDescending { it.createAt }
         notifyDataSetChanged()
     }
 

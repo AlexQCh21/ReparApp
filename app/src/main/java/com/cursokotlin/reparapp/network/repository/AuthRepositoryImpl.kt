@@ -4,6 +4,7 @@ import com.cursokotlin.reparapp.domain.model.AuthError
 import com.cursokotlin.reparapp.domain.repository.AuthRepository
 import com.cursokotlin.reparapp.network.AuthManager
 import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Usuario
 import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.Flow
@@ -46,6 +47,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override fun logOut() {
         authManager.logout()
+    }
+
+    override suspend fun getUserData(): Result<Usuario> {
+        return authManager.getUserData()
     }
 
     //Facebook

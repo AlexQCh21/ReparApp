@@ -99,28 +99,8 @@ class TicketManager @Inject constructor(
             )
             estadoRef.set(estadoTicket).await()
 
-            // 5. Notificar al usuario dueño del ticket
-            val notificacion = Notificacion(
-                visto = false,
-                mensaje = if (comentario.isNotBlank()) comentario else "El estado del ticket ha cambiado a $nuevoEstado",
-                receptorId = ticket.cliente, // usuario_id del ticket
-                tipoUSuario = "tecnico",
-                asuntoId = ticket.id ?: ""
-            )
-            // Usar suspendCancellableCoroutine para esperar el callback de la notificación
-            kotlinx.coroutines.suspendCancellableCoroutine<Unit> { cont ->
-                notificacionManager.enviarNotificacion(notificacion) { result ->
-                    when (result) {
-                        is Result.Success -> cont.resume(Unit) {}
-                        is Result.Failure -> {
-                            Log.e(TAG, "Error al enviar notificación de cambio de estado", result.error)
-                            cont.resume(Unit) {} // Continúa aunque falle la notificación
-                        }
-                        else -> cont.resume(Unit) {}
-                    }
-                }
-            }
-
+            // 5. Notificar a ambos
+            notificarCambioDeEstado(ticket, nuevoEstado)
             Log.d(TAG, "Estado del ticket $ticketId actualizado automáticamente a $nuevoEstado, subcolección de estados y notificación generada.")
             Result.Success(Unit)
         } catch (e: Exception) {
@@ -358,7 +338,7 @@ class TicketManager @Inject constructor(
             mensaje = asunto,
             receptorId = ticket.tecnico ?: "",
             asuntoId = ticket.id ?: "",
-            tipoUSuario = "tecnico"
+            tipoUsuario = "tecnico"
         )
 
         notificacionManager.enviarNotificacion(notificacion) { result ->
@@ -410,6 +390,57 @@ class TicketManager @Inject constructor(
             return Result.Success(Unit)
         } catch (e: Exception) {
             return Result.Failure(AuthError.DatabaseError(e))
+        }
+    }
+
+    private fun notificarCambioDeEstado(ticket: Ticket, nuevoEstado: String){
+        val asunto = "Actualización del ticket"
+        val idTicket = ticket.id ?: return
+
+        val mensajeCliente = when(nuevoEstado){
+            Estado.ASIGNADO.toString() -> "Tu ticket ha sido asignado a un técnico"
+            Estado.INICIADO.toString() -> "El técnico a comenzado a trabajar en tu ticket"
+            Estado.TERMINADO.toString() -> "Puedes acercarte a recoger tu dispositivo en la oficina de soporte técnico"
+            else -> "El ticket ha cambio de estado a $nuevoEstado"
+        }
+
+        val notificacionCliente = Notificacion(
+            visto = false,
+            mensaje = mensajeCliente,
+            receptorId = ticket.cliente,
+            tipoUsuario = "cliente",
+            asuntoId = idTicket
+        )
+
+        notificacionManager.enviarNotificacion(notificacionCliente) { result ->
+            when(result){
+                is Result.Success -> Log.d(TAG, "Notificación enviada al cliente")
+                is Result.Failure -> Log.e(TAG, "Error al notificar al cliente", result.error)
+                else -> {}
+            }
+        }
+
+        ticket.tecnico?.let{ tecnicoId ->
+            val mensajeTecnico = when(nuevoEstado){
+                Estado.ASIGNADO.toString() -> "Se te ha asignado un nuevo ticket."
+                Estado.INICIADO.toString() -> "El ticket ha sido marcado como iniciado"
+                Estado.TERMINADO.toString() -> "El ticket ha sido completado"
+                else -> "El ticket ha cambio de estado a $nuevoEstado"
+            }
+            val notificacionTecnico = Notificacion(
+                visto = false,
+                mensaje = mensajeTecnico,
+                receptorId = tecnicoId,
+                tipoUsuario = "tecnico",
+                asuntoId = idTicket
+            )
+            notificacionManager.enviarNotificacion(notificacionTecnico) { result ->
+                when(result){
+                    is Result.Success -> Log.d(TAG, "Notificación enviada al técnico")
+                    is Result.Failure -> Log.e(TAG, "Error al notificar al técnico", result.error)
+                    else -> {}
+                }
+            }
         }
     }
 }
