@@ -50,7 +50,7 @@ class DetailTicketFragment : Fragment() {
     }
 
     private fun eventListeners(){
-        binding.imgCerrar.setOnClickListener {
+        binding.imgClose.setOnClickListener {
             findNavController().navigate(
                 R.id.homeClientFragment,
                 null,

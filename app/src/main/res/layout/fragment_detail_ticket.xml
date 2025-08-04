@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="whi"
+    android:background="@color/white"
     tools:context=".views.ui.fragments.DetailTicketFragment">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             >
 
             <ImageView
-                android:id="@+id/img_flecha_back"
+                android:id="@+id/img_close"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
