@@ -1,0 +1,354 @@
+[debug] [2025-08-04T02:20:15.936Z] ----------------------------------------------------------------------
+[debug] [2025-08-04T02:20:15.940Z] Command:       C:\Users\Alex\AppData\Local\fnm_multishells\15720_1754270823444\node.exe C:\Users\Alex\AppData\Local\fnm_multishells\15720_1754270823444\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2025-08-04T02:20:15.941Z] CLI Version:   13.35.1
+[debug] [2025-08-04T02:20:15.941Z] Platform:      win32
+[debug] [2025-08-04T02:20:15.942Z] Node Version:  v18.20.8
+[debug] [2025-08-04T02:20:15.944Z] Time:          Sun Aug 03 2025 21:20:15 GMT-0500 (hora estándar de Perú)
+[debug] [2025-08-04T02:20:15.945Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-08-04T02:20:16.389Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-04T02:20:16.391Z] > authorizing via signed-in user (cesaralexanderquezadachorres@gmail.com)
+[debug] [2025-08-04T02:20:16.391Z] [iam] checking project reparapp-18d32 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-08-04T02:20:16.394Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:16.395Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:16.397Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions [none]
+[debug] [2025-08-04T02:20:16.397Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:16.398Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-04T02:20:17.633Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions 200
+[debug] [2025-08-04T02:20:17.633Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-08-04T02:20:17.634Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:17.635Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:17.635Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/reparapp-18d32/serviceAccounts/reparapp-18d32@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-08-04T02:20:17.635Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/reparapp-18d32/serviceAccounts/reparapp-18d32@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-08-04T02:20:18.849Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/reparapp-18d32/serviceAccounts/reparapp-18d32@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-08-04T02:20:18.849Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/reparapp-18d32/serviceAccounts/reparapp-18d32@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'reparapp-18d32'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-08-04T02:20:19.707Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:19.708Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:19.708Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 [none]
+[debug] [2025-08-04T02:20:20.795Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 200
+[debug] [2025-08-04T02:20:20.795Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 {"projectNumber":"140750798895","projectId":"reparapp-18d32","lifecycleState":"ACTIVE","name":"ReparApp","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-10T03:59:11.263891Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:20.797Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.797Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.797Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.798Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:20.798Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.798Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:20.799Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.799Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:20.799Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-08-04T02:20:20.799Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:20.801Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-08-04T02:20:20.801Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:20.802Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudbuild.googleapis.com [none]
+[debug] [2025-08-04T02:20:20.802Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudbuild.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:20.803Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/artifactregistry.googleapis.com [none]
+[debug] [2025-08-04T02:20:20.803Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/artifactregistry.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:21.960Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/runtimeconfig.googleapis.com 200
+[debug] [2025-08-04T02:20:21.960Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-08-04T02:20:21.988Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/artifactregistry.googleapis.com 200
+[debug] [2025-08-04T02:20:21.988Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:21.993Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudbuild.googleapis.com 200
+[debug] [2025-08-04T02:20:21.994Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:21.996Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudfunctions.googleapis.com 200
+[debug] [2025-08-04T02:20:21.997Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:21.998Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:21.998Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:21.998Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/reparapp-18d32/adminSdkConfig [none]
+[debug] [2025-08-04T02:20:22.537Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/reparapp-18d32/adminSdkConfig 200
+[debug] [2025-08-04T02:20:22.537Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/reparapp-18d32/adminSdkConfig {"projectId":"reparapp-18d32","storageBucket":"reparapp-18d32.firebasestorage.app"}
+[debug] [2025-08-04T02:20:22.538Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:22.538Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:22.538Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/reparapp-18d32/configs [none]
+[debug] [2025-08-04T02:20:23.000Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/reparapp-18d32/configs 200
+[debug] [2025-08-04T02:20:23.000Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/reparapp-18d32/configs {}
+[debug] [2025-08-04T02:20:23.002Z] Validating nodejs source
+[warn] !  functions: Runtime Node.js 18 was deprecated on 2025-04-30 and will be decommissioned on 2025-10-31, after which you will not be able to deploy without upgrading. Consider upgrading now to avoid disruption. See https://cloud.google.com/functions/docs/runtime-support for full details on the lifecycle policy 
+[debug] [2025-08-04T02:20:25.150Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "echo 'Lint skipped'",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.1.0"
+  },
+  "private": true
+}
+[debug] [2025-08-04T02:20:25.151Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-08-04T02:20:25.155Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-08-04T02:20:25.176Z] Found firebase-functions binary at 'C:\Users\Alex\AndroidStudioProjects\ReparApp\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8724
+
+[error] {"severity":"WARNING","message":"Calling setGlobalOptions twice leads to undefined behavior"}
+
+[debug] [2025-08-04T02:20:26.263Z] Got response from /__/functions.yaml {"endpoints":{"enviarNotificacion":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":10,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","eventFilters":{"database":"(default)","namespace":"(default)"},"eventFilterPathPatterns":{"document":"notificaciones/{notificacionId}"},"retry":false},"entryPoint":"enviarNotificacion"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:26.300Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:26.300Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:26.300Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/firebaseextensions.googleapis.com [none]
+[debug] [2025-08-04T02:20:26.300Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/firebaseextensions.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:27.508Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/firebaseextensions.googleapis.com 200
+[debug] [2025-08-04T02:20:27.508Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/firebaseextensions.googleapis.com [omitted]
+[info] +  extensions: required API firebaseextensions.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:27.509Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-08-04T02:20:27.509Z] > authorizing via signed-in user (cesaralexanderquezadachorres@gmail.com)
+[debug] [2025-08-04T02:20:27.509Z] [iam] checking project reparapp-18d32 for permissions ["firebase.projects.get","firebaseextensions.instances.list"]
+[debug] [2025-08-04T02:20:27.509Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:27.509Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:27.509Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions [none]
+[debug] [2025-08-04T02:20:27.509Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:27.509Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-08-04T02:20:28.494Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions 200
+[debug] [2025-08-04T02:20:28.494Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32:testIamPermissions {"permissions":["firebase.projects.get","firebaseextensions.instances.list"]}
+[debug] [2025-08-04T02:20:28.495Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:28.495Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:28.495Z] >>> [apiv2][query] GET https://firebaseextensions.googleapis.com/v1beta/projects/reparapp-18d32/instances pageSize=100&pageToken=
+[debug] [2025-08-04T02:20:29.650Z] <<< [apiv2][status] GET https://firebaseextensions.googleapis.com/v1beta/projects/reparapp-18d32/instances 200
+[debug] [2025-08-04T02:20:29.650Z] <<< [apiv2][body] GET https://firebaseextensions.googleapis.com/v1beta/projects/reparapp-18d32/instances {}
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged C:\Users\Alex\AndroidStudioProjects\ReparApp\functions (77.69 KB) for uploading 
+[debug] [2025-08-04T02:20:29.739Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:29.739Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:29.740Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/reparapp-18d32/locations/-/functions [none]
+[debug] [2025-08-04T02:20:30.784Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/reparapp-18d32/locations/-/functions 200
+[debug] [2025-08-04T02:20:30.784Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/reparapp-18d32/locations/-/functions {}
+[debug] [2025-08-04T02:20:30.785Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:30.785Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:30.785Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2025-08-04T02:20:32.097Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/-/functions 200
+[debug] [2025-08-04T02:20:32.098Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/-/functions {}
+[debug] [2025-08-04T02:20:32.099Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:32.099Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:32.099Z] >>> [apiv2][query] GET https://firestore.googleapis.com/v1/projects/reparapp-18d32/databases/(default) [none]
+[debug] [2025-08-04T02:20:33.169Z] <<< [apiv2][status] GET https://firestore.googleapis.com/v1/projects/reparapp-18d32/databases/(default) 200
+[debug] [2025-08-04T02:20:33.169Z] <<< [apiv2][body] GET https://firestore.googleapis.com/v1/projects/reparapp-18d32/databases/(default) {"name":"projects/reparapp-18d32/databases/(default)","uid":"abe1131c-6b72-45a9-be0c-0ad4d631640a","createTime":"2025-07-10T04:37:31.081517Z","updateTime":"2025-07-10T04:37:31.081517Z","locationId":"nam5","type":"FIRESTORE_NATIVE","concurrencyMode":"PESSIMISTIC","versionRetentionPeriod":"3600s","earliestVersionTime":"2025-08-04T01:20:33.904593Z","appEngineIntegrationMode":"DISABLED","keyPrefix":"s","pointInTimeRecoveryEnablement":"POINT_IN_TIME_RECOVERY_DISABLED","deleteProtectionState":"DELETE_PROTECTION_DISABLED","databaseEdition":"STANDARD","freeTier":true,"etag":"IMXShIWM8I4DMMn7nqW8sY4D"}
+[info] i  functions: ensuring required API run.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:33.171Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:33.171Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  functions: ensuring required API eventarc.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:33.171Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:33.171Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  functions: ensuring required API pubsub.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:33.172Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:33.172Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  functions: ensuring required API storage.googleapis.com is enabled... 
+[debug] [2025-08-04T02:20:33.172Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:33.172Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:33.172Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/run.googleapis.com [none]
+[debug] [2025-08-04T02:20:33.173Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/run.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:33.174Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/eventarc.googleapis.com [none]
+[debug] [2025-08-04T02:20:33.175Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/eventarc.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:33.178Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/pubsub.googleapis.com [none]
+[debug] [2025-08-04T02:20:33.179Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/pubsub.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:33.180Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/storage.googleapis.com [none]
+[debug] [2025-08-04T02:20:33.180Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/storage.googleapis.com x-goog-quota-user=projects/reparapp-18d32
+[debug] [2025-08-04T02:20:34.250Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/run.googleapis.com 200
+[debug] [2025-08-04T02:20:34.250Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/run.googleapis.com [omitted]
+[info] +  functions: required API run.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:34.251Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/pubsub.googleapis.com 200
+[debug] [2025-08-04T02:20:34.251Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/pubsub.googleapis.com [omitted]
+[info] +  functions: required API pubsub.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:34.260Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/storage.googleapis.com 200
+[debug] [2025-08-04T02:20:34.260Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/storage.googleapis.com [omitted]
+[info] +  functions: required API storage.googleapis.com is enabled 
+[debug] [2025-08-04T02:20:34.385Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/eventarc.googleapis.com 200
+[debug] [2025-08-04T02:20:34.385Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/reparapp-18d32/services/eventarc.googleapis.com [omitted]
+[info] +  functions: required API eventarc.googleapis.com is enabled 
+[info] i  functions: generating the service identity for pubsub.googleapis.com... 
+[debug] [2025-08-04T02:20:34.387Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:34.387Z] Checked if tokens are valid: true, expires at: 1754277602544
+[info] i  functions: generating the service identity for eventarc.googleapis.com... 
+[debug] [2025-08-04T02:20:34.388Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:34.388Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:34.388Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/pubsub.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-08-04T02:20:34.390Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/eventarc.googleapis.com:generateServiceIdentity [none]
+[debug] [2025-08-04T02:20:35.456Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/eventarc.googleapis.com:generateServiceIdentity 200
+[debug] [2025-08-04T02:20:35.456Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/eventarc.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-140750798895@gcp-sa-eventarc.iam.gserviceaccount.com","uniqueId":"116261977778288833287"}}
+[debug] [2025-08-04T02:20:35.508Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/pubsub.googleapis.com:generateServiceIdentity 200
+[debug] [2025-08-04T02:20:35.508Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1beta1/projects/140750798895/services/pubsub.googleapis.com:generateServiceIdentity {"name":"operations/finished.DONE_OPERATION","done":true,"response":{"@type":"type.googleapis.com/google.api.serviceusage.v1beta1.ServiceIdentity","email":"service-140750798895@gcp-sa-pubsub.iam.gserviceaccount.com","uniqueId":"103842959083237127814"}}
+[debug] [2025-08-04T02:20:35.510Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:35.510Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:35.510Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:getIamPolicy [none]
+[debug] [2025-08-04T02:20:36.700Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:getIamPolicy 200
+[debug] [2025-08-04T02:20:36.700Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:getIamPolicy {"version":1,"etag":"BwY7gLNFvCw=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:140750798895@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-140750798895@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-140750798895@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:140750798895@cloudservices.gserviceaccount.com","serviceAccount:reparapp-18d32@appspot.gserviceaccount.com","serviceAccount:140750798895-compute@developer.gserviceaccount.com","user:davidemanuelrojasjimenez@gmail.com","user:zapatacarbonel@gmail.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-140750798895@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firebasestorage.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasestorage.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:cesaralexanderquezadachorres@gmail.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-140750798895@serverless-robot-prod.iam.gserviceaccount.com"]},{"role":"roles/storage.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]}]}
+[debug] [2025-08-04T02:20:36.700Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:36.700Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:36.700Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:setIamPolicy [none]
+[debug] [2025-08-04T02:20:36.700Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:setIamPolicy {"policy":{"version":1,"etag":"BwY7gLNFvCw=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:140750798895@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-140750798895@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-140750798895@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:140750798895@cloudservices.gserviceaccount.com","serviceAccount:reparapp-18d32@appspot.gserviceaccount.com","serviceAccount:140750798895-compute@developer.gserviceaccount.com","user:davidemanuelrojasjimenez@gmail.com","user:zapatacarbonel@gmail.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-140750798895@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firebasestorage.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasestorage.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com","serviceAccount:service-140750798895@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:cesaralexanderquezadachorres@gmail.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-140750798895@serverless-robot-prod.iam.gserviceaccount.com"]},{"role":"roles/storage.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/run.invoker","members":["serviceAccount:140750798895-compute@developer.gserviceaccount.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:140750798895-compute@developer.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2025-08-04T02:20:38.448Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:setIamPolicy 200
+[debug] [2025-08-04T02:20:38.448Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/140750798895:setIamPolicy {"version":1,"etag":"BwY7gMDxKVs=","bindings":[{"role":"roles/cloudbuild.builds.builder","members":["serviceAccount:140750798895@cloudbuild.gserviceaccount.com"]},{"role":"roles/cloudbuild.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-cloudbuild.iam.gserviceaccount.com"]},{"role":"roles/cloudfunctions.serviceAgent","members":["serviceAccount:service-140750798895@gcf-admin-robot.iam.gserviceaccount.com"]},{"role":"roles/containerregistry.ServiceAgent","members":["serviceAccount:service-140750798895@containerregistry.iam.gserviceaccount.com"]},{"role":"roles/editor","members":["serviceAccount:140750798895-compute@developer.gserviceaccount.com","serviceAccount:140750798895@cloudservices.gserviceaccount.com","serviceAccount:reparapp-18d32@appspot.gserviceaccount.com","user:davidemanuelrojasjimenez@gmail.com","user:zapatacarbonel@gmail.com"]},{"role":"roles/eventarc.eventReceiver","members":["serviceAccount:140750798895-compute@developer.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]},{"role":"roles/firebasemods.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasemods.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-140750798895@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firebasestorage.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firebasestorage.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-140750798895@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com","serviceAccount:service-140750798895@gcp-sa-pubsub.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:cesaralexanderquezadachorres@gmail.com"]},{"role":"roles/run.invoker","members":["serviceAccount:140750798895-compute@developer.gserviceaccount.com"]},{"role":"roles/run.serviceAgent","members":["serviceAccount:service-140750798895@serverless-robot-prod.iam.gserviceaccount.com"]},{"role":"roles/storage.admin","members":["serviceAccount:firebase-adminsdk-fbsvc@reparapp-18d32.iam.gserviceaccount.com"]}]}
+[debug] [2025-08-04T02:20:38.449Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:38.449Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:38.449Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 [none]
+[debug] [2025-08-04T02:20:39.540Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 200
+[debug] [2025-08-04T02:20:39.540Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/reparapp-18d32 {"projectNumber":"140750798895","projectId":"reparapp-18d32","lifecycleState":"ACTIVE","name":"ReparApp","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-07-10T03:59:11.263891Z"}
+[debug] [2025-08-04T02:20:39.541Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:39.541Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:39.541Z] >>> [apiv2][query] GET https://cloudbilling.googleapis.com/v1/projects/reparapp-18d32/billingInfo [none]
+[debug] [2025-08-04T02:20:40.874Z] <<< [apiv2][status] GET https://cloudbilling.googleapis.com/v1/projects/reparapp-18d32/billingInfo 200
+[debug] [2025-08-04T02:20:40.874Z] <<< [apiv2][body] GET https://cloudbilling.googleapis.com/v1/projects/reparapp-18d32/billingInfo {"name":"projects/reparapp-18d32/billingInfo","projectId":"reparapp-18d32","billingAccountName":"billingAccounts/014590-54D36A-4F14BA","billingEnabled":true}
+[debug] [2025-08-04T02:20:40.876Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:40.876Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:40.876Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2025-08-04T02:20:42.925Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2025-08-04T02:20:42.926Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com/ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip?GoogleAccessId=service-140750798895@gcf-admin-robot.iam.gserviceaccount.com&Expires=1754275843&Signature=lmgcaWIPUeyRHF1C2Z2ifK4otV6Z7q1VJyBlRov4SXzVXq29Id5i1O2laijGCWq29Ilmcid7j8XyRSYiElQH8%2FkKKLZR2z9QhaeAzfqJCsuySZWx5gTwGh9Z2tyyo%2BNBkhBJPe0NzO7DwyH4kicD9kOrp0GuCBZ1clIT5uwzvCOsnRrZrT02x7fIfKz0ALT0GiYJtonMvgyvuMu6Uv52y7zOMXo2aFMDRh%2BFfUQpHBCeaMyRgJDwGx12J07ZKwgoW2I9ZhBobFbllpMjrGxG%2BDu1MPBaqmkxQq4HLz72klSkX6yHjE1Q6E7ouuLeumjSJwlAvncwUOsCLTBtUg5y6A%3D%3D","storageSource":{"bucket":"gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com","object":"ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip"}}
+[debug] [2025-08-04T02:20:42.927Z] >>> [apiv2][query] PUT https://storage.googleapis.com/gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com/ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip GoogleAccessId=service-140750798895%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1754275843&Signature=lmgcaWIPUeyRHF1C2Z2ifK4otV6Z7q1VJyBlRov4SXzVXq29Id5i1O2laijGCWq29Ilmcid7j8XyRSYiElQH8%2FkKKLZR2z9QhaeAzfqJCsuySZWx5gTwGh9Z2tyyo%2BNBkhBJPe0NzO7DwyH4kicD9kOrp0GuCBZ1clIT5uwzvCOsnRrZrT02x7fIfKz0ALT0GiYJtonMvgyvuMu6Uv52y7zOMXo2aFMDRh%2BFfUQpHBCeaMyRgJDwGx12J07ZKwgoW2I9ZhBobFbllpMjrGxG%2BDu1MPBaqmkxQq4HLz72klSkX6yHjE1Q6E7ouuLeumjSJwlAvncwUOsCLTBtUg5y6A%3D%3D
+[debug] [2025-08-04T02:20:42.927Z] >>> [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com/ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip [stream]
+[debug] [2025-08-04T02:20:44.266Z] <<< [apiv2][status] PUT https://storage.googleapis.com/gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com/ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip 200
+[debug] [2025-08-04T02:20:44.266Z] <<< [apiv2][body] PUT https://storage.googleapis.com/gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com/ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip [omitted]
+[info] +  functions: functions folder uploaded successfully 
+[info] i  functions: creating Node.js 18 (2nd Gen) function enviarNotificacion(us-central1)... 
+[debug] [2025-08-04T02:20:44.274Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:44.275Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:20:44.275Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions functionId=enviarNotificacion
+[debug] [2025-08-04T02:20:44.275Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions {"name":"projects/reparapp-18d32/locations/us-central1/functions/enviarNotificacion","buildConfig":{"runtime":"nodejs18","entryPoint":"enviarNotificacion","source":{"storageSource":{"bucket":"gcf-v2-uploads-140750798895.us-central1.cloudfunctions.appspot.com","object":"ca9bbd55-82ab-4ac4-afd9-93eb2cba2117.zip"}},"environmentVariables":{"GOOGLE_NODE_RUN_SCRIPTS":""}},"serviceConfig":{"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"reparapp-18d32\",\"storageBucket\":\"reparapp-18d32.firebasestorage.app\"}","GCLOUD_PROJECT":"reparapp-18d32","EVENTARC_CLOUD_EVENT_SOURCE":"projects/reparapp-18d32/locations/us-central1/services/enviarNotificacion","FUNCTION_SIGNATURE_TYPE":"cloudevent","FUNCTION_TARGET":"enviarNotificacion","LOG_EXECUTION_ID":"true"},"ingressSettings":null,"timeoutSeconds":null,"serviceAccountEmail":null,"availableMemory":"256Mi","minInstanceCount":null,"maxInstanceCount":10,"maxInstanceRequestConcurrency":80,"availableCpu":"1","vpcConnector":null,"vpcConnectorEgressSettings":null},"labels":{"deployment-tool":"cli-firebase","firebase-functions-hash":"5d32c531feca0b12e8c822ec7e9f4c284a2832df"},"eventTrigger":{"eventType":"google.cloud.firestore.document.v1.created","retryPolicy":"RETRY_POLICY_DO_NOT_RETRY","eventFilters":[{"attribute":"database","value":"(default)"},{"attribute":"namespace","value":"(default)"},{"attribute":"document","value":"notificaciones/{notificacionId}","operator":"match-path-pattern"}],"triggerRegion":"nam5"}}
+[debug] [2025-08-04T02:21:01.264Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions 400
+[debug] [2025-08-04T02:21:01.264Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions {"error":{"code":400,"message":"Validation failed for trigger projects/reparapp-18d32/locations/nam5/triggers/enviarnotificacion-446580: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.","status":"FAILED_PRECONDITION"}}
+[warn] !  functions: Request to https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions?functionId=enviarNotificacion had HTTP Error: 400, Validation failed for trigger projects/reparapp-18d32/locations/nam5/triggers/enviarnotificacion-446580: Invalid resource state for "": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role. 
+[warn] !  functions: Since this is your first time using 2nd gen functions, we need a little bit longer to finish setting everything up. Retry the deployment in a few minutes. 
+[warn] !  functions:  failed to create function projects/reparapp-18d32/locations/us-central1/functions/enviarNotificacion 
+[error] Failed to create function projects/reparapp-18d32/locations/us-central1/functions/enviarNotificacion
+[debug] [2025-08-04T02:21:01.269Z] Total Function Deployment time: 16998
+[debug] [2025-08-04T02:21:01.269Z] 1 Functions Deployed
+[debug] [2025-08-04T02:21:01.270Z] 1 Functions Errored
+[debug] [2025-08-04T02:21:01.270Z] 0 Function Deployments Aborted
+[debug] [2025-08-04T02:21:01.270Z] Average Function Deployment time: 16997
+[info] 
+[info] Functions deploy had errors with the following functions:
+	enviarNotificacion(us-central1)
+[info] i  functions: cleaning up build files... 
+[debug] [2025-08-04T02:21:01.292Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:01.293Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:01.293Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:01.293Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:01.293Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1/projects/reparapp-18d32/locations/us-central1/repositories/gcf-artifacts/packages/reparapp--18d32__us--central1__enviar_notificacion [none]
+[debug] [2025-08-04T02:21:01.294Z] >>> [apiv2][query] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list [none]
+[debug] [2025-08-04T02:21:02.482Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1/projects/reparapp-18d32/locations/us-central1/repositories/gcf-artifacts/packages/reparapp--18d32__us--central1__enviar_notificacion 404
+[debug] [2025-08-04T02:21:02.482Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1/projects/reparapp-18d32/locations/us-central1/repositories/gcf-artifacts/packages/reparapp--18d32__us--central1__enviar_notificacion {"error":{"code":404,"message":"Package \"projects/reparapp-18d32/locations/us-central1/repositories/gcf-artifacts/packages/reparapp--18d32__us--central1__enviar_notificacion\" was not found.","status":"NOT_FOUND"}}
+[debug] [2025-08-04T02:21:02.785Z] <<< [apiv2][status] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list 404
+[debug] [2025-08-04T02:21:02.785Z] <<< [apiv2][body] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-08-04T02:21:02.785Z] Failed docker command with error  Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[debug] [2025-08-04T02:21:02.801Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:02.801Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:02.801Z] >>> [apiv2][query] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list [none]
+[debug] [2025-08-04T02:21:03.820Z] <<< [apiv2][status] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list 404
+[debug] [2025-08-04T02:21:03.820Z] <<< [apiv2][body] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-08-04T02:21:03.820Z] Failed docker command with error  Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[debug] [2025-08-04T02:21:03.927Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:03.927Z] Checked if tokens are valid: true, expires at: 1754277602544
+[debug] [2025-08-04T02:21:03.927Z] >>> [apiv2][query] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list [none]
+[debug] [2025-08-04T02:21:04.917Z] <<< [apiv2][status] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list 404
+[debug] [2025-08-04T02:21:04.917Z] <<< [apiv2][body] GET https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list {"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}]}
+[debug] [2025-08-04T02:21:04.918Z] Failed docker command with error  Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found {"name":"FirebaseError","children":[],"context":{"body":{"errors":[{"code":"NAME_UNKNOWN","message":"Repository \"us.gcr.io\" not found"}],"error":{"message":"Not Found"}},"response":{"statusCode":404}},"exit":1,"message":"Request to https://us.gcr.io/v2/reparapp-18d32/gcf/us-central1/tags/list had HTTP Error: 404, Not Found","status":404}
+[warn] !  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/gcr/images/reparapp-18d32/us/gcf 
+[debug] [2025-08-04T02:21:04.918Z] Functions deploy failed.
+[debug] [2025-08-04T02:21:04.919Z] {
+  "endpoint": {
+    "id": "enviarNotificacion",
+    "project": "reparapp-18d32",
+    "region": "us-central1",
+    "entryPoint": "enviarNotificacion",
+    "platform": "gcfv2",
+    "runtime": "nodejs18",
+    "eventTrigger": {
+      "eventType": "google.cloud.firestore.document.v1.created",
+      "retry": false,
+      "eventFilters": {
+        "database": "(default)",
+        "namespace": "(default)"
+      },
+      "eventFilterPathPatterns": {
+        "document": "notificaciones/{notificacionId}"
+      },
+      "region": "nam5"
+    },
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "ingressSettings": null,
+    "availableMemoryMb": null,
+    "serviceAccount": null,
+    "timeoutSeconds": null,
+    "maxInstances": 10,
+    "minInstances": null,
+    "concurrency": 80,
+    "vpc": null,
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"reparapp-18d32\",\"storageBucket\":\"reparapp-18d32.firebasestorage.app\"}",
+      "GCLOUD_PROJECT": "reparapp-18d32",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/reparapp-18d32/locations/us-central1/services/enviarNotificacion"
+    },
+    "codebase": "default",
+    "cpu": 1,
+    "targetedByOnly": false,
+    "hash": "5d32c531feca0b12e8c822ec7e9f4c284a2832df"
+  },
+  "op": "create",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/reparapp-18d32/locations/us-central1/functions/enviarNotificacion"
+    },
+    "exit": 1,
+    "message": "Failed to create function projects/reparapp-18d32/locations/us-central1/functions/enviarNotificacion",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 400,
+            "message": "Validation failed for trigger projects/reparapp-18d32/locations/nam5/triggers/enviarnotificacion-446580: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.",
+            "status": "FAILED_PRECONDITION"
+          }
+        },
+        "response": {
+          "statusCode": 400
+        }
+      },
+      "exit": 1,
+      "message": "Request to https://cloudfunctions.googleapis.com/v2/projects/reparapp-18d32/locations/us-central1/functions?functionId=enviarNotificacion had HTTP Error: 400, Validation failed for trigger projects/reparapp-18d32/locations/nam5/triggers/enviarnotificacion-446580: Invalid resource state for \"\": Permission denied while using the Eventarc Service Agent. If you recently started to use Eventarc, it may take a few minutes before all necessary permissions are propagated to the Service Agent. Otherwise, verify that it has Eventarc Service Agent role.",
+      "status": 400
+    },
+    "status": 400,
+    "code": 400
+  }
+}
+[debug] [2025-08-04T02:21:04.921Z] Error: Failed to create function enviarNotificacion in region us-central1
+    at C:\Users\Alex\AppData\Roaming\fnm\node-versions\v18.20.8\installation\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:294:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Fabricator.createV2Function (C:\Users\Alex\AppData\Roaming\fnm\node-versions\v18.20.8\installation\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:278:30)
+    at async Fabricator.createEndpoint (C:\Users\Alex\AppData\Roaming\fnm\node-versions\v18.20.8\installation\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:137:13)
+    at async handle (C:\Users\Alex\AppData\Roaming\fnm\node-versions\v18.20.8\installation\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:89:17)
+[error] 
+[error] Error: There was an error deploying functions
