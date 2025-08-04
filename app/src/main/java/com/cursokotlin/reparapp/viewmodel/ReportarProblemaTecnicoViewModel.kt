@@ -21,6 +21,7 @@ import android.net.Uri
 import com.cursokotlin.reparapp.model.AuthError
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.model.Estado
+import com.cursokotlin.reparapp.model.EstadoTicket
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.model.Usuario
 import com.cursokotlin.reparapp.network.FirestoreManager
@@ -163,8 +164,19 @@ class ReportarProblemaTecnicoViewModel @Inject constructor(
             )
 
             val ticketRes = ticketRepositoryImpl.saveTicket(ticket)
+
+
             if (ticketRes is Result.Success) {
                 _ticketCreadoExitoso.value = true
+                val ticketId = ticketRes.data.id?:""
+
+                // 5. Crear y guardar estado
+                val estado = EstadoTicket(
+                    automatico = true,
+                    estado = Estado.ASIGNADO.toString()
+                )
+
+                val estadoResult = ticketRepositoryImpl.agregarEstado(ticketId, estado)
             } else {
                 _error.value = "Error al generar el ticket"
             }

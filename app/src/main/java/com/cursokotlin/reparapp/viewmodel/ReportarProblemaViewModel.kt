@@ -99,10 +99,8 @@ class ReportarProblemaViewModel @Inject constructor(
                     val ticketGuardado = resultado.data // <-- asegúrate que saveTicket retorna Result<Ticket>
 
                     val estadoInicial = EstadoTicket(
-                        id = null, // Firestore lo asigna
                         estado = Estado.ASIGNADO.toString(),
-                        automatico = true,
-                        comentario = "Ticket creado por el usuario"
+                        automatico = true
                     )
 
                     // Usa el id real del ticket
