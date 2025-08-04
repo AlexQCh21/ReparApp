@@ -1,7 +1,6 @@
 package com.cursokotlin.reparapp.network.repository
 
-import com.cursokotlin.reparapp.domain.model.Result
-import com.cursokotlin.reparapp.domain.repository.DispositivoRepository
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.network.services.DispositivoManager
 import javax.inject.Inject

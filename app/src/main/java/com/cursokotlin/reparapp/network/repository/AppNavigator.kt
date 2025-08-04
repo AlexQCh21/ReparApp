@@ -1,4 +1,4 @@
-package com.cursokotlin.reparapp.domain.repository
+package com.cursokotlin.reparapp.network.repository
 
 interface AppNavigator {
     fun navigateToHome(userRole: String)

@@ -2,7 +2,7 @@ package com.cursokotlin.reparapp.network.services
 
 import com.cursokotlin.reparapp.network.FirestoreManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Notificacion
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject

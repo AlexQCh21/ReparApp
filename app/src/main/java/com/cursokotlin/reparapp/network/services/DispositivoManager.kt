@@ -1,8 +1,8 @@
 package com.cursokotlin.reparapp.network.services
 
 import android.util.Log
-import com.cursokotlin.reparapp.domain.model.AuthError
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.AuthError
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Dispositivo
 import com.cursokotlin.reparapp.model.Ticket
 import com.cursokotlin.reparapp.network.repository.AuthRepositoryImpl

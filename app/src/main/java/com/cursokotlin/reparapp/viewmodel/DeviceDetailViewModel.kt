@@ -11,7 +11,7 @@ import com.cursokotlin.reparapp.network.repository.AuthRepositoryImpl
 import com.cursokotlin.reparapp.network.repository.DispositivoRepositoryImpl
 import com.cursokotlin.reparapp.network.storage.StorageManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject

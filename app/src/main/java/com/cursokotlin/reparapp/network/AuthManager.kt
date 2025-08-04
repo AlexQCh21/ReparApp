@@ -1,7 +1,7 @@
 package com.cursokotlin.reparapp.network
 
 import android.util.Log
-import com.cursokotlin.reparapp.domain.model.AuthError
+import com.cursokotlin.reparapp.model.AuthError
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Usuario
 import com.facebook.AccessToken
 import com.google.firebase.auth.EmailAuthProvider

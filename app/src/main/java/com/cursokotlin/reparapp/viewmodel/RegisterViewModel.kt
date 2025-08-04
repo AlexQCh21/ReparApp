@@ -2,11 +2,11 @@ package com.cursokotlin.reparapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cursokotlin.reparapp.domain.model.Result
-import com.cursokotlin.reparapp.domain.model.flatMap
-import com.cursokotlin.reparapp.domain.model.map
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
-import com.cursokotlin.reparapp.domain.repository.UserRepository
+import com.cursokotlin.reparapp.model.Result
+import com.cursokotlin.reparapp.model.flatMap
+import com.cursokotlin.reparapp.model.map
+import com.cursokotlin.reparapp.network.repository.AuthRepository
+import com.cursokotlin.reparapp.network.repository.UserRepository
 import com.cursokotlin.reparapp.model.Usuario
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

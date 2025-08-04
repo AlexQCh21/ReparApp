@@ -11,7 +11,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 
 @Singleton
 class LocalManager @Inject constructor(

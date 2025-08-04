@@ -1,4 +1,4 @@
-package com.cursokotlin.reparapp.domain.model
+package com.cursokotlin.reparapp.model
 
 // Result.kt
 sealed class Result<out T> {

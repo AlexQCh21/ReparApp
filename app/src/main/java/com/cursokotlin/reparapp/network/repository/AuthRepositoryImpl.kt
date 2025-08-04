@@ -1,9 +1,7 @@
 package com.cursokotlin.reparapp.network.repository
 
-import com.cursokotlin.reparapp.domain.model.AuthError
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
 import com.cursokotlin.reparapp.network.AuthManager
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import com.cursokotlin.reparapp.model.Usuario
 import com.facebook.AccessToken
 import com.google.firebase.auth.FirebaseUser

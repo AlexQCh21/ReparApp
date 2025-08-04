@@ -3,12 +3,12 @@ package com.cursokotlin.reparapp.viewmodel
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
+import com.cursokotlin.reparapp.network.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.cursokotlin.reparapp.domain.model.Result
-import com.cursokotlin.reparapp.domain.repository.UserRepository
+import com.cursokotlin.reparapp.model.Result
+import com.cursokotlin.reparapp.network.repository.UserRepository
 import com.cursokotlin.reparapp.model.Usuario
 import com.facebook.AccessToken
 import kotlinx.coroutines.flow.MutableStateFlow

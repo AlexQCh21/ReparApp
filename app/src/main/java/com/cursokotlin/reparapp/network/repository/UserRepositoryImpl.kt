@@ -1,9 +1,8 @@
 package com.cursokotlin.reparapp.network.repository
 
-import com.cursokotlin.reparapp.domain.repository.UserRepository
 import com.cursokotlin.reparapp.model.Usuario
 import com.cursokotlin.reparapp.network.FirestoreManager
-import com.cursokotlin.reparapp.domain.model.Result
+import com.cursokotlin.reparapp.model.Result
 import javax.inject.Inject
 import javax.inject.Singleton
 

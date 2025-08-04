@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cursokotlin.reparapp.domain.model.Result
-import com.cursokotlin.reparapp.domain.repository.AuthRepository
+import com.cursokotlin.reparapp.model.Result
+import com.cursokotlin.reparapp.network.repository.AuthRepository
 import com.cursokotlin.reparapp.model.Notificacion
 import com.cursokotlin.reparapp.network.services.NotificacionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
