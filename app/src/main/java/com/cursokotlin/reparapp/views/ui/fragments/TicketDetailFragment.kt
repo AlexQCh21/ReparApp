@@ -182,6 +182,7 @@ class TicketDetailFragment : Fragment() {
         }
         binding.btnCambiarEstado.isEnabled = estado != "TERMINADO"
     }
+
     private fun mostrarDialogCambioEstado(ticket: Ticket) {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.fragmen_estado_popup, null)
 
@@ -190,14 +191,9 @@ class TicketDetailFragment : Fragment() {
         val btnCancelar = dialogView.findViewById<MaterialButton>(R.id.btnCancelar)
         val btnConfirmar = dialogView.findViewById<Button>(R.id.btnConfirmar)
 
+        // Inicialmente muestra el estado actual
         tvEstadoActual.text = ticket.estadoActual
-
-        val siguienteEstado = when(ticket.estadoActual) {
-            "ASIGNADO" -> "INICIADO"
-            "INICIADO" -> "TERMINADO"
-            else -> "TERMINADO"
-        }
-        tvEstadoCambio.text = siguienteEstado
+        tvEstadoCambio.text = getSiguienteEstado(ticket.estadoActual)
 
         val dialog = android.app.AlertDialog.Builder(requireContext())
             .setView(dialogView)
@@ -205,11 +201,32 @@ class TicketDetailFragment : Fragment() {
             .create()
 
         btnCancelar.setOnClickListener { dialog.dismiss() }
+
         btnConfirmar.setOnClickListener {
-            viewModel.cambiarEstadoTicket(ticket.id ?: "", comentario = "Se ha actulizado el estado del ticket")
-            dialog.dismiss()
+            viewModel.cambiarEstadoTicket(ticket.id ?: "", comentario = "Se ha actualizado el estado del ticket")
+        }
+
+        // Observa el ticket actualizado en tiempo real
+        viewModel.ticket.observe(viewLifecycleOwner) { ticketActualizado ->
+            tvEstadoActual.text = ticketActualizado.estadoActual
+            tvEstadoCambio.text = getSiguienteEstado(ticketActualizado.estadoActual)
+
+            // Si el estado es TERMINADO, cierra el dialog automáticamente
+            if (ticketActualizado.estadoActual == "TERMINADO") {
+                dialog.dismiss()
+            }
         }
 
         dialog.show()
     }
+
+    // Función auxiliar para obtener el siguiente estado
+    private fun getSiguienteEstado(estadoActual: String?): String {
+        return when (estadoActual) {
+            "ASIGNADO" -> "INICIADO"
+            "INICIADO" -> "TERMINADO"
+            else -> "TERMINADO"
+        }
+    }
+
 }

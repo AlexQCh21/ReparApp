@@ -90,10 +90,8 @@ class TicketManager @Inject constructor(
             // 4. Agregar el nuevo estado a la subcolección 'estados'
             val estadoRef = ticketRef.collection(SUBCOLLECTION_ESTADOS).document()
             val estadoTicket = mapOf(
-                "id" to estadoRef.id,
                 "estado" to nuevoEstado,
                 "automatico" to automatico,
-                "comentario" to comentario,
                 "fecha_creacion" to com.google.firebase.firestore.FieldValue.serverTimestamp()
             )
             estadoRef.set(estadoTicket).await()
@@ -222,9 +220,9 @@ class TicketManager @Inject constructor(
                 .collection(SUBCOLLECTION_ESTADOS)
                 .document()
 
-            val estadoConId = estado.copy(id = estadoRef.id)
+            //val estadoConId = estado.copy(id = estadoRef.id)
 
-            estadoRef.set(estadoConId).await()
+            estadoRef.set(estado).await()
 
             Log.d(TAG, "Estado agregado al ticket $ticketId: ${estado.estado}")
             Result.Success(Unit)
@@ -382,8 +380,7 @@ class TicketManager @Inject constructor(
             // Agrega un registro de "reversión" en la subcolección
             val estadoRevertido = EstadoTicket(
                 estado = estadoAnterior.estado,
-                automatico = false,
-                comentario = "Reversión de estado a ${estadoAnterior.estado} por el técnico"
+                automatico = false
             )
             ticketRef.collection(SUBCOLLECTION_ESTADOS).document().set(estadoRevertido).await()
             return Result.Success(Unit)
